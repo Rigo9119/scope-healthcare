@@ -170,44 +170,53 @@ body {
   color: var(--color-text-primary);
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-family: var(--font-heading);
-  font-weight: var(--font-weight-bold);
-  line-height: var(--leading-tight);
-  color: var(--color-text-primary);
-  letter-spacing: var(--tracking-tight);
+/* These element defaults live in @layer base so Tailwind utility classes
+   (e.g. text-white on an <a> button or <h2>) always override them.
+   Unlayered rules would beat @layer utilities and hide button text. */
+@layer base {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--leading-tight);
+    color: var(--color-text-primary);
+    letter-spacing: var(--tracking-tight);
+  }
+
+  a {
+    color: var(--color-text-link);
+    text-decoration: none;
+    transition: color var(--transition-fast);
+  }
+
+  a:hover {
+    color: var(--color-primary-600);
+  }
 }
 
-h1 {
-  font-size: var(--text-4xl);
-}
-h2 {
-  font-size: var(--text-2xl);
-}
-h3 {
-  font-size: var(--text-xl);
-}
-h4 {
-  font-size: var(--text-lg);
-}
-h5 {
-  font-size: var(--text-md);
-}
-h6 {
-  font-size: var(--text-base);
-}
-
-a {
-  color: var(--color-text-link);
-  text-decoration: none;
-  transition: color var(--transition-fast);
-}
-
-a:hover {
-  color: var(--color-primary-600);
+/* Default heading sizes — also layered so responsive text-* utilities
+   (text-4xl sm:text-5xl …) on a heading aren't overridden. */
+@layer base {
+  h1 {
+    font-size: var(--text-4xl);
+  }
+  h2 {
+    font-size: var(--text-2xl);
+  }
+  h3 {
+    font-size: var(--text-xl);
+  }
+  h4 {
+    font-size: var(--text-lg);
+  }
+  h5 {
+    font-size: var(--text-md);
+  }
+  h6 {
+    font-size: var(--text-base);
+  }
 }
