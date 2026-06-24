@@ -129,7 +129,7 @@ function BrandMark({ tone = 'dark' }: { tone?: 'dark' | 'light' }) {
   const text = tone === 'light' ? 'text-white' : 'text-text-primary'
   return (
     <span className="flex items-center gap-2.5">
-      <span className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary-500 shadow-[0_6px_16px_rgba(0,178,178,0.35)]">
+      <span className="flex h-10 w-10 items-center justify-center bg-primary-500 shadow-[0_6px_16px_rgba(16,89,181,0.35)]">
         <Stethoscope size={20} className="text-white" />
       </span>
       <span className={`font-heading text-lg font-bold tracking-tight ${text}`}>
@@ -199,7 +199,7 @@ function Navbar() {
 
           <a
             href="#contacto"
-            className="hidden items-center gap-2 rounded-full bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-600 lg:inline-flex"
+            className="hidden items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-600 lg:inline-flex"
           >
             <Calendar size={16} /> Lorem ipsum
           </a>
@@ -222,7 +222,7 @@ function Navbar() {
                   key={href}
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="rounded-lg px-3 py-3 text-base font-medium text-text-secondary transition hover:bg-primary-50 hover:text-primary-700"
+                  className="px-3 py-3 text-base font-medium text-text-secondary transition hover:bg-primary-50 hover:text-primary-700"
                 >
                   {label}
                 </a>
@@ -230,7 +230,7 @@ function Navbar() {
               <a
                 href="#contacto"
                 onClick={() => setOpen(false)}
-                className="mt-3 rounded-full bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white"
+                className="mt-3 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white"
               >
                 Lorem ipsum
               </a>
@@ -255,7 +255,7 @@ function Stars({ count }: { count: number }) {
 
 function Eyebrow({ children }: { children: React.ReactNode }) {
   return (
-    <p className="mb-3 inline-flex items-center gap-2 rounded-full bg-primary-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-700">
+    <p className="mb-3 inline-flex items-center gap-2 bg-primary-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-700">
       <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
       {children}
     </p>
@@ -270,7 +270,7 @@ function ImagePlaceholder({ className = '', icon: Icon = UserRound }: { classNam
       style={{ background: 'linear-gradient(150deg, #b3e8e8 0%, #4dcaca 55%, #009999 100%)' }}
     >
       <Icon size={80} className="text-white/70" strokeWidth={1.25} />
-      <span className="absolute bottom-3 right-4 rounded-full bg-white/85 px-3 py-1 text-[11px] font-semibold text-primary-700">
+      <span className="absolute bottom-3 right-4 bg-white/85 px-3 py-1 text-[11px] font-semibold text-primary-700">
         Imagen
       </span>
     </div>
@@ -306,13 +306,13 @@ function Home() {
             <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
               <a
                 href="#contacto"
-                className="inline-flex items-center justify-center gap-2 rounded-full bg-primary-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(0,178,178,0.3)] transition hover:bg-primary-600"
+                className="inline-flex items-center justify-center gap-2 bg-primary-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(16,89,181,0.3)] transition hover:bg-primary-600"
               >
                 <CalendarCheck size={18} /> Lorem ipsum dolor
               </a>
               <a
                 href="#especialidades"
-                className="inline-flex items-center justify-center gap-2 rounded-full border border-primary-200 bg-white px-7 py-3.5 text-sm font-semibold text-primary-700 transition hover:border-primary-400 hover:bg-primary-50"
+                className="inline-flex items-center justify-center gap-2 border border-primary-200 bg-white px-7 py-3.5 text-sm font-semibold text-primary-700 transition hover:border-primary-400 hover:bg-primary-50"
               >
                 Dolor sit amet <ChevronRight size={16} />
               </a>
@@ -320,19 +320,19 @@ function Home() {
 
             <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium text-text-secondary">
               <span className="inline-flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-100">
+                <span className="flex h-6 w-6 items-center justify-center bg-primary-100">
                   <Check size={13} className="text-primary-700" strokeWidth={3} />
                 </span>
                 Lorem ipsum
               </span>
               <span className="inline-flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-100">
+                <span className="flex h-6 w-6 items-center justify-center bg-primary-100">
                   <Check size={13} className="text-primary-700" strokeWidth={3} />
                 </span>
                 Dolor sit amet
               </span>
               <span className="inline-flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center rounded-full bg-primary-100">
+                <span className="flex h-6 w-6 items-center justify-center bg-primary-100">
                   <Check size={13} className="text-primary-700" strokeWidth={3} />
                 </span>
                 Consectetur
@@ -344,12 +344,12 @@ function Home() {
           <div className="relative">
             <ImagePlaceholder
               icon={Stethoscope}
-              className="aspect-[4/5] w-full rounded-[2rem] shadow-[0_30px_60px_-20px_rgba(0,122,122,0.45)]"
+              className="aspect-[4/5] w-full shadow-[0_30px_60px_-20px_rgba(16,89,181,0.35)]"
             />
 
             {/* floating: appointment */}
-            <div className="absolute -left-5 top-10 hidden items-center gap-3 rounded-2xl bg-white p-3.5 shadow-lg sm:flex">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary-50">
+            <div className="absolute -left-5 top-10 hidden items-center gap-3 bg-white p-3.5 shadow-lg sm:flex">
+              <span className="flex h-11 w-11 items-center justify-center bg-primary-50">
                 <CalendarCheck size={20} className="text-primary-600" />
               </span>
               <div>
@@ -359,8 +359,8 @@ function Home() {
             </div>
 
             {/* floating: rating */}
-            <div className="absolute -bottom-5 -right-3 flex items-center gap-3 rounded-2xl bg-white p-3.5 shadow-lg">
-              <span className="flex h-11 w-11 items-center justify-center rounded-xl bg-amber-50">
+            <div className="absolute -bottom-5 -right-3 flex items-center gap-3 bg-white p-3.5 shadow-lg">
+              <span className="flex h-11 w-11 items-center justify-center bg-amber-50">
                 <Star size={20} className="fill-amber-400 text-amber-400" />
               </span>
               <div>
@@ -377,7 +377,7 @@ function Home() {
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
           {stats.map(({ value, label, icon: Icon }) => (
             <div key={label} className="flex items-center gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-50">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary-50">
                 <Icon size={22} className="text-primary-600" />
               </span>
               <div>
@@ -409,9 +409,9 @@ function Home() {
             {specialties.map(({ icon: Icon, title, body }) => (
               <div
                 key={title}
-                className="group rounded-3xl border border-border-default bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card"
+                className="group border border-border-default bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card"
               >
-                <span className="flex h-14 w-14 items-center justify-center rounded-2xl bg-primary-50 transition group-hover:bg-primary-500">
+                <span className="flex h-14 w-14 items-center justify-center bg-primary-50 transition group-hover:bg-primary-500">
                   <Icon size={26} className="text-primary-600 transition group-hover:text-white" />
                 </span>
                 <h3 className="mt-5 font-heading text-lg font-bold text-text-primary">{title}</h3>
@@ -442,11 +442,11 @@ function Home() {
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
             {journey.map(({ icon: Icon, title, body }, i) => (
-              <div key={title} className="relative rounded-3xl bg-white p-7 shadow-sm">
-                <span className="absolute -top-4 left-7 flex h-9 w-9 items-center justify-center rounded-full bg-primary-600 font-heading text-sm font-bold text-white shadow-md">
+              <div key={title} className="relative bg-white p-7 shadow-sm">
+                <span className="absolute -top-4 left-7 flex h-9 w-9 items-center justify-center bg-primary-600 font-heading text-sm font-bold text-white shadow-md">
                   {i + 1}
                 </span>
-                <span className="mt-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-primary-50">
+                <span className="mt-3 flex h-12 w-12 items-center justify-center bg-primary-50">
                   <Icon size={24} className="text-primary-600" />
                 </span>
                 <h3 className="mt-4 font-heading text-base font-bold text-text-primary">{title}</h3>
@@ -463,11 +463,11 @@ function Home() {
           <div className="relative order-2 lg:order-1">
             <ImagePlaceholder
               icon={HeartPulse}
-              className="aspect-[5/4] w-full rounded-[2rem] shadow-[0_30px_60px_-20px_rgba(0,122,122,0.4)]"
+              className="aspect-[5/4] w-full shadow-[0_30px_60px_-20px_rgba(16,89,181,0.3)]"
             />
-            <div className="absolute -bottom-5 left-6 right-6 flex items-center justify-between rounded-2xl bg-white px-5 py-4 shadow-lg">
+            <div className="absolute -bottom-5 left-6 right-6 flex items-center justify-between bg-white px-5 py-4 shadow-lg">
               <div className="flex items-center gap-3">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-primary-50">
+                <span className="flex h-10 w-10 items-center justify-center bg-primary-50">
                   <ShieldCheck size={18} className="text-primary-600" />
                 </span>
                 <span className="text-sm font-semibold text-text-primary">Lorem ipsum dolor</span>
@@ -489,7 +489,7 @@ function Home() {
             <div className="mt-8 space-y-6">
               {reasons.map(({ icon: Icon, title, body }) => (
                 <div key={title} className="flex gap-4">
-                  <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-primary-50">
+                  <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary-50">
                     <Icon size={22} className="text-primary-600" />
                   </span>
                   <div>
@@ -519,7 +519,7 @@ function Home() {
             {testimonials.map((t) => (
               <figure
                 key={t.name}
-                className="flex flex-col rounded-3xl bg-white p-7 shadow-sm"
+                className="flex flex-col bg-white p-7 shadow-sm"
               >
                 <Quote size={32} className="text-primary-200" fill="currentColor" />
                 <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-text-secondary">
@@ -530,7 +530,7 @@ function Home() {
                 </div>
                 <figcaption className="mt-5 flex items-center gap-3 border-t border-border-default pt-5">
                   <span
-                    className="flex h-11 w-11 items-center justify-center rounded-full font-heading text-sm font-bold text-white"
+                    className="flex h-11 w-11 items-center justify-center font-heading text-sm font-bold text-white"
                     style={{ backgroundColor: t.avatarBg }}
                   >
                     {t.name.split(' ').map((w) => w[0]).join('')}
@@ -548,10 +548,10 @@ function Home() {
 
       {/* ── CTA ── */}
       <section id="contacto" className="px-6 py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl overflow-hidden rounded-[2.5rem] bg-gradient-to-br from-primary-600 to-primary-800 px-8 py-16 text-center shadow-xl sm:px-16">
+        <div className="mx-auto max-w-7xl overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 px-8 py-16 text-center shadow-xl sm:px-16">
           <div className="mx-auto max-w-2xl">
             <span className="flex justify-center">
-              <span className="mb-5 inline-flex items-center gap-2 rounded-full bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white">
+              <span className="mb-5 inline-flex items-center gap-2 bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white">
                 <Sparkles size={14} /> Lorem ipsum
               </span>
             </span>
@@ -565,13 +565,13 @@ function Home() {
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
                 href="#contacto"
-                className="inline-flex items-center gap-2 rounded-full bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-lg transition hover:bg-primary-50"
+                className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-lg transition hover:bg-primary-50"
               >
                 <CalendarCheck size={18} /> Lorem ipsum dolor
               </a>
               <a
                 href="tel:+5710000000"
-                className="inline-flex items-center gap-2 rounded-full border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex items-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
               >
                 <Phone size={16} /> +57 (1) 000 0000
               </a>
