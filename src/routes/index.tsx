@@ -411,9 +411,9 @@ function Home() {
           {page.stats?.map(({ value, label, icon }) => {
             const Icon = resolveIcon(icon)
             return (
-              <div key={label} className="flex items-center gap-4">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary-50">
-                  <Icon size={22} className="text-primary-600" />
+              <div key={label} className="flex flex-col items-center gap-2 text-center sm:flex-row sm:items-center sm:gap-4 sm:text-left">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-primary-50 sm:h-12 sm:w-12">
+                  <Icon size={20} className="text-primary-600" />
                 </span>
                 <div>
                   <p className="font-heading text-2xl font-extrabold text-text-primary">{value}</p>
@@ -446,12 +446,12 @@ function Home() {
               return (
                 <div
                   key={title}
-                  className="group border border-border-default bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card"
+                  className="group border border-border-default bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card sm:p-7"
                 >
-                  <span className="flex h-14 w-14 items-center justify-center bg-primary-50 transition group-hover:bg-primary-500">
-                    <Icon size={26} className="text-primary-600 transition group-hover:text-white" />
+                  <span className="flex h-12 w-12 items-center justify-center bg-primary-50 transition group-hover:bg-primary-500 sm:h-14 sm:w-14">
+                    <Icon size={22} className="text-primary-600 transition group-hover:text-white sm:size-[26px]" />
                   </span>
-                  <h3 className="mt-5 font-heading text-lg font-bold text-text-primary">{title}</h3>
+                  <h3 className="mt-4 font-heading text-lg font-bold text-text-primary sm:mt-5">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-secondary">{body}</p>
                   <a
                     href="#contacto"
@@ -479,11 +479,11 @@ function Home() {
             </h2>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid gap-8 pt-5 md:grid-cols-2 md:gap-6 md:pt-0 lg:grid-cols-4">
             {page.journey?.map(({ icon, title, body }, i) => {
               const Icon = resolveIcon(icon)
               return (
-              <div key={title} className="relative bg-white p-7 shadow-sm">
+              <div key={title} className="relative bg-white p-5 shadow-sm sm:p-7">
                 <span className="absolute -top-4 left-7 flex h-9 w-9 items-center justify-center bg-primary-600 font-heading text-sm font-bold text-white shadow-md">
                   {i + 1}
                 </span>
@@ -501,8 +501,8 @@ function Home() {
 
       {/* ── Why us (split) ── */}
       <section className="px-4 py-12 sm:px-6 sm:py-20 lg:py-28">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
-          <div className="relative order-2 lg:order-1">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 sm:gap-12 lg:grid-cols-2 lg:gap-16">
+          <div className="relative order-2 pb-7 lg:order-1 lg:pb-0">
             <ImagePlaceholder
               icon={HeartPulse}
               className="aspect-[5/4] w-full shadow-[0_30px_60px_-20px_rgba(16,89,181,0.3)]"
@@ -527,7 +527,7 @@ function Home() {
               {page.whyUsSubtitle}
             </p>
 
-            <div className="mt-8 space-y-6">
+            <div className="mt-6 space-y-5 sm:mt-8 sm:space-y-6">
               {page.reasons?.map(({ icon, title, body }) => {
                 const Icon = resolveIcon(icon)
                 return (
@@ -563,7 +563,7 @@ function Home() {
             {page.testimonials?.map((t, i) => (
               <figure
                 key={t.name}
-                className="flex flex-col bg-white p-7 shadow-sm"
+                className="flex flex-col bg-white p-5 shadow-sm sm:p-7"
               >
                 <Quote size={32} className="text-primary-200" fill="currentColor" />
                 <blockquote className="mt-4 flex-1 text-sm leading-relaxed text-text-secondary">
@@ -602,7 +602,7 @@ function Home() {
             <h2 className="font-heading text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-5xl">
               {page.ctaTitle}
             </h2>
-            <p className="mx-auto mt-5 max-w-md text-primary-50">
+            <p className="mx-auto mt-3 max-w-md text-sm text-primary-50 sm:mt-5 sm:text-base">
               {page.ctaSubtitle}
             </p>
             <div className="mt-7 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
