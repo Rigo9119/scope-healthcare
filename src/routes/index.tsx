@@ -6,7 +6,6 @@ import {
   Bone,
   Calendar,
   CalendarCheck,
-  Check,
   ChevronRight,
   ClipboardCheck,
   Clock,
@@ -190,7 +189,7 @@ function Navbar() {
               <a
                 key={href}
                 href={href}
-                className="text-sm font-semibold text-text-secondary transition-colors hover:text-primary-600"
+                className="link-animated text-sm font-semibold text-text-secondary transition-colors duration-200 hover:text-primary-600"
               >
                 {label}
               </a>
@@ -199,7 +198,7 @@ function Navbar() {
 
           <a
             href="#contacto"
-            className="hidden items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-primary-600 lg:inline-flex"
+            className="hidden items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-btn-primary-hover active:translate-y-0 active:shadow-btn-primary-active lg:inline-flex"
           >
             <Calendar size={16} /> Lorem ipsum
           </a>
@@ -222,7 +221,7 @@ function Navbar() {
                   key={href}
                   href={href}
                   onClick={() => setOpen(false)}
-                  className="px-3 py-3 text-base font-medium text-text-secondary transition hover:bg-primary-50 hover:text-primary-700"
+                  className="link-animated px-3 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-primary-50 hover:text-primary-700"
                 >
                   {label}
                 </a>
@@ -230,7 +229,7 @@ function Navbar() {
               <a
                 href="#contacto"
                 onClick={() => setOpen(false)}
-                className="mt-3 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white"
+                className="mt-3 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:bg-primary-600 active:shadow-btn-primary-active"
               >
                 Lorem ipsum
               </a>
@@ -253,7 +252,15 @@ function Stars({ count }: { count: number }) {
   )
 }
 
-function Eyebrow({ children }: { children: React.ReactNode }) {
+function Eyebrow({ children, light = false }: { children: React.ReactNode; light?: boolean }) {
+  if (light) {
+    return (
+      <p className="mb-4 inline-flex items-center gap-2.5 text-xs font-bold uppercase tracking-[0.18em] text-white/65">
+        <span className="h-px w-7 bg-white/50" />
+        {children}
+      </p>
+    )
+  }
   return (
     <p className="mb-3 inline-flex items-center gap-2 bg-primary-50 px-3.5 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-primary-700">
       <span className="h-1.5 w-1.5 rounded-full bg-primary-500" />
@@ -285,90 +292,64 @@ function Home() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="relative overflow-hidden bg-gradient-to-b from-primary-50 to-bg-page">
-        {/* soft organic shapes */}
-        <div className="pointer-events-none absolute -right-24 -top-24 h-96 w-96 rounded-full bg-primary-100/70 blur-2xl" />
-        <div className="pointer-events-none absolute -left-32 top-40 h-80 w-80 rounded-full bg-primary-100/50 blur-2xl" />
+      <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
+        {/* Full-bleed background image */}
+        <ImagePlaceholder
+          icon={Stethoscope}
+          className="absolute inset-0 h-full w-full"
+        />
 
-        <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-6 py-16 lg:grid-cols-2 lg:gap-16 lg:py-24">
-          {/* Left — copy */}
-          <div>
-            <Eyebrow>Lorem ipsum dolor</Eyebrow>
-            <h1 className="font-heading text-4xl font-extrabold leading-[1.1] tracking-tight text-text-primary sm:text-5xl lg:text-6xl">
-              Lorem ipsum dolor{' '}
-              <span className="text-primary-600">sit amet</span> consectetur
-            </h1>
-            <p className="mt-6 max-w-lg text-base leading-relaxed text-text-secondary sm:text-lg">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
-            </p>
+        {/* Overlay */}
+        <div className="pointer-events-none absolute inset-0 bg-primary-900/60" />
+        <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
-            <div className="mt-9 flex flex-col gap-3 sm:flex-row sm:items-center">
-              <a
-                href="#contacto"
-                className="inline-flex items-center justify-center gap-2 bg-primary-500 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_10px_24px_rgba(16,89,181,0.3)] transition hover:bg-primary-600"
-              >
-                <CalendarCheck size={18} /> Lorem ipsum dolor
-              </a>
-              <a
-                href="#especialidades"
-                className="inline-flex items-center justify-center gap-2 border border-primary-200 bg-white px-7 py-3.5 text-sm font-semibold text-primary-700 transition hover:border-primary-400 hover:bg-primary-50"
-              >
-                Dolor sit amet <ChevronRight size={16} />
-              </a>
-            </div>
+        {/* Centered copy */}
+        <div className="relative px-6 py-20 text-center lg:px-12">
+          <Eyebrow light>Lorem ipsum dolor</Eyebrow>
+          <h1 className="font-heading text-5xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
+            Lorem ipsum dolor<br className="hidden sm:block" />{' '}
+            <span className="text-primary-200">sit amet</span> consectetur
+          </h1>
+          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+          </p>
 
-            <div className="mt-10 flex flex-wrap items-center gap-x-8 gap-y-3 text-sm font-medium text-text-secondary">
-              <span className="inline-flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center bg-primary-100">
-                  <Check size={13} className="text-primary-700" strokeWidth={3} />
-                </span>
-                Lorem ipsum
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center bg-primary-100">
-                  <Check size={13} className="text-primary-700" strokeWidth={3} />
-                </span>
-                Dolor sit amet
-              </span>
-              <span className="inline-flex items-center gap-2">
-                <span className="flex h-6 w-6 items-center justify-center bg-primary-100">
-                  <Check size={13} className="text-primary-700" strokeWidth={3} />
-                </span>
-                Consectetur
-              </span>
-            </div>
+          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <a
+              href="#contacto"
+              className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md"
+            >
+              <CalendarCheck size={18} /> Lorem ipsum dolor
+            </a>
+            <a
+              href="#especialidades"
+              className="inline-flex items-center gap-2 border border-white/50 px-7 py-3.5 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-white/80 hover:bg-white/10 active:translate-y-0"
+            >
+              Dolor sit amet <ChevronRight size={16} />
+            </a>
           </div>
 
-          {/* Right — image + floating cards */}
-          <div className="relative">
-            <ImagePlaceholder
-              icon={Stethoscope}
-              className="aspect-[4/5] w-full shadow-[0_30px_60px_-20px_rgba(16,89,181,0.35)]"
-            />
-
-            {/* floating: appointment */}
-            <div className="absolute -left-5 top-10 hidden items-center gap-3 bg-white p-3.5 shadow-lg sm:flex">
-              <span className="flex h-11 w-11 items-center justify-center bg-primary-50">
-                <CalendarCheck size={20} className="text-primary-600" />
-              </span>
-              <div>
-                <p className="font-heading text-sm font-bold text-text-primary">Lorem ipsum</p>
-                <p className="text-xs text-text-muted">Dolor sit amet</p>
-              </div>
-            </div>
-
-            {/* floating: rating */}
-            <div className="absolute -bottom-5 -right-3 flex items-center gap-3 bg-white p-3.5 shadow-lg">
-              <span className="flex h-11 w-11 items-center justify-center bg-amber-50">
-                <Star size={20} className="fill-amber-400 text-amber-400" />
-              </span>
-              <div>
-                <p className="font-heading text-base font-bold leading-none text-text-primary">4.9/5</p>
-                <p className="mt-1 text-xs text-text-muted">Lorem ipsum</p>
-              </div>
-            </div>
+          {/* Trust badges */}
+          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-white/60">
+            <span className="inline-flex items-center gap-2">
+              <span className="h-px w-5 bg-primary-300" /> Lorem ipsum
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-px w-5 bg-primary-300" /> Dolor sit amet
+            </span>
+            <span className="inline-flex items-center gap-2">
+              <span className="h-px w-5 bg-primary-300" /> Consectetur
+            </span>
           </div>
+        </div>
+
+        {/* Scroll indicator */}
+        <div className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex">
+          <div className="h-10 w-px bg-gradient-to-b from-white/50 to-transparent" />
+          <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
+            Scroll
+          </span>
         </div>
       </section>
 
@@ -418,9 +399,10 @@ function Home() {
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">{body}</p>
                 <a
                   href="#contacto"
-                  className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-primary-600 transition hover:gap-2 hover:text-primary-700"
+                  className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700"
                 >
-                  Lorem ipsum <ArrowRight size={15} />
+                  <span className="link-animated">Lorem ipsum</span>
+                  <ArrowRight size={15} className="transition-transform duration-200 group-hover/link:translate-x-1" />
                 </a>
               </div>
             ))}
@@ -565,13 +547,13 @@ function Home() {
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
                 href="#contacto"
-                className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-lg transition hover:bg-primary-50"
+                className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md"
               >
                 <CalendarCheck size={18} /> Lorem ipsum dolor
               </a>
               <a
                 href="tel:+5710000000"
-                className="inline-flex items-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white transition hover:bg-white/10"
+                className="inline-flex items-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_6px_16px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none"
               >
                 <Phone size={16} /> +57 (1) 000 0000
               </a>
@@ -599,7 +581,7 @@ function Home() {
               <ul className="space-y-3 text-sm">
                 {['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'].map((l) => (
                   <li key={l}>
-                    <a href="#especialidades" className="transition hover:text-primary-300">{l}</a>
+                    <a href="#especialidades" className="link-animated transition-colors duration-200 hover:text-primary-300">{l}</a>
                   </li>
                 ))}
               </ul>
@@ -612,7 +594,7 @@ function Home() {
               <ul className="space-y-3 text-sm">
                 {['Adipiscing', 'Tempor', 'Incididunt', 'Magna aliqua'].map((l) => (
                   <li key={l}>
-                    <a href="#especialidades" className="transition hover:text-primary-300">{l}</a>
+                    <a href="#especialidades" className="link-animated transition-colors duration-200 hover:text-primary-300">{l}</a>
                   </li>
                 ))}
               </ul>
@@ -639,9 +621,9 @@ function Home() {
           <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs sm:flex-row">
             <p>© 2026 Scope Health. Lorem ipsum dolor sit amet.</p>
             <div className="flex gap-6">
-              <a href="#" className="transition hover:text-white">Lorem</a>
-              <a href="#" className="transition hover:text-white">Ipsum</a>
-              <a href="#" className="transition hover:text-white">Dolor</a>
+              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">Lorem</a>
+              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">Ipsum</a>
+              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">Dolor</a>
             </div>
           </div>
         </div>
