@@ -4,43 +4,26 @@ import { useLang } from '#/i18n.js'
 import { fetchHomePage, type HomePageData } from '#/lib/queries.js'
 import {
   ArrowRight,
-  Award,
-  Baby,
-  Bone,
   Calendar,
   CalendarCheck,
   ChevronRight,
-  ClipboardCheck,
   Clock,
-  Eye,
   HeartPulse,
   Mail,
   MapPin,
   Menu,
-  Microscope,
   Phone,
   Quote,
-  Scale,
   ShieldCheck,
-  Smile,
   Sparkles,
-  Star,
   Stethoscope,
   UserRound,
   X,
 } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { IconComponent } from '#/components/Icon.js'
 
 export const Route = createFileRoute('/')({ component: Home })
-
-// ─── Icon map — resuelve nombres de Sanity a componentes Lucide ──────────────
-
-const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
-  Smile, Sparkles, Bone, Eye, HeartPulse, Baby, Scale, Microscope,
-  ShieldCheck, Award, Stethoscope, Phone, ClipboardCheck, UserRound, Star,
-}
-
-const resolveIcon = (name: string) => ICON_MAP[name] ?? Stethoscope
 
 const AVATAR_COLORS = ['#80d9d9', '#4dcaca', '#26bebe', '#009999', '#006666']
 
@@ -331,10 +314,82 @@ function ImagePlaceholder({ className = '', icon: Icon = UserRound }: { classNam
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
+function Skel({ className = '' }: { className?: string }) {
+  return <div className={`animate-pulse bg-neutral-200 ${className}`} />
+}
+
 function PageSkeleton() {
   return (
     <div className="min-h-screen bg-bg-page">
-      <div className="h-[90vh] animate-pulse bg-primary-100" />
+      {/* Navbar */}
+      <div className="border-b border-border-default bg-white px-6 py-4">
+        <div className="mx-auto flex max-w-7xl items-center justify-between">
+          <div className="flex items-center gap-2.5">
+            <Skel className="h-10 w-10" />
+            <Skel className="h-5 w-28" />
+          </div>
+          <div className="hidden items-center gap-8 lg:flex">
+            <Skel className="h-4 w-20" />
+            <Skel className="h-4 w-16" />
+            <Skel className="h-4 w-24" />
+            <Skel className="h-4 w-20" />
+          </div>
+          <Skel className="hidden h-10 w-36 lg:block" />
+        </div>
+      </div>
+
+      {/* Hero */}
+      <div className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-primary-800 sm:min-h-[90vh]">
+        <div className="relative w-full max-w-2xl px-5 py-12 text-center sm:py-20">
+          <Skel className="mx-auto mb-6 h-5 w-44 bg-white/20" />
+          <Skel className="mx-auto mb-3 h-10 w-full bg-white/20 sm:h-14" />
+          <Skel className="mx-auto mb-6 h-10 w-3/4 bg-white/20 sm:h-14" />
+          <Skel className="mx-auto mb-2 h-5 w-full max-w-md bg-white/20" />
+          <Skel className="mx-auto mb-8 h-5 w-2/3 max-w-sm bg-white/20 sm:mb-10" />
+          <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <Skel className="h-12 w-full bg-white/25 sm:w-44" />
+            <Skel className="h-12 w-full bg-white/15 sm:w-44" />
+          </div>
+        </div>
+      </div>
+
+      {/* Stats band */}
+      <div className="border-y border-border-default bg-white px-4 py-8 sm:px-6 sm:py-10">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 sm:grid-cols-4 sm:gap-6">
+          {Array.from({ length: 4 }).map((_, i) => (
+            // biome-ignore lint/suspicious/noArrayIndexKey: static skeleton
+            <div key={i} className="flex flex-col items-center gap-2 text-center sm:flex-row sm:items-center sm:gap-4 sm:text-left">
+              <Skel className="h-10 w-10 shrink-0 sm:h-12 sm:w-12" />
+              <div className="space-y-2">
+                <Skel className="h-7 w-14" />
+                <Skel className="h-3 w-20" />
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Specialties */}
+      <div className="px-4 py-12 sm:px-6 sm:py-20 lg:py-28">
+        <div className="mx-auto max-w-7xl">
+          <div className="mx-auto mb-8 max-w-2xl space-y-4 text-center sm:mb-14">
+            <Skel className="mx-auto h-7 w-32" />
+            <Skel className="mx-auto h-8 w-64 sm:h-10" />
+            <Skel className="mx-auto h-5 w-full max-w-sm" />
+          </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {Array.from({ length: 8 }).map((_, i) => (
+              // biome-ignore lint/suspicious/noArrayIndexKey: static skeleton
+              <div key={i} className="border border-border-default bg-white p-5 sm:p-7">
+                <Skel className="h-12 w-12 sm:h-14 sm:w-14" />
+                <Skel className="mt-4 h-5 w-3/4 sm:mt-5" />
+                <Skel className="mt-3 h-4 w-full" />
+                <Skel className="mt-2 h-4 w-5/6" />
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   )
 }
@@ -408,20 +463,17 @@ function Home() {
       {/* ── Stats band ── */}
       <section className="border-y border-border-default bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-8 sm:gap-6 sm:px-6 sm:py-10 sm:grid-cols-4">
-          {page.stats?.map(({ value, label, icon }) => {
-            const Icon = resolveIcon(icon)
-            return (
+          {page.stats?.map(({ value, label, icon }) => (
               <div key={label} className="flex flex-col items-center gap-2 text-center sm:flex-row sm:items-center sm:gap-4 sm:text-left">
                 <span className="flex h-10 w-10 shrink-0 items-center justify-center bg-primary-50 sm:h-12 sm:w-12">
-                  <Icon size={20} className="text-primary-600" />
+                  <IconComponent name={icon} size={20} className="text-primary-600" />
                 </span>
                 <div>
                   <p className="font-heading text-2xl font-extrabold text-text-primary">{value}</p>
                   <p className="text-xs text-text-muted">{label}</p>
                 </div>
               </div>
-            )
-          })}
+          ))}
         </div>
       </section>
 
@@ -441,15 +493,13 @@ function Home() {
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {page.specialties?.map(({ icon, title, body }) => {
-              const Icon = resolveIcon(icon)
-              return (
+            {page.specialties?.map(({ icon, title, body }) => (
                 <div
                   key={title}
                   className="group border border-border-default bg-white p-5 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card sm:p-7"
                 >
                   <span className="flex h-12 w-12 items-center justify-center bg-primary-50 transition group-hover:bg-primary-500 sm:h-14 sm:w-14">
-                    <Icon size={22} className="text-primary-600 transition group-hover:text-white sm:size-[26px]" />
+                    <IconComponent name={icon} size={22} className="text-primary-600 transition group-hover:text-white sm:size-[26px]" />
                   </span>
                   <h3 className="mt-4 font-heading text-lg font-bold text-text-primary sm:mt-5">{title}</h3>
                   <p className="mt-2 text-sm leading-relaxed text-text-secondary">{body}</p>
@@ -461,8 +511,7 @@ function Home() {
                     <ArrowRight size={15} className="transition-transform duration-200 group-hover/link:translate-x-1" />
                   </a>
                 </div>
-              )
-            })}
+            ))}
           </div>
         </div>
       </section>
@@ -480,21 +529,18 @@ function Home() {
           </div>
 
           <div className="grid gap-8 pt-5 md:grid-cols-2 md:gap-6 md:pt-0 lg:grid-cols-4">
-            {page.journey?.map(({ icon, title, body }, i) => {
-              const Icon = resolveIcon(icon)
-              return (
+            {page.journey?.map(({ icon, title, body }, i) => (
               <div key={title} className="relative bg-white p-5 shadow-sm sm:p-7">
                 <span className="absolute -top-4 left-7 flex h-9 w-9 items-center justify-center bg-primary-600 font-heading text-sm font-bold text-white shadow-md">
                   {i + 1}
                 </span>
                 <span className="mt-3 flex h-12 w-12 items-center justify-center bg-primary-50">
-                  <Icon size={24} className="text-primary-600" />
+                  <IconComponent name={icon} size={24} className="text-primary-600" />
                 </span>
                 <h3 className="mt-4 font-heading text-base font-bold text-text-primary">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">{body}</p>
               </div>
-              )
-            })}
+            ))}
           </div>
         </div>
       </section>
@@ -528,20 +574,17 @@ function Home() {
             </p>
 
             <div className="mt-6 space-y-5 sm:mt-8 sm:space-y-6">
-              {page.reasons?.map(({ icon, title, body }) => {
-                const Icon = resolveIcon(icon)
-                return (
+              {page.reasons?.map(({ icon, title, body }) => (
                 <div key={title} className="flex gap-4">
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary-50">
-                    <Icon size={22} className="text-primary-600" />
+                    <IconComponent name={icon} size={22} className="text-primary-600" />
                   </span>
                   <div>
                     <h3 className="font-heading text-base font-bold text-text-primary">{title}</h3>
                     <p className="mt-1 text-sm leading-relaxed text-text-secondary">{body}</p>
                   </div>
                 </div>
-                )
-              })}
+              ))}
             </div>
           </div>
         </div>
