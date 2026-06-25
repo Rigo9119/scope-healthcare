@@ -48,7 +48,12 @@ const ICON_MAP: Record<
 	Star,
 };
 
-export function IconComponent({ name, size, className, strokeWidth }: IconProps) {
+export function IconComponent({
+	name,
+	size,
+	className,
+	strokeWidth,
+}: IconProps) {
 	const Component = ICON_MAP[name] ?? Stethoscope;
 	return (
 		<Component size={size} className={className} strokeWidth={strokeWidth} />

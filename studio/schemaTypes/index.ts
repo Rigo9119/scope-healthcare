@@ -1,4 +1,5 @@
 import { homePageType } from './documents/homePage'
+import { siteSettingsType } from './documents/siteSettings'
 import { heroType } from './objects/hero'
 import { statItemType } from './objects/statItem'
 import { specialtyItemType } from './objects/specialtyItem'
@@ -9,6 +10,7 @@ import { testimonialType } from './objects/testimonial'
 export const schemaTypes = [
   // Documents
   homePageType,
+  siteSettingsType,
   // Objects
   heroType,
   statItemType,

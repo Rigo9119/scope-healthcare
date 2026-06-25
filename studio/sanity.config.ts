@@ -22,7 +22,7 @@ export default defineConfig({
     visionTool(),
     documentInternationalization({
       supportedLanguages: LOCALES,
-      schemaTypes: ['homePage'],
+      schemaTypes: ['homePage', 'siteSettings'],
     }),
   ],
 
@@ -30,6 +30,8 @@ export default defineConfig({
 
   document: {
     newDocumentOptions: (prev) =>
-      prev.filter((item) => item.templateId !== 'homePage'),
+      prev.filter(
+        (item) => item.templateId !== 'homePage' && item.templateId !== 'siteSettings',
+      ),
   },
 })

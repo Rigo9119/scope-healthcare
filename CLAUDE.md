@@ -52,10 +52,12 @@ File-based routing via TanStack Router. Add route files under `src/routes/`. **N
 ### Sanity Studio structure
 
 Schemas live in `studio/schemaTypes/` split by type:
-- `documents/` — top-level document types (currently just `homePage`)
+- `documents/` — top-level document types:
+  - `homePage` — page content (hero, stats, specialties, process, why-us, testimonials, CTA)
+  - `siteSettings` — global footer + contact, a per-locale singleton ("Configuración del sitio")
 - `objects/` — reusable embedded types (`hero`, `statItem`, `specialtyItem`, etc.)
 
-Studio uses a custom structure (`studio/structure/index.ts`) that surfaces one `homePage` editor per locale instead of a generic document list.
+Studio uses a custom structure (`studio/structure/index.ts`) that surfaces one editor per locale for each document ("Página de inicio" and "Configuración del sitio") instead of a generic document list. Both are registered with the document-internationalization plugin and use `{type}-{locale}` IDs (e.g. `homePage-es`, `siteSettings-en`).
 
 ### Design system
 
@@ -69,11 +71,41 @@ All design tokens are defined in `src/styles.css` inside `@theme {}` (Tailwind v
 
 ### Icon mapping
 
-Lucide icons are mapped by string name in `src/routes/index.tsx` via `ICON_MAP` / `resolveIcon()`. When adding new icon references in Sanity content, add the corresponding import and entry to `ICON_MAP`.
+Sanity stores icons as string names; they're resolved to Lucide components in `src/components/Icon.tsx` via `ICON_MAP` and the `<IconComponent name="..." />` wrapper. When adding a new icon reference in Sanity content, import the icon and add an entry to `ICON_MAP`.
+
+### Layout & components
+
+The home page is composed from components under `src/components/`: `ui/` (BrandMark, Eyebrow, Stars, ImagePlaceholder), `layout/` (Navbar incl. TopBar, Footer), and `sections/` (Hero, StatsBand, Specialties, CareJourney, WhyUs, Testimonials, CtaBand). Section props are typed via `Pick<HomePageData, …>`.
+
+**Navbar and Footer are global chrome rendered once in `src/routes/__root.tsx`** — inside `LangProvider` and `SiteSettingsProvider`, not per page. New routes render only their own content into the `<Outlet />`. Footer/contact data comes from the shared `useSiteSettings()` context (a single `fetchSiteSettings(locale)` shared by the TopBar and Footer); home-page content comes from `fetchHomePage(locale)`. Fallbacks live in `src/lib/homeFallback.ts` and `src/lib/siteSettingsFallback.ts`.
 
 ### Path alias
 
 `#/` resolves to `./src/` in both Vite and Vitest configs.
+
+## Deployment
+
+The frontend and the Studio are **two independent deploys** — they ship separately.
+
+### Frontend (Netlify)
+
+`netlify.toml` builds the root SPA only: `npm run build` → publishes `dist/`, with an SPA catch-all redirect (`/*` → `/index.html`, 200). The `/studio` package is **not** built or served by Netlify, so the Studio is **not** reachable at `<site>/studio` by default.
+
+### Sanity Studio (Sanity hosting)
+
+Deployed to Sanity's free hosting, independent of Netlify:
+
+```bash
+cd studio && bun --bun run deploy
+```
+
+First run prompts for a hostname → Studio goes live at `https://<hostname>.sanity.studio`. Re-run after any schema/structure change. The project `3fyb50d2` is owned by `rigo4791@gmail.com`; the CLI login (`sanity login`) uses that same account — no new account needed.
+
+### Client handoff
+
+The deployed Studio URL loads for anyone, but **editing requires project membership**. Invite the client at <https://manage.sanity.io> → project **Scope Health** (`3fyb50d2`) → **Members** → **Invite** (set role to **Editor** for content-only access). They then log in at the `*.sanity.studio` URL.
+
+> To instead serve the Studio under the main domain at `<site>/studio`, you'd build it into the Netlify output with `basePath: '/studio'` in `studio/sanity.config.ts`, add a `/studio/*` redirect **before** the SPA catch-all in `netlify.toml`, and register the Netlify origin via `sanity cors add`. This couples the two builds, so the standalone `*.sanity.studio` deploy above is preferred for handoff.
 
 ## Development practices
 

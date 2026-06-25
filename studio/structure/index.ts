@@ -1,4 +1,4 @@
-import { HomeIcon } from '@sanity/icons'
+import { CogIcon, HomeIcon } from '@sanity/icons'
 import type { StructureResolver } from 'sanity/structure'
 
 const LOCALES = [
@@ -26,6 +26,27 @@ export const structure: StructureResolver = (S) =>
                       .schemaType('homePage')
                       .documentId(`homePage-${locale.id}`)
                       .title(`Inicio (${locale.title})`)
+                  )
+              )
+            )
+        ),
+
+      S.listItem()
+        .title('Configuración del sitio')
+        .icon(CogIcon)
+        .child(
+          S.list()
+            .title('Configuración del sitio')
+            .items(
+              LOCALES.map((locale) =>
+                S.listItem()
+                  .title(`Footer y contacto — ${locale.title}`)
+                  .icon(CogIcon)
+                  .child(
+                    S.document()
+                      .schemaType('siteSettings')
+                      .documentId(`siteSettings-${locale.id}`)
+                      .title(`Configuración (${locale.title})`)
                   )
               )
             )

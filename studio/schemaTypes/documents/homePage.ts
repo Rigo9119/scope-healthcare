@@ -14,7 +14,6 @@ export const homePageType = defineType({
     { name: 'whyUs', title: 'Por qué elegirnos' },
     { name: 'testimonials', title: 'Testimonios' },
     { name: 'cta', title: 'CTA / Contacto' },
-    { name: 'footer', title: 'Footer' },
   ],
   fields: [
     // Internal — set by plugin
@@ -89,33 +88,6 @@ export const homePageType = defineType({
     defineField({ name: 'ctaSubtitle', title: 'Subtítulo', type: 'text', rows: 2, group: 'cta' }),
     defineField({ name: 'ctaPrimaryLabel', title: 'Botón primario', type: 'string', group: 'cta' }),
     defineField({ name: 'ctaPhone', title: 'Teléfono', type: 'string', group: 'cta' }),
-
-    // ── Footer ────────────────────────────────────────────────────────────────
-    defineField({ name: 'footerTagline', title: 'Tagline', type: 'text', rows: 2, group: 'footer' }),
-    defineField({ name: 'footerColServicesLabel', title: 'Columna Servicios — título', type: 'string', group: 'footer' }),
-    defineField({
-      name: 'footerServices',
-      title: 'Columna Servicios — links',
-      type: 'array',
-      of: [{ type: 'object', fields: [defineField({ name: 'label', title: 'Texto', type: 'string' })] }],
-      group: 'footer',
-    }),
-    defineField({ name: 'footerColCompanyLabel', title: 'Columna Empresa — título', type: 'string', group: 'footer' }),
-    defineField({
-      name: 'footerCompany',
-      title: 'Columna Empresa — links',
-      type: 'array',
-      of: [{ type: 'object', fields: [defineField({ name: 'label', title: 'Texto', type: 'string' })] }],
-      group: 'footer',
-    }),
-    defineField({ name: 'footerColContactLabel', title: 'Columna Contacto — título', type: 'string', group: 'footer' }),
-    defineField({ name: 'footerAddress', title: 'Dirección', type: 'string', group: 'footer' }),
-    defineField({ name: 'footerPhone', title: 'Teléfono', type: 'string', group: 'footer' }),
-    defineField({ name: 'footerEmail', title: 'Email', type: 'string', group: 'footer' }),
-    defineField({ name: 'footerCopyright', title: 'Copyright', type: 'string', group: 'footer' }),
-    defineField({ name: 'footerPrivacyLabel', title: 'Link Privacidad', type: 'string', group: 'footer' }),
-    defineField({ name: 'footerTermsLabel', title: 'Link Términos', type: 'string', group: 'footer' }),
-    defineField({ name: 'footerCookiesLabel', title: 'Link Cookies', type: 'string', group: 'footer' }),
   ],
   preview: {
     select: { language: 'language' },
