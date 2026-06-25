@@ -1,4 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { m } from '#/paraglide/messages.js'
+import { useLang } from '#/i18n.js'
+import { fetchHomePage, type HomePageData } from '#/lib/queries.js'
 import {
   ArrowRight,
   Award,
@@ -30,97 +33,89 @@ import { useEffect, useState } from 'react'
 
 export const Route = createFileRoute('/')({ component: Home })
 
-// ─── Data ──────────────────────────────────────────────────────────────────────
+// ─── Icon map — resuelve nombres de Sanity a componentes Lucide ──────────────
 
-const specialties = [
-  { icon: Smile, title: 'Lorem ipsum', body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.' },
-  { icon: Sparkles, title: 'Dolor sit', body: 'Sed do eiusmod tempor incididunt ut labore et dolore.' },
-  { icon: Bone, title: 'Amet consectetur', body: 'Ut enim ad minim veniam, quis nostrud exercitation.' },
-  { icon: Eye, title: 'Adipiscing elit', body: 'Duis aute irure dolor in reprehenderit in voluptate.' },
-  { icon: HeartPulse, title: 'Eiusmod tempor', body: 'Excepteur sint occaecat cupidatat non proident sunt.' },
-  { icon: Baby, title: 'Incididunt labore', body: 'Nemo enim ipsam voluptatem quia voluptas sit aspernatur.' },
-  { icon: Scale, title: 'Dolore magna', body: 'Neque porro quisquam est qui dolorem ipsum quia dolor.' },
-  { icon: Microscope, title: 'Aliqua veniam', body: 'Quis autem vel eum iure reprehenderit qui in ea.' },
-]
+const ICON_MAP: Record<string, React.ComponentType<{ size?: number; className?: string; strokeWidth?: number }>> = {
+  Smile, Sparkles, Bone, Eye, HeartPulse, Baby, Scale, Microscope,
+  ShieldCheck, Award, Stethoscope, Phone, ClipboardCheck, UserRound, Star,
+}
 
-const stats = [
-  { value: '25+', label: 'Lorem ipsum dolor', icon: Award },
-  { value: '40k+', label: 'Dolor sit amet', icon: UserRound },
-  { value: '120', label: 'Consectetur elit', icon: Stethoscope },
-  { value: '4.9', label: 'Adipiscing tempor', icon: Star },
-]
+const resolveIcon = (name: string) => ICON_MAP[name] ?? Stethoscope
 
-const journey = [
-  {
-    icon: Phone,
-    title: 'Lorem ipsum dolor',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.',
-  },
-  {
-    icon: ClipboardCheck,
-    title: 'Sit amet consectetur',
-    body: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea.',
-  },
-  {
-    icon: Stethoscope,
-    title: 'Adipiscing elit sed',
-    body: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat.',
-  },
-  {
-    icon: HeartPulse,
-    title: 'Eiusmod tempor labore',
-    body: 'Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit.',
-  },
-]
+const AVATAR_COLORS = ['#80d9d9', '#4dcaca', '#26bebe', '#009999', '#006666']
 
-const reasons = [
-  {
-    icon: ShieldCheck,
-    title: 'Lorem ipsum dolor',
-    body: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.',
+const FALLBACK: HomePageData = {
+  hero: {
+    eyebrow: 'Turismo médico de calidad',
+    titleStart: 'Tu salud en las',
+    titleAccent: 'mejores manos del mundo',
+    subtitle: 'Conectamos pacientes con los mejores especialistas médicos internacionales, garantizando atención de clase mundial al mejor precio.',
+    ctaPrimaryLabel: 'Agendar consulta',
+    ctaSecondaryLabel: 'Ver especialidades',
   },
-  {
-    icon: Award,
-    title: 'Sit amet consectetur',
-    body: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo.',
-  },
-  {
-    icon: HeartPulse,
-    title: 'Adipiscing elit sed',
-    body: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla.',
-  },
-]
-
-const testimonials = [
-  {
-    name: 'Lorem Ipsum',
-    detail: 'Dolor sit amet',
-    rating: 5,
-    text: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.',
-    avatarBg: '#80d9d9',
-  },
-  {
-    name: 'Dolor Sit',
-    detail: 'Consectetur elit',
-    rating: 5,
-    text: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-    avatarBg: '#4dcaca',
-  },
-  {
-    name: 'Amet Consectetur',
-    detail: 'Adipiscing tempor',
-    rating: 5,
-    text: 'Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.',
-    avatarBg: '#26bebe',
-  },
-]
-
-const navLinks = [
-  { href: '#especialidades', label: 'Lorem' },
-  { href: '#proceso', label: 'Ipsum' },
-  { href: '#testimonios', label: 'Dolor' },
-  { href: '#contacto', label: 'Sit amet' },
-]
+  stats: [
+    { value: '25+', label: 'Años de experiencia', icon: 'Award' },
+    { value: '40k+', label: 'Pacientes atendidos', icon: 'UserRound' },
+    { value: '120', label: 'Especialistas', icon: 'Stethoscope' },
+    { value: '4.9', label: 'Calificación promedio', icon: 'Star' },
+  ],
+  specialtiesEyebrow: 'Especialidades',
+  specialtiesTitle: 'Áreas de atención médica',
+  specialtiesSubtitle: 'Contamos con especialistas certificados en las principales ramas de la medicina.',
+  specialtiesLinkLabel: 'Más información',
+  specialties: [
+    { icon: 'Smile', title: 'Odontología', body: 'Tratamientos dentales de alta calidad con tecnología de punta.' },
+    { icon: 'Sparkles', title: 'Estética', body: 'Procedimientos estéticos certificados con los mejores resultados.' },
+    { icon: 'Bone', title: 'Ortopedia', body: 'Cirugías ortopédicas de precisión y rehabilitación avanzada.' },
+    { icon: 'Eye', title: 'Oftalmología', body: 'Corrección visual y tratamientos oculares de última generación.' },
+    { icon: 'HeartPulse', title: 'Cardiología', body: 'Diagnóstico y tratamiento cardiovascular de excelencia.' },
+    { icon: 'Baby', title: 'Pediatría', body: 'Atención integral para los más pequeños con especialistas certificados.' },
+    { icon: 'Scale', title: 'Bariátrica', body: 'Cirugías de pérdida de peso con acompañamiento nutricional.' },
+    { icon: 'Microscope', title: 'Oncología', body: 'Tratamientos oncológicos con tecnología de vanguardia.' },
+  ],
+  processEyebrow: 'Proceso',
+  processTitle: 'Tu viaje médico, paso a paso',
+  journey: [
+    { icon: 'Phone', title: 'Consulta inicial', body: 'Evaluamos tu caso y te orientamos sobre las mejores opciones disponibles.' },
+    { icon: 'ClipboardCheck', title: 'Plan personalizado', body: 'Diseñamos un plan médico adaptado a tus necesidades y presupuesto.' },
+    { icon: 'Stethoscope', title: 'Atención médica', body: 'Recibes tratamiento con nuestros especialistas certificados internacionalmente.' },
+    { icon: 'HeartPulse', title: 'Seguimiento', body: 'Acompañamiento post-tratamiento para garantizar tu recuperación óptima.' },
+  ],
+  whyUsEyebrow: 'Por qué elegirnos',
+  whyUsTitle: 'La mejor opción para tu salud',
+  whyUsSubtitle: 'Nos comprometemos con tu bienestar en cada etapa del proceso.',
+  whyUsBadgeText: 'Satisfacción garantizada',
+  reasons: [
+    { icon: 'ShieldCheck', title: 'Calidad certificada', body: 'Todos nuestros especialistas cuentan con certificaciones internacionales y amplia experiencia.' },
+    { icon: 'Award', title: 'Precios transparentes', body: 'Sin costos ocultos. Recibes un presupuesto detallado antes de iniciar cualquier tratamiento.' },
+    { icon: 'HeartPulse', title: 'Acompañamiento integral', body: 'Desde la consulta inicial hasta tu recuperación, estamos contigo en cada paso.' },
+  ],
+  testimonialsEyebrow: 'Testimonios',
+  testimonialsTitle: 'Lo que dicen nuestros pacientes',
+  testimonials: [
+    { name: 'María González', detail: 'Cirugía de cadera, Bogotá', rating: 5, text: 'El servicio fue excepcional. Me ayudaron a encontrar el mejor especialista y coordinaron todo el proceso. Recuperé mi movilidad y calidad de vida gracias a Scope Health.' },
+    { name: 'Carlos Restrepo', detail: 'Implantes dentales, Medellín', rating: 5, text: 'Increíble experiencia. El proceso fue sencillo, transparente y el resultado superó todas mis expectativas. Lo recomiendo ampliamente a quienes buscan calidad.' },
+    { name: 'Ana Martínez', detail: 'Cirugía ocular, Cali', rating: 5, text: 'Nunca imaginé que acceder a tratamiento de clase mundial fuera tan fácil. El equipo de Scope Health me guió en cada paso con profesionalismo y calidez.' },
+  ],
+  ctaEyebrow: 'Agenda tu consulta',
+  ctaTitle: 'Comienza tu viaje hacia una mejor salud hoy',
+  ctaSubtitle: 'Contáctanos y recibe asesoría personalizada sin costo de nuestros especialistas.',
+  ctaPrimaryLabel: 'Agendar consulta',
+  ctaPhone: '+57 (1) 000 0000',
+  footerTagline: 'Conectamos pacientes con los mejores especialistas médicos internacionales.',
+  footerColServicesLabel: 'Servicios',
+  footerServices: [{ label: 'Odontología' }, { label: 'Estética' }, { label: 'Ortopedia' }, { label: 'Oftalmología' }],
+  footerColCompanyLabel: 'Empresa',
+  footerCompany: [{ label: 'Nosotros' }, { label: 'Proceso' }, { label: 'Especialistas' }, { label: 'Blog' }],
+  footerColContactLabel: 'Contacto',
+  footerAddress: 'Calle 100 #19-61, Bogotá',
+  footerPhone: '+57 (1) 000 0000',
+  footerEmail: 'hola@scopehealth.co',
+  footerCopyright: '© 2026 Scope Health. Todos los derechos reservados.',
+  footerPrivacyLabel: 'Privacidad',
+  footerTermsLabel: 'Términos',
+  footerCookiesLabel: 'Cookies',
+}
 
 // ─── Shared bits ─────────────────────────────────────────────────────────────
 
@@ -150,7 +145,7 @@ function TopBar() {
             <Mail size={13} /> lorem@scopehealth.co
           </span>
           <span className="inline-flex items-center gap-1.5">
-            <Clock size={13} /> Lun–Sáb · 8:00–18:00
+            <Clock size={13} /> {m.topbar_hours()}
           </span>
         </div>
         <span className="inline-flex items-center gap-1.5 text-primary-100">
@@ -162,8 +157,16 @@ function TopBar() {
 }
 
 function Navbar() {
+  const { locale, switchLocale } = useLang()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+
+  const navLinks = [
+    { href: '#especialidades', label: m.nav_specialties() },
+    { href: '#proceso',        label: m.nav_process() },
+    { href: '#testimonios',    label: m.nav_testimonials() },
+    { href: '#contacto',       label: m.nav_contact() },
+  ]
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -196,12 +199,35 @@ function Navbar() {
             ))}
           </nav>
 
-          <a
-            href="#contacto"
-            className="hidden items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-btn-primary-hover active:translate-y-0 active:shadow-btn-primary-active lg:inline-flex"
-          >
-            <Calendar size={16} /> Lorem ipsum
-          </a>
+          <div className="hidden items-center gap-4 lg:flex">
+            {/* Language switcher */}
+            <div className="flex items-center gap-0.5">
+              {(['es', 'en'] as const).map((lang, i) => (
+                <>
+                  {i > 0 && <span key={`sep-${lang}`} className="text-xs text-border-default">|</span>}
+                  <button
+                    key={lang}
+                    type="button"
+                    onClick={() => switchLocale(lang)}
+                    className={`px-2 py-1 text-xs font-bold uppercase tracking-wide transition-colors duration-200 ${
+                      locale === lang
+                        ? 'text-primary-600'
+                        : 'text-text-muted hover:text-text-secondary'
+                    }`}
+                  >
+                    {lang}
+                  </button>
+                </>
+              ))}
+            </div>
+
+            <a
+              href="#contacto"
+              className="inline-flex items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-btn-primary-hover active:translate-y-0 active:shadow-btn-primary-active"
+            >
+              <Calendar size={16} /> {m.nav_book()}
+            </a>
+          </div>
 
           <button
             type="button"
@@ -231,8 +257,27 @@ function Navbar() {
                 onClick={() => setOpen(false)}
                 className="mt-3 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:bg-primary-600 active:shadow-btn-primary-active"
               >
-                Lorem ipsum
+                {m.nav_book()}
               </a>
+
+              {/* Language switcher mobile */}
+              <div className="mt-3 flex items-center gap-2 border-t border-border-default pt-4">
+                <span className="text-xs text-text-muted">Idioma:</span>
+                {(['es', 'en'] as const).map((lang) => (
+                  <button
+                    key={lang}
+                    type="button"
+                    onClick={() => { switchLocale(lang); setOpen(false) }}
+                    className={`px-3 py-1.5 text-xs font-bold uppercase tracking-wide transition-colors duration-200 ${
+                      locale === lang
+                        ? 'bg-primary-500 text-white'
+                        : 'text-text-muted hover:text-primary-600'
+                    }`}
+                  >
+                    {lang}
+                  </button>
+                ))}
+              </div>
             </nav>
           </div>
         )}
@@ -286,7 +331,29 @@ function ImagePlaceholder({ className = '', icon: Icon = UserRound }: { classNam
 
 // ─── Page ────────────────────────────────────────────────────────────────────
 
+function PageSkeleton() {
+  return (
+    <div className="min-h-screen bg-bg-page">
+      <div className="h-[90vh] animate-pulse bg-primary-100" />
+    </div>
+  )
+}
+
 function Home() {
+  const { locale } = useLang()
+  const [page, setPage] = useState<HomePageData>(FALLBACK)
+  const [loading, setLoading] = useState(true)
+
+  useEffect(() => {
+    setLoading(true)
+    fetchHomePage(locale)
+      .then((data) => { if (data) setPage(data) })
+      .catch(() => {})
+      .finally(() => setLoading(false))
+  }, [locale])
+
+  if (loading) return <PageSkeleton />
+
   return (
     <div className="min-h-screen overflow-x-hidden bg-bg-page font-body text-text-secondary">
       <Navbar />
@@ -305,14 +372,13 @@ function Home() {
 
         {/* Centered copy */}
         <div className="relative px-6 py-20 text-center lg:px-12">
-          <Eyebrow light>Lorem ipsum dolor</Eyebrow>
+          <Eyebrow light>{page.hero.eyebrow}</Eyebrow>
           <h1 className="font-heading text-5xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Lorem ipsum dolor<br className="hidden sm:block" />{' '}
-            <span className="text-primary-200">sit amet</span> consectetur
+            {page.hero.titleStart}<br className="hidden sm:block" />{' '}
+            <span className="text-primary-200">{page.hero.titleAccent}</span>
           </h1>
           <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
-            tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam.
+            {page.hero.subtitle}
           </p>
 
           <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
@@ -320,27 +386,14 @@ function Home() {
               href="#contacto"
               className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md"
             >
-              <CalendarCheck size={18} /> Lorem ipsum dolor
+              <CalendarCheck size={18} /> {page.hero.ctaPrimaryLabel}
             </a>
             <a
               href="#especialidades"
               className="inline-flex items-center gap-2 border border-white/50 px-7 py-3.5 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-white/80 hover:bg-white/10 active:translate-y-0"
             >
-              Dolor sit amet <ChevronRight size={16} />
+              {page.hero.ctaSecondaryLabel} <ChevronRight size={16} />
             </a>
-          </div>
-
-          {/* Trust badges */}
-          <div className="mt-12 flex flex-wrap items-center justify-center gap-x-8 gap-y-3 text-sm font-medium text-white/60">
-            <span className="inline-flex items-center gap-2">
-              <span className="h-px w-5 bg-primary-300" /> Lorem ipsum
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="h-px w-5 bg-primary-300" /> Dolor sit amet
-            </span>
-            <span className="inline-flex items-center gap-2">
-              <span className="h-px w-5 bg-primary-300" /> Consectetur
-            </span>
           </div>
         </div>
 
@@ -356,17 +409,20 @@ function Home() {
       {/* ── Stats band ── */}
       <section className="border-y border-border-default bg-white">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
-          {stats.map(({ value, label, icon: Icon }) => (
-            <div key={label} className="flex items-center gap-4">
-              <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary-50">
-                <Icon size={22} className="text-primary-600" />
-              </span>
-              <div>
-                <p className="font-heading text-2xl font-extrabold text-text-primary">{value}</p>
-                <p className="text-xs text-text-muted">{label}</p>
+          {page.stats?.map(({ value, label, icon }) => {
+            const Icon = resolveIcon(icon)
+            return (
+              <div key={label} className="flex items-center gap-4">
+                <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary-50">
+                  <Icon size={22} className="text-primary-600" />
+                </span>
+                <div>
+                  <p className="font-heading text-2xl font-extrabold text-text-primary">{value}</p>
+                  <p className="text-xs text-text-muted">{label}</p>
+                </div>
               </div>
-            </div>
-          ))}
+            )
+          })}
         </div>
       </section>
 
@@ -375,37 +431,39 @@ function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-14 max-w-2xl text-center">
             <div className="flex justify-center">
-              <Eyebrow>Lorem ipsum</Eyebrow>
+              <Eyebrow>{page.specialtiesEyebrow}</Eyebrow>
             </div>
             <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
-              Lorem ipsum dolor sit amet
+              {page.specialtiesTitle}
             </h2>
             <p className="mt-4 text-text-secondary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore.
+              {page.specialtiesSubtitle}
             </p>
           </div>
 
           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {specialties.map(({ icon: Icon, title, body }) => (
-              <div
-                key={title}
-                className="group border border-border-default bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card"
-              >
-                <span className="flex h-14 w-14 items-center justify-center bg-primary-50 transition group-hover:bg-primary-500">
-                  <Icon size={26} className="text-primary-600 transition group-hover:text-white" />
-                </span>
-                <h3 className="mt-5 font-heading text-lg font-bold text-text-primary">{title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-text-secondary">{body}</p>
-                <a
-                  href="#contacto"
-                  className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700"
+            {page.specialties?.map(({ icon, title, body }) => {
+              const Icon = resolveIcon(icon)
+              return (
+                <div
+                  key={title}
+                  className="group border border-border-default bg-white p-7 shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card"
                 >
-                  <span className="link-animated">Lorem ipsum</span>
-                  <ArrowRight size={15} className="transition-transform duration-200 group-hover/link:translate-x-1" />
-                </a>
-              </div>
-            ))}
+                  <span className="flex h-14 w-14 items-center justify-center bg-primary-50 transition group-hover:bg-primary-500">
+                    <Icon size={26} className="text-primary-600 transition group-hover:text-white" />
+                  </span>
+                  <h3 className="mt-5 font-heading text-lg font-bold text-text-primary">{title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-text-secondary">{body}</p>
+                  <a
+                    href="#contacto"
+                    className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700"
+                  >
+                    <span className="link-animated">{page.specialtiesLinkLabel}</span>
+                    <ArrowRight size={15} className="transition-transform duration-200 group-hover/link:translate-x-1" />
+                  </a>
+                </div>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -415,15 +473,17 @@ function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-14 max-w-2xl text-center">
             <div className="flex justify-center">
-              <Eyebrow>Dolor sit amet</Eyebrow>
+              <Eyebrow>{page.processEyebrow}</Eyebrow>
             </div>
             <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
-              Lorem ipsum dolor consectetur
+              {page.processTitle}
             </h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {journey.map(({ icon: Icon, title, body }, i) => (
+            {page.journey?.map(({ icon, title, body }, i) => {
+              const Icon = resolveIcon(icon)
+              return (
               <div key={title} className="relative bg-white p-7 shadow-sm">
                 <span className="absolute -top-4 left-7 flex h-9 w-9 items-center justify-center bg-primary-600 font-heading text-sm font-bold text-white shadow-md">
                   {i + 1}
@@ -434,7 +494,8 @@ function Home() {
                 <h3 className="mt-4 font-heading text-base font-bold text-text-primary">{title}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-text-secondary">{body}</p>
               </div>
-            ))}
+              )
+            })}
           </div>
         </div>
       </section>
@@ -452,24 +513,25 @@ function Home() {
                 <span className="flex h-10 w-10 items-center justify-center bg-primary-50">
                   <ShieldCheck size={18} className="text-primary-600" />
                 </span>
-                <span className="text-sm font-semibold text-text-primary">Lorem ipsum dolor</span>
+                <span className="text-sm font-semibold text-text-primary">{page.whyUsBadgeText}</span>
               </div>
               <span className="font-heading text-lg font-extrabold text-primary-600">100%</span>
             </div>
           </div>
 
           <div className="order-1 lg:order-2">
-            <Eyebrow>Consectetur elit</Eyebrow>
+            <Eyebrow>{page.whyUsEyebrow}</Eyebrow>
             <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
-              Lorem ipsum dolor sit amet adipiscing
+              {page.whyUsTitle}
             </h2>
             <p className="mt-4 text-text-secondary">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore magna aliqua.
+              {page.whyUsSubtitle}
             </p>
 
             <div className="mt-8 space-y-6">
-              {reasons.map(({ icon: Icon, title, body }) => (
+              {page.reasons?.map(({ icon, title, body }) => {
+                const Icon = resolveIcon(icon)
+                return (
                 <div key={title} className="flex gap-4">
                   <span className="flex h-12 w-12 shrink-0 items-center justify-center bg-primary-50">
                     <Icon size={22} className="text-primary-600" />
@@ -479,7 +541,8 @@ function Home() {
                     <p className="mt-1 text-sm leading-relaxed text-text-secondary">{body}</p>
                   </div>
                 </div>
-              ))}
+                )
+              })}
             </div>
           </div>
         </div>
@@ -490,15 +553,15 @@ function Home() {
         <div className="mx-auto max-w-7xl">
           <div className="mx-auto mb-14 max-w-2xl text-center">
             <div className="flex justify-center">
-              <Eyebrow>Adipiscing tempor</Eyebrow>
+              <Eyebrow>{page.testimonialsEyebrow}</Eyebrow>
             </div>
             <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
-              Lorem ipsum dolor sit amet
+              {page.testimonialsTitle}
             </h2>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">
-            {testimonials.map((t) => (
+            {page.testimonials?.map((t, i) => (
               <figure
                 key={t.name}
                 className="flex flex-col bg-white p-7 shadow-sm"
@@ -513,9 +576,9 @@ function Home() {
                 <figcaption className="mt-5 flex items-center gap-3 border-t border-border-default pt-5">
                   <span
                     className="flex h-11 w-11 items-center justify-center font-heading text-sm font-bold text-white"
-                    style={{ backgroundColor: t.avatarBg }}
+                    style={{ backgroundColor: AVATAR_COLORS[i % AVATAR_COLORS.length] }}
                   >
-                    {t.name.split(' ').map((w) => w[0]).join('')}
+                    {t.name.split(' ').map((w: string) => w[0]).join('')}
                   </span>
                   <span>
                     <span className="block text-sm font-bold text-text-primary">{t.name}</span>
@@ -534,28 +597,27 @@ function Home() {
           <div className="mx-auto max-w-2xl">
             <span className="flex justify-center">
               <span className="mb-5 inline-flex items-center gap-2 bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white">
-                <Sparkles size={14} /> Lorem ipsum
+                <Sparkles size={14} /> {page.ctaEyebrow}
               </span>
             </span>
             <h2 className="font-heading text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
-              Lorem ipsum dolor sit amet consectetur
+              {page.ctaTitle}
             </h2>
             <p className="mx-auto mt-5 max-w-md text-primary-50">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-              incididunt ut labore et dolore.
+              {page.ctaSubtitle}
             </p>
             <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
               <a
                 href="#contacto"
                 className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md"
               >
-                <CalendarCheck size={18} /> Lorem ipsum dolor
+                <CalendarCheck size={18} /> {page.ctaPrimaryLabel}
               </a>
               <a
-                href="tel:+5710000000"
+                href={`tel:${page.ctaPhone?.replace(/\s/g, '')}`}
                 className="inline-flex items-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_6px_16px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none"
               >
-                <Phone size={16} /> +57 (1) 000 0000
+                <Phone size={16} /> {page.ctaPhone}
               </a>
             </div>
           </div>
@@ -569,19 +631,18 @@ function Home() {
             <div>
               <BrandMark tone="light" />
               <p className="mt-5 max-w-xs text-sm leading-relaxed">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-                incididunt ut labore.
+                {page.footerTagline}
               </p>
             </div>
 
             <div>
               <h3 className="mb-5 font-heading text-sm font-bold uppercase tracking-wide text-white">
-                Lorem
+                {page.footerColServicesLabel}
               </h3>
               <ul className="space-y-3 text-sm">
-                {['Lorem ipsum', 'Dolor sit', 'Amet elit', 'Consectetur'].map((l) => (
-                  <li key={l}>
-                    <a href="#especialidades" className="link-animated transition-colors duration-200 hover:text-primary-300">{l}</a>
+                {page.footerServices?.map((l) => (
+                  <li key={l.label}>
+                    <a href="#especialidades" className="link-animated transition-colors duration-200 hover:text-primary-300">{l.label}</a>
                   </li>
                 ))}
               </ul>
@@ -589,12 +650,12 @@ function Home() {
 
             <div>
               <h3 className="mb-5 font-heading text-sm font-bold uppercase tracking-wide text-white">
-                Ipsum
+                {page.footerColCompanyLabel}
               </h3>
               <ul className="space-y-3 text-sm">
-                {['Adipiscing', 'Tempor', 'Incididunt', 'Magna aliqua'].map((l) => (
-                  <li key={l}>
-                    <a href="#especialidades" className="link-animated transition-colors duration-200 hover:text-primary-300">{l}</a>
+                {page.footerCompany?.map((l) => (
+                  <li key={l.label}>
+                    <a href="#" className="link-animated transition-colors duration-200 hover:text-primary-300">{l.label}</a>
                   </li>
                 ))}
               </ul>
@@ -602,28 +663,34 @@ function Home() {
 
             <div>
               <h3 className="mb-5 font-heading text-sm font-bold uppercase tracking-wide text-white">
-                Dolor sit
+                {page.footerColContactLabel}
               </h3>
               <ul className="space-y-4 text-sm">
-                <li className="flex items-start gap-3">
-                  <MapPin size={16} className="mt-0.5 shrink-0 text-primary-400" /> Lorem ipsum, Bogotá
-                </li>
-                <li className="flex items-start gap-3">
-                  <Phone size={16} className="mt-0.5 shrink-0 text-primary-400" /> +57 (1) 000 0000
-                </li>
-                <li className="flex items-start gap-3">
-                  <Mail size={16} className="mt-0.5 shrink-0 text-primary-400" /> lorem@scopehealth.co
-                </li>
+                {page.footerAddress && (
+                  <li className="flex items-start gap-3">
+                    <MapPin size={16} className="mt-0.5 shrink-0 text-primary-400" /> {page.footerAddress}
+                  </li>
+                )}
+                {page.footerPhone && (
+                  <li className="flex items-start gap-3">
+                    <Phone size={16} className="mt-0.5 shrink-0 text-primary-400" /> {page.footerPhone}
+                  </li>
+                )}
+                {page.footerEmail && (
+                  <li className="flex items-start gap-3">
+                    <Mail size={16} className="mt-0.5 shrink-0 text-primary-400" /> {page.footerEmail}
+                  </li>
+                )}
               </ul>
             </div>
           </div>
 
           <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs sm:flex-row">
-            <p>© 2026 Scope Health. Lorem ipsum dolor sit amet.</p>
+            <p>{page.footerCopyright}</p>
             <div className="flex gap-6">
-              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">Lorem</a>
-              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">Ipsum</a>
-              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">Dolor</a>
+              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">{page.footerPrivacyLabel}</a>
+              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">{page.footerTermsLabel}</a>
+              <a href="#" className="link-animated transition-colors duration-200 hover:text-white">{page.footerCookiesLabel}</a>
             </div>
           </div>
         </div>

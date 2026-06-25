@@ -17,6 +17,7 @@
     "machine-translate": "inlang machine translate --project project.inlang"
   },
   "dependencies": {
+    "@sanity/client": "^7.23.0",
     "@tailwindcss/vite": "^4.3.1",
     "@tanstack/react-devtools": "latest",
     "@tanstack/react-router": "latest",

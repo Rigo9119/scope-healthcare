@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Hello world {username}"
+  "nav_specialties": "Specialties",
+  "nav_process": "Process",
+  "nav_testimonials": "Testimonials",
+  "nav_contact": "Contact",
+  "nav_book": "Book appointment",
+  "topbar_hours": "Mon–Sat · 8:00–6:00 PM"
 }

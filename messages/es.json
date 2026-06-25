@@ -1,0 +1,9 @@
+{
+  "$schema": "https://inlang.com/schema/inlang-message-format",
+  "nav_specialties": "Especialidades",
+  "nav_process": "Proceso",
+  "nav_testimonials": "Testimonios",
+  "nav_contact": "Contacto",
+  "nav_book": "Agendar cita",
+  "topbar_hours": "Lun–Sáb · 8:00–18:00"
+}
