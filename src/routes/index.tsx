@@ -359,38 +359,37 @@ function Home() {
       <Navbar />
 
       {/* ── Hero ── */}
-      <section className="relative flex min-h-[90vh] items-center justify-center overflow-hidden">
+      <section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden sm:min-h-[90vh]">
         {/* Full-bleed background image */}
-        <ImagePlaceholder
-          icon={Stethoscope}
-          className="absolute inset-0 h-full w-full"
-        />
+        <div className="absolute inset-0">
+          <ImagePlaceholder icon={Stethoscope} className="h-full w-full" />
+        </div>
 
         {/* Overlay */}
         <div className="pointer-events-none absolute inset-0 bg-primary-900/60" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/40" />
 
         {/* Centered copy */}
-        <div className="relative px-6 py-20 text-center lg:px-12">
+        <div className="relative mx-auto w-full max-w-2xl px-5 py-12 text-center sm:py-20 lg:px-12">
           <Eyebrow light>{page.hero.eyebrow}</Eyebrow>
-          <h1 className="font-heading text-5xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-6xl lg:text-7xl">
+          <h1 className="font-heading text-3xl font-extrabold leading-[1.08] tracking-tight text-white sm:text-5xl lg:text-7xl">
             {page.hero.titleStart}<br className="hidden sm:block" />{' '}
             <span className="text-primary-200">{page.hero.titleAccent}</span>
           </h1>
-          <p className="mx-auto mt-6 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
+          <p className="mx-auto mt-4 max-w-xl text-base leading-relaxed text-white/70 sm:mt-6 sm:text-lg">
             {page.hero.subtitle}
           </p>
 
-          <div className="mt-9 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+          <div className="mt-7 flex flex-col items-center gap-3 sm:mt-9 sm:flex-row sm:justify-center">
             <a
               href="#contacto"
-              className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md"
+              className="inline-flex w-full items-center justify-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md sm:w-auto"
             >
               <CalendarCheck size={18} /> {page.hero.ctaPrimaryLabel}
             </a>
             <a
               href="#especialidades"
-              className="inline-flex items-center gap-2 border border-white/50 px-7 py-3.5 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-white/80 hover:bg-white/10 active:translate-y-0"
+              className="inline-flex w-full items-center justify-center gap-2 border border-white/50 px-7 py-3.5 text-sm font-semibold text-white transition duration-200 hover:-translate-y-0.5 hover:border-white/80 hover:bg-white/10 active:translate-y-0 sm:w-auto"
             >
               {page.hero.ctaSecondaryLabel} <ChevronRight size={16} />
             </a>
@@ -408,7 +407,7 @@ function Home() {
 
       {/* ── Stats band ── */}
       <section className="border-y border-border-default bg-white">
-        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-6 py-10 sm:grid-cols-4">
+        <div className="mx-auto grid max-w-7xl grid-cols-2 gap-4 px-4 py-8 sm:gap-6 sm:px-6 sm:py-10 sm:grid-cols-4">
           {page.stats?.map(({ value, label, icon }) => {
             const Icon = resolveIcon(icon)
             return (
@@ -427,13 +426,13 @@ function Home() {
       </section>
 
       {/* ── Specialties ── */}
-      <section id="especialidades" className="px-6 py-20 lg:py-28">
+      <section id="especialidades" className="px-4 py-12 sm:px-6 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-14 max-w-2xl text-center">
+          <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-14">
             <div className="flex justify-center">
               <Eyebrow>{page.specialtiesEyebrow}</Eyebrow>
             </div>
-            <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
+            <h2 className="font-heading text-2xl font-extrabold text-text-primary sm:text-3xl lg:text-4xl">
               {page.specialtiesTitle}
             </h2>
             <p className="mt-4 text-text-secondary">
@@ -469,13 +468,13 @@ function Home() {
       </section>
 
       {/* ── Care journey ── */}
-      <section id="proceso" className="bg-primary-50/60 px-6 py-20 lg:py-28">
+      <section id="proceso" className="bg-primary-50/60 px-4 py-12 sm:px-6 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-14 max-w-2xl text-center">
+          <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-14">
             <div className="flex justify-center">
               <Eyebrow>{page.processEyebrow}</Eyebrow>
             </div>
-            <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
+            <h2 className="font-heading text-2xl font-extrabold text-text-primary sm:text-3xl lg:text-4xl">
               {page.processTitle}
             </h2>
           </div>
@@ -501,7 +500,7 @@ function Home() {
       </section>
 
       {/* ── Why us (split) ── */}
-      <section className="px-6 py-20 lg:py-28">
+      <section className="px-4 py-12 sm:px-6 sm:py-20 lg:py-28">
         <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-2 lg:gap-16">
           <div className="relative order-2 lg:order-1">
             <ImagePlaceholder
@@ -521,7 +520,7 @@ function Home() {
 
           <div className="order-1 lg:order-2">
             <Eyebrow>{page.whyUsEyebrow}</Eyebrow>
-            <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
+            <h2 className="font-heading text-2xl font-extrabold text-text-primary sm:text-3xl lg:text-4xl">
               {page.whyUsTitle}
             </h2>
             <p className="mt-4 text-text-secondary">
@@ -549,13 +548,13 @@ function Home() {
       </section>
 
       {/* ── Testimonials ── */}
-      <section id="testimonios" className="bg-primary-50/60 px-6 py-20 lg:py-28">
+      <section id="testimonios" className="bg-primary-50/60 px-4 py-12 sm:px-6 sm:py-20 lg:py-28">
         <div className="mx-auto max-w-7xl">
-          <div className="mx-auto mb-14 max-w-2xl text-center">
+          <div className="mx-auto mb-8 max-w-2xl text-center sm:mb-14">
             <div className="flex justify-center">
               <Eyebrow>{page.testimonialsEyebrow}</Eyebrow>
             </div>
-            <h2 className="font-heading text-3xl font-extrabold text-text-primary sm:text-4xl">
+            <h2 className="font-heading text-2xl font-extrabold text-text-primary sm:text-3xl lg:text-4xl">
               {page.testimonialsTitle}
             </h2>
           </div>
@@ -592,30 +591,30 @@ function Home() {
       </section>
 
       {/* ── CTA ── */}
-      <section id="contacto" className="px-6 py-20 lg:py-24">
-        <div className="mx-auto max-w-7xl overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 px-8 py-16 text-center shadow-xl sm:px-16">
+      <section id="contacto" className="px-4 py-12 sm:px-6 sm:py-20 lg:py-24">
+        <div className="mx-auto max-w-7xl overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 px-5 py-10 text-center shadow-xl sm:px-8 sm:py-16 lg:px-16">
           <div className="mx-auto max-w-2xl">
             <span className="flex justify-center">
               <span className="mb-5 inline-flex items-center gap-2 bg-white/15 px-4 py-1.5 text-xs font-bold uppercase tracking-[0.12em] text-white">
                 <Sparkles size={14} /> {page.ctaEyebrow}
               </span>
             </span>
-            <h2 className="font-heading text-3xl font-extrabold leading-tight text-white sm:text-4xl lg:text-5xl">
+            <h2 className="font-heading text-2xl font-extrabold leading-tight text-white sm:text-3xl lg:text-5xl">
               {page.ctaTitle}
             </h2>
             <p className="mx-auto mt-5 max-w-md text-primary-50">
               {page.ctaSubtitle}
             </p>
-            <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
+            <div className="mt-7 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
               <a
                 href="#contacto"
-                className="inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md"
+                className="inline-flex w-full items-center justify-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md sm:w-auto"
               >
                 <CalendarCheck size={18} /> {page.ctaPrimaryLabel}
               </a>
               <a
                 href={`tel:${page.ctaPhone?.replace(/\s/g, '')}`}
-                className="inline-flex items-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_6px_16px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none"
+                className="inline-flex w-full items-center justify-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_6px_16px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none sm:w-auto"
               >
                 <Phone size={16} /> {page.ctaPhone}
               </a>
@@ -625,9 +624,9 @@ function Home() {
       </section>
 
       {/* ── Footer ── */}
-      <footer className="bg-text-primary px-6 pb-10 pt-16 text-neutral-400">
+      <footer className="bg-text-primary px-4 pb-8 pt-12 text-neutral-400 sm:px-6 sm:pb-10 sm:pt-16">
         <div className="mx-auto max-w-7xl">
-          <div className="grid gap-12 lg:grid-cols-4">
+          <div className="grid gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-12">
             <div>
               <BrandMark tone="light" />
               <p className="mt-5 max-w-xs text-sm leading-relaxed">
@@ -685,7 +684,7 @@ function Home() {
             </div>
           </div>
 
-          <div className="mt-14 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-8 text-xs sm:flex-row">
+          <div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs sm:mt-14 sm:flex-row sm:pt-8">
             <p>{page.footerCopyright}</p>
             <div className="flex gap-6">
               <a href="#" className="link-animated transition-colors duration-200 hover:text-white">{page.footerPrivacyLabel}</a>
