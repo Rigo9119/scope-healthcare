@@ -16,6 +16,7 @@ import {
   Quote,
   ShieldCheck,
   Sparkles,
+  Star,
   Stethoscope,
   UserRound,
   X,
