@@ -92,9 +92,17 @@ The home page is composed from components under `src/components/`: `ui/` (BrandM
 
 The frontend and the Studio are **two independent deploys** — they ship separately.
 
-### Frontend (Netlify)
+### Frontend (Netlify) — SSG / prerendered
 
-`netlify.toml` builds the root SPA only: `npm run build` → publishes `dist/`, with an SPA catch-all redirect (`/*` → `/index.html`, 200). The `/studio` package is **not** built or served by Netlify, so the Studio is **not** reachable at `<site>/studio` by default.
+`netlify.toml` runs **`npm run build:ssg`** (= `vite build && npm run prerender`) → publishes `dist/`, with an SPA catch-all redirect (`/*` → `/index.html`, 200). The `/studio` package is **not** built or served by Netlify, so the Studio is **not** reachable at `<site>/studio` by default.
+
+**Prerendering (`scripts/prerender.mjs`):** after `vite build`, it serves `dist/` locally, opens `/es` and `/en` in headless Chrome (Puppeteer), lets the route loader fetch Sanity (or fall back), and snapshots the finished HTML — with per-locale `<head>` (title/description/OG/canonical/hreflang) and content baked in — to `dist/es/index.html` and `dist/en/index.html`. Netlify serves those static files (static files win over the catch-all), so **crawlers and link-preview scrapers (WhatsApp/Facebook) get real HTML**. The catch-all only handles file-less paths (client routing). `main.tsx` always `createRoot`s (it renders the live SPA over the snapshot). `index.html` keeps only a fallback `<title>` + JSON-LD; `HeadContent` owns the rest per route (so snapshots don't get duplicate meta). SEO config + `SITE_URL` live in `src/lib/seo.ts` (placeholder until the domain is migrated — also in `public/robots.txt` + `public/sitemap.xml`).
+
+> Notes: Puppeteer downloads Chromium on `npm install` (works in Netlify's build image). For local fast builds use plain `npm run build` (no prerender). Run `npm run build:ssg` to reproduce what Netlify ships.
+
+**Content edits → auto-rebuild (required for SSG):** because pages are prerendered, a Sanity edit only goes live on the next build. Wire it up once:
+1. Netlify → **Site configuration → Build & deploy → Build hooks** → create a hook → copy its URL.
+2. Sanity → create a webhook to that URL: `cd studio && npx sanity hook create` (name it "Netlify rebuild", URL = the build hook, dataset `production`, trigger on create/update/delete) — or add it at <https://manage.sanity.io> → API → Webhooks. Now publishing in the Studio triggers a redeploy.
 
 ### Sanity Studio (Sanity hosting)
 

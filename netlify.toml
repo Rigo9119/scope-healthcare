@@ -1,7 +1,10 @@
 [build]
-  command = "npm run build"
+  # SSG: vite build + prerender /es and /en to static HTML (see scripts/prerender.mjs).
+  command = "npm run build:ssg"
   publish = "dist"
 
+# Static files win over redirects, so prerendered /es and /en are served as real
+# HTML. This catch-all only handles paths without a matching file (client routing).
 [[redirects]]
   from = "/*"
   to = "/index.html"

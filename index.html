@@ -6,22 +6,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1059b5" />
 
-    <!-- Default meta (static, for crawlers/first paint). TanStack Router's
-         per-route <head> refines title/description/canonical/hreflang per locale.
-         "/" redirects to "/es", so these defaults are Spanish. -->
-    <title>Scope Health | Turismo médico en Bogotá — atención de clase mundial</title>
-    <meta
-      name="description"
-      content="Cirugías y tratamientos médicos de alta calidad en Bogotá, Colombia, para pacientes internacionales. Especialistas certificados, precios transparentes y acompañamiento integral."
-    />
-    <meta property="og:type" content="website" />
-    <meta property="og:site_name" content="Scope Health" />
-    <meta property="og:title" content="Scope Health | Turismo médico en Bogotá" />
-    <meta
-      property="og:description"
-      content="Atención médica de clase mundial en Bogotá para pacientes internacionales."
-    />
-    <meta name="twitter:card" content="summary_large_image" />
+    <!-- Fallback title only. Per-route, per-locale title/description/OG/Twitter/
+         canonical/hreflang are owned by TanStack Router's <head> (HeadContent)
+         and baked into the prerendered /es and /en HTML. Keeping description/OG
+         out of here avoids duplicate tags in the SSG snapshots. -->
+    <title>Scope Health | Turismo médico en Bogotá</title>
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />

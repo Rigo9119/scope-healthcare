@@ -9,6 +9,8 @@
     "dev": "vite dev --port 3000",
     "generate-routes": "tsr generate",
     "build": "vite build",
+    "prerender": "node scripts/prerender.mjs",
+    "build:ssg": "vite build && npm run prerender",
     "preview": "vite preview",
     "test": "vitest run",
     "format": "biome format",
@@ -43,6 +45,7 @@
     "@types/react-dom": "^19.2.0",
     "@vitejs/plugin-react": "^6.0.1",
     "jsdom": "^28.1.0",
+    "puppeteer": "^25.2.1",
     "typescript": "^6.0.2",
     "vite": "^8.0.0",
     "vitest": "^4.1.5"
