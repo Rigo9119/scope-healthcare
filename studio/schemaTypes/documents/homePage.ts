@@ -14,10 +14,14 @@ export const homePageType = defineType({
     { name: 'whyUs', title: 'Por qué elegirnos' },
     { name: 'testimonials', title: 'Testimonios' },
     { name: 'cta', title: 'CTA / Contacto' },
+    { name: 'seo', title: 'SEO' },
   ],
   fields: [
     // Internal — set by plugin
     defineField({ name: 'language', type: 'string', readOnly: true, hidden: true }),
+
+    // ── SEO ───────────────────────────────────────────────────────────────────
+    defineField({ name: 'seo', title: 'SEO', type: 'seo', group: 'seo' }),
 
     // ── Hero ──────────────────────────────────────────────────────────────────
     defineField({ name: 'hero', title: 'Hero', type: 'hero', group: 'hero' }),

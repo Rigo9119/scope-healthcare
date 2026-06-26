@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ⚠️ Update the domain to the production site (matches SITE_URL in src/lib/seo.ts). -->
+<urlset
+  xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml"
+>
+  <url>
+    <loc>https://www.scopehealth.co/es</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.scopehealth.co/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.scopehealth.co/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.scopehealth.co/es" />
+  </url>
+  <url>
+    <loc>https://www.scopehealth.co/en</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://www.scopehealth.co/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://www.scopehealth.co/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.scopehealth.co/es" />
+  </url>
+</urlset>

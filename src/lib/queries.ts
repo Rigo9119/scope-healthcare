@@ -36,6 +36,11 @@ export interface HomePageData {
 	ctaSubtitle: string;
 	ctaPrimaryLabel: string;
 	ctaPhone: string;
+	seo?: {
+		seoTitle?: string;
+		seoDescription?: string;
+		ogImage?: string;
+	};
 }
 
 const HOME_PAGE_QUERY = `
@@ -50,7 +55,8 @@ const HOME_PAGE_QUERY = `
     reasons,
     testimonialsEyebrow, testimonialsTitle,
     testimonials,
-    ctaEyebrow, ctaTitle, ctaSubtitle, ctaPrimaryLabel, ctaPhone
+    ctaEyebrow, ctaTitle, ctaSubtitle, ctaPrimaryLabel, ctaPhone,
+    seo{ seoTitle, seoDescription, "ogImage": ogImage.asset->url }
   }
 `;
 

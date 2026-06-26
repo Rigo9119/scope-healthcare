@@ -1,3 +1,6 @@
 # https://www.robotstxt.org/robotstxt.html
 User-agent: *
-Disallow:
+Allow: /
+
+# ⚠️ Update the domain to the production site.
+Sitemap: https://www.scopehealth.co/sitemap.xml

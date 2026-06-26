@@ -5,6 +5,7 @@ import { statItemType } from './objects/statItem'
 import { specialtyItemType } from './objects/specialtyItem'
 import { journeyStepType } from './objects/journeyStep'
 import { reasonType } from './objects/reason'
+import { seoType } from './objects/seo'
 import { testimonialType } from './objects/testimonial'
 
 export const schemaTypes = [
@@ -18,4 +19,5 @@ export const schemaTypes = [
   journeyStepType,
   reasonType,
   testimonialType,
+  seoType,
 ]
