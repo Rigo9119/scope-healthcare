@@ -1,8 +1,9 @@
 // Central SEO config + per-route <head> builders for TanStack Router.
 //
-// ⚠️ SET THIS to the real production domain (no trailing slash). It is also
-// hardcoded in `public/robots.txt` and `public/sitemap.xml` — update all three.
-export const SITE_URL = "https://www.scopehealth.co";
+// Production base URL (no trailing slash). Currently the live Netlify URL —
+// switch to the custom domain once the client migrates it. Also hardcoded in
+// `public/robots.txt`, `public/sitemap.xml`, and the JSON-LD in `index.html`.
+export const SITE_URL = "https://scope-healthcare.netlify.app";
 export const SITE_NAME = "Scope Health";
 export const DEFAULT_OG_IMAGE = "/logo512.png";
 

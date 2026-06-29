@@ -5,15 +5,15 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
   <url>
-    <loc>https://www.scopehealth.co/es</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.scopehealth.co/es" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.scopehealth.co/en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.scopehealth.co/es" />
+    <loc>https://scope-healthcare.netlify.app/es</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es" />
   </url>
   <url>
-    <loc>https://www.scopehealth.co/en</loc>
-    <xhtml:link rel="alternate" hreflang="es" href="https://www.scopehealth.co/es" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://www.scopehealth.co/en" />
-    <xhtml:link rel="alternate" hreflang="x-default" href="https://www.scopehealth.co/es" />
+    <loc>https://scope-healthcare.netlify.app/en</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es" />
   </url>
 </urlset>

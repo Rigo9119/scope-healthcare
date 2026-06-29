@@ -2,5 +2,5 @@
 User-agent: *
 Allow: /
 
-# ⚠️ Update the domain to the production site.
-Sitemap: https://www.scopehealth.co/sitemap.xml
+# Update to the custom domain once it's migrated.
+Sitemap: https://scope-healthcare.netlify.app/sitemap.xml

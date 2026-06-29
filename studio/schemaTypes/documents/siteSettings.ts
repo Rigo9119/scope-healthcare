@@ -41,6 +41,14 @@ export const siteSettingsType = defineType({
     defineField({ name: 'footerPhone', title: 'Teléfono', type: 'string', group: 'contact' }),
     defineField({ name: 'footerEmail', title: 'Email', type: 'string', group: 'contact' }),
     defineField({ name: 'footerHours', title: 'Horario (barra superior)', type: 'string', group: 'contact' }),
+    defineField({
+      name: 'whatsappNumber',
+      title: 'WhatsApp (citas)',
+      type: 'string',
+      description:
+        'Número de WhatsApp del encargado de citas, con código de país y sin + ni espacios. Ej: 573001234567. Los botones de "Agendar" abren un chat con este número.',
+      group: 'contact',
+    }),
 
     // ── Legal ─────────────────────────────────────────────────────────────────
     defineField({ name: 'footerPrivacyLabel', title: 'Link Privacidad', type: 'string', group: 'legal' }),

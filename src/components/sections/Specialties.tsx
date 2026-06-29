@@ -1,6 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { IconComponent } from "#/components/Icon.js";
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
+import { useBookingLink } from "#/lib/booking.js";
 import type { HomePageData } from "#/lib/queries.js";
 
 type SpecialtiesProps = Pick<
@@ -19,6 +20,7 @@ export function Specialties({
 	specialtiesLinkLabel,
 	specialties,
 }: SpecialtiesProps) {
+	const booking = useBookingLink();
 	return (
 		<section
 			id="especialidades"
@@ -55,7 +57,9 @@ export function Specialties({
 								{body}
 							</p>
 							<a
-								href="#contacto"
+								href={booking.forSpecialty(title)}
+								target="_blank"
+								rel="noopener noreferrer"
 								className="group/link mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700"
 							>
 								<span className="link-animated">{specialtiesLinkLabel}</span>

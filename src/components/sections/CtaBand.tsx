@@ -1,4 +1,6 @@
-import { CalendarCheck, Phone, Sparkles } from "lucide-react";
+import { Phone, Sparkles } from "lucide-react";
+import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
+import { useBookingLink } from "#/lib/booking.js";
 import type { HomePageData } from "#/lib/queries.js";
 
 type CtaBandProps = Pick<
@@ -13,6 +15,7 @@ export function CtaBand({
 	ctaPrimaryLabel,
 	ctaPhone,
 }: CtaBandProps) {
+	const booking = useBookingLink();
 	return (
 		<section id="contacto" className="px-4 py-12 sm:px-6 sm:py-20 lg:py-24">
 			<div className="mx-auto max-w-7xl overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 px-5 py-10 text-center shadow-xl sm:px-8 sm:py-16 lg:px-16">
@@ -30,10 +33,12 @@ export function CtaBand({
 					</p>
 					<div className="mt-7 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
 						<a
-							href="#contacto"
+							href={booking.general}
+							target="_blank"
+							rel="noopener noreferrer"
 							className="inline-flex w-full items-center justify-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md sm:w-auto"
 						>
-							<CalendarCheck size={18} /> {ctaPrimaryLabel}
+							<WhatsappIcon size={18} /> {ctaPrimaryLabel}
 						</a>
 						<a
 							href={`tel:${ctaPhone?.replace(/\s/g, "")}`}

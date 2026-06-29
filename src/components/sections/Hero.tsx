@@ -1,9 +1,12 @@
-import { CalendarCheck, ChevronRight, Stethoscope } from "lucide-react";
+import { ChevronRight, Stethoscope } from "lucide-react";
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
 import { ImagePlaceholder } from "#/components/ui/ImagePlaceholder.js";
+import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
+import { useBookingLink } from "#/lib/booking.js";
 import type { HomePageData } from "#/lib/queries.js";
 
 export function Hero({ hero }: { hero: HomePageData["hero"] }) {
+	const booking = useBookingLink();
 	return (
 		<section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden sm:min-h-[90vh]">
 			{/* Full-bleed background image */}
@@ -29,10 +32,12 @@ export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 
 				<div className="mt-7 flex flex-col items-center gap-3 sm:mt-9 sm:flex-row sm:justify-center">
 					<a
-						href="#contacto"
+						href={booking.general}
+						target="_blank"
+						rel="noopener noreferrer"
 						className="inline-flex w-full items-center justify-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md sm:w-auto"
 					>
-						<CalendarCheck size={18} /> {hero.ctaPrimaryLabel}
+						<WhatsappIcon size={18} /> {hero.ctaPrimaryLabel}
 					</a>
 					<a
 						href="#especialidades"

@@ -1,8 +1,10 @@
 import { Link } from "@tanstack/react-router";
-import { Calendar, Clock, Mail, MapPin, Menu, Phone, X } from "lucide-react";
+import { Clock, Mail, MapPin, Menu, Phone, X } from "lucide-react";
 import { useEffect, useState } from "react";
 import { BrandMark } from "#/components/ui/BrandMark.js";
+import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useLang } from "#/i18n.js";
+import { useBookingLink } from "#/lib/booking.js";
 import { m } from "#/paraglide/messages.js";
 import { useSiteSettings } from "#/siteSettings.js";
 
@@ -41,6 +43,7 @@ function TopBar() {
 
 export function Navbar() {
 	const { locale, switchLocale } = useLang();
+	const booking = useBookingLink();
 	const [open, setOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
 
@@ -114,10 +117,12 @@ export function Navbar() {
 						</div>
 
 						<a
-							href="#contacto"
+							href={booking.general}
+							target="_blank"
+							rel="noopener noreferrer"
 							className="inline-flex items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-btn-primary-hover active:translate-y-0 active:shadow-btn-primary-active"
 						>
-							<Calendar size={16} /> {m.nav_book()}
+							<WhatsappIcon size={16} /> {m.nav_book()}
 						</a>
 					</div>
 
@@ -145,11 +150,13 @@ export function Navbar() {
 								</a>
 							))}
 							<a
-								href="#contacto"
+								href={booking.general}
+								target="_blank"
+								rel="noopener noreferrer"
 								onClick={() => setOpen(false)}
-								className="mt-3 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:bg-primary-600 active:shadow-btn-primary-active"
+								className="mt-3 inline-flex items-center justify-center gap-2 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:bg-primary-600 active:shadow-btn-primary-active"
 							>
-								{m.nav_book()}
+								<WhatsappIcon size={16} /> {m.nav_book()}
 							</a>
 
 							{/* Language switcher mobile */}

@@ -5,5 +5,7 @@
   "nav_testimonials": "Testimonials",
   "nav_contact": "Contact",
   "nav_book": "Book appointment",
-  "topbar_hours": "Mon–Sat · 8:00–6:00 PM"
+  "topbar_hours": "Mon–Sat · 8:00–6:00 PM",
+  "whatsapp_cta_message": "Hi 👋 I'd like to book a consultation with Scope Health.",
+  "whatsapp_specialty_message": "Hi 👋 I'm interested in {specialty} at Scope Health."
 }

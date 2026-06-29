@@ -24,6 +24,8 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
 	footerPhone: "+57 (1) 000 0000",
 	footerEmail: "hola@scopehealth.co",
 	footerHours: "Lun–Sáb · 8:00–18:00",
+	// ⚠️ Placeholder — set the real appointments WhatsApp in "Configuración del sitio".
+	whatsappNumber: "573000000000",
 	footerCopyright: "© 2026 Scope Health. Todos los derechos reservados.",
 	footerPrivacyLabel: "Privacidad",
 	footerTermsLabel: "Términos",

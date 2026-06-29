@@ -77,6 +77,7 @@ export interface SiteSettings {
 	footerPhone: string;
 	footerEmail: string;
 	footerHours: string;
+	whatsappNumber: string;
 	footerCopyright: string;
 	footerPrivacyLabel: string;
 	footerTermsLabel: string;
@@ -89,7 +90,7 @@ const SITE_SETTINGS_QUERY = `
     footerColServicesLabel, footerServices[]{ label },
     footerColCompanyLabel, footerCompany[]{ label },
     footerColContactLabel,
-    footerAddress, footerPhone, footerEmail, footerHours,
+    footerAddress, footerPhone, footerEmail, footerHours, whatsappNumber,
     footerCopyright, footerPrivacyLabel, footerTermsLabel, footerCookiesLabel
   }
 `;
