@@ -8,12 +8,15 @@ export default function LanguageSwitcher() {
       {(["es", "en"] as const).map((lang, i) => (
         <>
           {i > 0 && (
-            <span key={`sep-${lang}`} className="text-xs text-border-default">
+            <span
+              key={`sep-${lang}-${i}`}
+              className="text-xs text-border-default"
+            >
               |
             </span>
           )}
           <button
-            key={lang}
+            key={`sel-${lang}-${i}`}
             type="button"
             onClick={() => switchLocale(lang)}
             className={`px-2 py-1 text-xs font-bold uppercase tracking-wide transition-colors duration-200 ${

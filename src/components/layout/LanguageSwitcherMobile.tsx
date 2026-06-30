@@ -11,9 +11,9 @@ export default function LanguageSwitcherMobile({
   return (
     <div className="mt-3 flex items-center gap-2 border-t border-border-default pt-4">
       <span className="text-xs text-text-muted">Idioma:</span>
-      {(["es", "en"] as const).map((lang) => (
+      {(["es", "en"] as const).map((lang, i) => (
         <button
-          key={lang}
+          key={`sel-${lang}-${i}`}
           type="button"
           onClick={() => {
             switchLocale(lang);
