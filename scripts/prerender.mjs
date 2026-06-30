@@ -14,10 +14,25 @@ import { extname, join } from "node:path";
 import puppeteer from "puppeteer";
 
 const DIST = "dist";
-const ROUTES = ["/es", "/en"];
+// Keep in sync with src/lib/localizedRoutes.ts (SECTIONS) + sitemap.xml.
+const ROUTES = [
+	"/es",
+	"/en",
+	"/es/nuestros-servicios",
+	"/en/our-services",
+	"/es/nuestro-equipo",
+	"/en/our-team",
+	"/es/blog",
+	"/en/blog",
+	"/es/sobre-nosotros",
+	"/en/about-us",
+	"/es/contacto",
+	"/en/contact",
+];
 const PORT = 4178;
-// Element that only exists once the real page content (not the skeleton) renders.
-const CONTENT_READY_SELECTOR = "#especialidades";
+// Every page renders an <h1> inside <main> once the real content is mounted
+// (the home skeleton has none), so this is a universal "content ready" signal.
+const CONTENT_READY_SELECTOR = "main h1";
 
 const MIME = {
 	".html": "text/html; charset=utf-8",
@@ -67,6 +82,9 @@ async function run() {
 	try {
 		for (const route of ROUTES) {
 			const page = await browser.newPage();
+			page.on("pageerror", (e) =>
+				console.error(`  [page error @ ${route}] ${e.message}`),
+			);
 			await page.goto(`http://localhost:${PORT}${route}`, {
 				waitUntil: "domcontentloaded",
 				timeout: 30000,

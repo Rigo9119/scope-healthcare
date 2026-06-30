@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!-- ⚠️ Update the domain to the production site (matches SITE_URL in src/lib/seo.ts). -->
+<!-- ⚠️ Domain = SITE_URL in src/lib/seo.ts; slugs = SECTIONS in src/lib/localizedRoutes.ts.
+     Keep in sync when adding pages or migrating the domain. -->
 <urlset
   xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml"
 >
+  <!-- Home -->
   <url>
     <loc>https://scope-healthcare.netlify.app/es</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es" />
@@ -15,5 +17,75 @@
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es" />
     <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es" />
+  </url>
+
+  <!-- Servicios y especialidades -->
+  <url>
+    <loc>https://scope-healthcare.netlify.app/es/nuestros-servicios</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/nuestros-servicios" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/our-services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/nuestros-servicios" />
+  </url>
+  <url>
+    <loc>https://scope-healthcare.netlify.app/en/our-services</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/nuestros-servicios" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/our-services" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/nuestros-servicios" />
+  </url>
+
+  <!-- Nuestro equipo -->
+  <url>
+    <loc>https://scope-healthcare.netlify.app/es/nuestro-equipo</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/nuestro-equipo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/our-team" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/nuestro-equipo" />
+  </url>
+  <url>
+    <loc>https://scope-healthcare.netlify.app/en/our-team</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/nuestro-equipo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/our-team" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/nuestro-equipo" />
+  </url>
+
+  <!-- Blog -->
+  <url>
+    <loc>https://scope-healthcare.netlify.app/es/blog</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/blog" />
+  </url>
+  <url>
+    <loc>https://scope-healthcare.netlify.app/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/blog" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/blog" />
+  </url>
+
+  <!-- Sobre nosotros -->
+  <url>
+    <loc>https://scope-healthcare.netlify.app/es/sobre-nosotros</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/sobre-nosotros" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/about-us" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/sobre-nosotros" />
+  </url>
+  <url>
+    <loc>https://scope-healthcare.netlify.app/en/about-us</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/sobre-nosotros" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/about-us" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/sobre-nosotros" />
+  </url>
+
+  <!-- Contacto -->
+  <url>
+    <loc>https://scope-healthcare.netlify.app/es/contacto</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/contacto" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/contacto" />
+  </url>
+  <url>
+    <loc>https://scope-healthcare.netlify.app/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/contacto" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/contacto" />
   </url>
 </urlset>

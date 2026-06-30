@@ -1,5 +1,6 @@
 import { useLocation, useNavigate } from "@tanstack/react-router";
 import { createContext, useContext, useEffect } from "react";
+import { sectionFromAnySlug, sectionSlug } from "#/lib/localizedRoutes.js";
 
 type Locale = "es" | "en";
 const LOCALES: Locale[] = ["es", "en"];
@@ -33,9 +34,18 @@ export function LangProvider({ children }: { children: React.ReactNode }) {
 
 	function switchLocale(next: Locale) {
 		if (next === locale) return;
-		// Swap the leading /es or /en, preserving any sub-path (e.g. /es/x → /en/x).
-		const rest = pathname.replace(/^\/(es|en)(?=\/|$)/, "");
-		navigate({ to: `/${next}${rest}` });
+		// If on a localized section page, translate the slug to the target locale
+		// (e.g. /es/nuestros-servicios → /en/our-services); otherwise go home.
+		const slug = pathname.split("/").filter(Boolean)[1];
+		const match = slug ? sectionFromAnySlug(slug) : null;
+		if (match) {
+			navigate({
+				to: "/$lang/$section",
+				params: { lang: next, section: sectionSlug(match.key, next) },
+			});
+		} else {
+			navigate({ to: "/$lang", params: { lang: next } });
+		}
 	}
 
 	return (
