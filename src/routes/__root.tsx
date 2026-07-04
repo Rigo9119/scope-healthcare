@@ -1,10 +1,11 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
 import {
-	createRootRoute,
+	createRootRouteWithContext,
 	HeadContent,
 	Outlet,
 	redirect,
 } from "@tanstack/react-router";
+import type { QueryClient } from "@tanstack/react-query";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Footer } from "#/components/layout/Footer.js";
 import { Header } from "#/components/layout/Header.js";
@@ -16,7 +17,7 @@ import { SiteSettingsProvider } from "#/siteSettings.js";
 import "../styles.css";
 import NotFound from "#/components/ui/NotFound";
 
-export const Route = createRootRoute({
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
 	// Site-wide default; per-route `head` (e.g. the home page) overrides this.
 	head: () => ({ meta: [{ title: SITE_NAME }] }),
 	notFoundComponent: NotFound,

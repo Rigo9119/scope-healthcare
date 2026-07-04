@@ -1,3 +1,4 @@
+import { queryOptions } from "@tanstack/react-query";
 import { sanityClient } from "./sanity";
 
 export interface HomePageData {
@@ -100,3 +101,21 @@ export function fetchSiteSettings(
 ): Promise<SiteSettings | null> {
 	return sanityClient.fetch(SITE_SETTINGS_QUERY, { locale });
 }
+
+const STALE_5_MIN = 1000 * 60 * 5;
+
+export const homePageQueryOptions = (locale: string) =>
+	queryOptions({
+		queryKey: ["homePage", locale],
+		queryFn: () => fetchHomePage(locale).catch(() => null),
+		staleTime: STALE_5_MIN,
+		retry: false,
+	});
+
+export const siteSettingsQueryOptions = (locale: string) =>
+	queryOptions({
+		queryKey: ["siteSettings", locale],
+		queryFn: () => fetchSiteSettings(locale).catch(() => null),
+		staleTime: STALE_5_MIN,
+		retry: false,
+	});
