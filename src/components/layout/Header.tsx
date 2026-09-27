@@ -75,6 +75,13 @@ export function Header() {
 						<div className="flex items-center gap-5">
 							<LanguageSwitcher light={light} />
 							<Link
+								to="/$lang"
+								params={{ lang: locale }}
+								className={utilityLinkCls}
+							>
+								{m.nav_home()}
+							</Link>
+							<Link
 								to="/$lang/$section"
 								params={{ lang: locale, section: sectionSlug("about", locale) }}
 								className={utilityLinkCls}
@@ -96,6 +103,7 @@ export function Header() {
 						<div className="flex justify-center">
 							<Link to="/$lang" params={{ lang: locale }}>
 								<BrandMark tone={light ? "light" : "dark"} />
+								<span className="sr-only">{m.nav_home()}</span>
 							</Link>
 						</div>
 
@@ -158,6 +166,7 @@ export function Header() {
 					<div className="flex justify-center">
 						<Link to="/$lang" params={{ lang: locale }}>
 							<BrandMark tone={light ? "light" : "dark"} />
+							<span className="sr-only">{m.nav_home()}</span>
 						</Link>
 					</div>
 					<button
