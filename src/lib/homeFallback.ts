@@ -4,8 +4,8 @@ import type { HomePageData } from "./queries";
 export const FALLBACK: HomePageData = {
 	hero: {
 		eyebrow: "Turismo médico de calidad",
-		titleStart: "Tu salud en las",
-		titleAccent: "mejores manos del mundo",
+		titleStart: "“Tu cuerpo tiene más años",
+		titleAccent: "por vivir. Vívelos mejor.”",
 		subtitle:
 			"Conectamos pacientes con los mejores especialistas médicos internacionales, garantizando atención de clase mundial al mejor precio.",
 		ctaPrimaryLabel: "Agendar consulta",
