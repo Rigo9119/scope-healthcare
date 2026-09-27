@@ -26,6 +26,9 @@ export const SITE_SETTINGS_FALLBACK: SiteSettings = {
 	footerHours: "Lun–Sáb · 8:00–18:00",
 	// ⚠️ Placeholder — set the real appointments WhatsApp in "Configuración del sitio".
 	whatsappNumber: "573000000000",
+	// Empty until the client adds real URLs in "Configuración del sitio" → Redes
+	// sociales; the header/menu render the social row only when this is non-empty.
+	socialLinks: [],
 	footerCopyright: "© 2026 Scope Health. Todos los derechos reservados.",
 	footerPrivacyLabel: "Privacidad",
 	footerTermsLabel: "Términos",

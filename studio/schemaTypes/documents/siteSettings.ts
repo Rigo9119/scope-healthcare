@@ -9,6 +9,7 @@ export const siteSettingsType = defineType({
   groups: [
     { name: 'footer', title: 'Footer' },
     { name: 'contact', title: 'Contacto' },
+    { name: 'social', title: 'Redes sociales' },
     { name: 'legal', title: 'Legal' },
   ],
   fields: [
@@ -40,7 +41,7 @@ export const siteSettingsType = defineType({
     defineField({ name: 'footerAddress', title: 'Dirección', type: 'string', group: 'contact' }),
     defineField({ name: 'footerPhone', title: 'Teléfono', type: 'string', group: 'contact' }),
     defineField({ name: 'footerEmail', title: 'Email', type: 'string', group: 'contact' }),
-    defineField({ name: 'footerHours', title: 'Horario (barra superior)', type: 'string', group: 'contact' }),
+    defineField({ name: 'footerHours', title: 'Horario', type: 'string', group: 'contact' }),
     defineField({
       name: 'whatsappNumber',
       title: 'WhatsApp (citas)',
@@ -48,6 +49,38 @@ export const siteSettingsType = defineType({
       description:
         'Número de WhatsApp del encargado de citas, con código de país y sin + ni espacios. Ej: 573001234567. Los botones de "Agendar" abren un chat con este número.',
       group: 'contact',
+    }),
+
+    // ── Redes sociales ──────────────────────────────────────────────────────────
+    defineField({
+      name: 'socialLinks',
+      title: 'Redes sociales',
+      description: 'Enlaces a las redes sociales; se muestran como iconos en la cabecera.',
+      type: 'array',
+      of: [
+        {
+          type: 'object',
+          fields: [
+            defineField({
+              name: 'platform',
+              title: 'Plataforma',
+              type: 'string',
+              options: {
+                list: [
+                  { title: 'Instagram', value: 'instagram' },
+                  { title: 'Facebook', value: 'facebook' },
+                  { title: 'X (Twitter)', value: 'x' },
+                  { title: 'YouTube', value: 'youtube' },
+                  { title: 'LinkedIn', value: 'linkedin' },
+                ],
+              },
+            }),
+            defineField({ name: 'url', title: 'URL', type: 'url' }),
+          ],
+          preview: { select: { title: 'platform', subtitle: 'url' } },
+        },
+      ],
+      group: 'social',
     }),
 
     // ── Legal ─────────────────────────────────────────────────────────────────

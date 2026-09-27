@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { SocialLinks } from "#/components/ui/SocialLinks.js";
 import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useLang } from "#/i18n.js";
 import { sectionSlug } from "#/lib/localizedRoutes.js";
@@ -75,6 +76,8 @@ export default function MobileMenu({
 
 				{/* Language switcher mobile */}
 				<LanguageSwitcherMobile setOpen={setOpen} />
+
+				<SocialLinks className="mt-3 px-3" />
 			</nav>
 		</div>
 	);
