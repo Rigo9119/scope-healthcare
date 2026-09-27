@@ -17,10 +17,10 @@ export const FALLBACK: HomePageData = {
 		{ value: "120", label: "Especialistas", icon: "Stethoscope" },
 		{ value: "4.9", label: "Calificación promedio", icon: "Star" },
 	],
-	specialtiesEyebrow: "Especialidades",
-	specialtiesTitle: "Áreas de atención médica",
+	specialtiesEyebrow: "Scope Clinic",
+	specialtiesTitle: "Especialidades médicas",
 	specialtiesSubtitle:
-		"Contamos con especialistas certificados en las principales ramas de la medicina.",
+		"Atención especializada con calidez humana y rigor clínico en cada área de Scope Clinic.",
 	specialtiesLinkLabel: "Más información",
 	specialties: [
 		{

@@ -14,7 +14,8 @@ import { extname, join } from "node:path";
 import puppeteer from "puppeteer";
 
 const DIST = "dist";
-// Keep in sync with src/lib/localizedRoutes.ts (SECTIONS) + sitemap.xml.
+// Keep in sync with src/lib/localizedRoutes.ts (SECTIONS), src/lib/pillars.ts
+// (PILLARS) + sitemap.xml.
 const ROUTES = [
 	"/es",
 	"/en",
@@ -28,6 +29,20 @@ const ROUTES = [
 	"/en/about-us",
 	"/es/contacto",
 	"/en/contact",
+	// Pillar index pages (slugs are identical across locales).
+	"/es/scope-clinic",
+	"/en/scope-clinic",
+	"/es/scope-ageless",
+	"/en/scope-ageless",
+	"/es/live-by-scope",
+	"/en/live-by-scope",
+	// Legal pages.
+	"/es/privacidad",
+	"/en/privacy",
+	"/es/terminos",
+	"/en/terms",
+	"/es/cookies",
+	"/en/cookies",
 ];
 const PORT = 4178;
 // Every page renders an <h1> inside <main> once the real content is mounted

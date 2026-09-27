@@ -12,6 +12,9 @@ export const SECTIONS = {
 	blog: { es: "blog", en: "blog" },
 	about: { es: "sobre-nosotros", en: "about-us" },
 	contact: { es: "contacto", en: "contact" },
+	privacy: { es: "privacidad", en: "privacy" },
+	terms: { es: "terminos", en: "terms" },
+	cookies: { es: "cookies", en: "cookies" },
 } as const;
 
 export type SectionKey = keyof typeof SECTIONS;
@@ -124,6 +127,42 @@ export const SECTION_SEO: Record<
 			title: "Contact | Scope Health",
 			description:
 				"Get in touch to book your consultation. Based in Bogotá, serving international patients.",
+		},
+	},
+	privacy: {
+		es: {
+			title: "Política de privacidad | Scope Health",
+			description:
+				"Cómo Scope Health recopila, usa y protege tus datos personales.",
+		},
+		en: {
+			title: "Privacy Policy | Scope Health",
+			description:
+				"How Scope Health collects, uses and protects your personal data.",
+		},
+	},
+	terms: {
+		es: {
+			title: "Términos y condiciones | Scope Health",
+			description:
+				"Términos y condiciones de uso del sitio y los servicios de Scope Health.",
+		},
+		en: {
+			title: "Terms & Conditions | Scope Health",
+			description:
+				"Terms and conditions for using Scope Health's website and services.",
+		},
+	},
+	cookies: {
+		es: {
+			title: "Política de cookies | Scope Health",
+			description:
+				"Qué cookies utiliza Scope Health y cómo puedes gestionarlas.",
+		},
+		en: {
+			title: "Cookie Policy | Scope Health",
+			description:
+				"Which cookies Scope Health uses and how you can manage them.",
 		},
 	},
 };

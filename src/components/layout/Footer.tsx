@@ -1,16 +1,29 @@
+import { Link } from "@tanstack/react-router";
 import { Mail, MapPin, Phone } from "lucide-react";
 import { BrandMark } from "#/components/ui/BrandMark.js";
+import { useLang } from "#/i18n.js";
+import { type SectionKey, sectionSlug } from "#/lib/localizedRoutes.js";
+import { PILLAR_ORDER, pillarByKey } from "#/lib/pillars.js";
+import { m } from "#/paraglide/messages.js";
 import { useSiteSettings } from "#/siteSettings.js";
 
+// "Empresa" column → the secondary pages kept out of the main (pillar) nav.
+const COMPANY_LINKS: { key: SectionKey; label: () => string }[] = [
+	{ key: "about", label: () => m.nav_about() },
+	{ key: "team", label: () => m.nav_our_team() },
+	{ key: "blog", label: () => m.nav_blog() },
+	{ key: "contact", label: () => m.nav_contact() },
+];
+
 export function Footer() {
+	const { locale } = useLang();
 	const data = useSiteSettings();
+	const pillars = PILLAR_ORDER.map(pillarByKey);
 
 	const {
 		footerTagline,
 		footerColServicesLabel,
-		footerServices,
 		footerColCompanyLabel,
-		footerCompany,
 		footerColContactLabel,
 		footerAddress,
 		footerPhone,
@@ -20,6 +33,12 @@ export function Footer() {
 		footerTermsLabel,
 		footerCookiesLabel,
 	} = data;
+
+	const legalLinks: { key: SectionKey; label: string }[] = [
+		{ key: "privacy", label: footerPrivacyLabel },
+		{ key: "terms", label: footerTermsLabel },
+		{ key: "cookies", label: footerCookiesLabel },
+	];
 
 	return (
 		<footer className="bg-text-primary px-4 pb-8 pt-12 text-neutral-400 sm:px-6 sm:pb-10 sm:pt-16">
@@ -37,14 +56,15 @@ export function Footer() {
 							{footerColServicesLabel}
 						</h3>
 						<ul className="space-y-3 text-sm">
-							{footerServices?.map((l) => (
-								<li key={l.label}>
-									<a
-										href="#especialidades"
+							{pillars.map((pillar) => (
+								<li key={pillar.key}>
+									<Link
+										to="/$lang/$section"
+										params={{ lang: locale, section: pillar.slug }}
 										className="link-animated transition-colors duration-200 hover:text-primary-300"
 									>
-										{l.label}
-									</a>
+										{pillar.navLabel}
+									</Link>
 								</li>
 							))}
 						</ul>
@@ -55,14 +75,15 @@ export function Footer() {
 							{footerColCompanyLabel}
 						</h3>
 						<ul className="space-y-3 text-sm">
-							{footerCompany?.map((l) => (
-								<li key={l.label}>
-									<a
-										href="#"
+							{COMPANY_LINKS.map(({ key, label }) => (
+								<li key={key}>
+									<Link
+										to="/$lang/$section"
+										params={{ lang: locale, section: sectionSlug(key, locale) }}
 										className="link-animated transition-colors duration-200 hover:text-primary-300"
 									>
-										{l.label}
-									</a>
+										{label()}
+									</Link>
 								</li>
 							))}
 						</ul>
@@ -107,24 +128,16 @@ export function Footer() {
 				<div className="mt-10 flex flex-col items-center justify-between gap-4 border-t border-white/10 pt-6 text-xs sm:mt-14 sm:flex-row sm:pt-8">
 					<p>{footerCopyright}</p>
 					<div className="flex gap-6">
-						<a
-							href="#"
-							className="link-animated transition-colors duration-200 hover:text-white"
-						>
-							{footerPrivacyLabel}
-						</a>
-						<a
-							href="#"
-							className="link-animated transition-colors duration-200 hover:text-white"
-						>
-							{footerTermsLabel}
-						</a>
-						<a
-							href="#"
-							className="link-animated transition-colors duration-200 hover:text-white"
-						>
-							{footerCookiesLabel}
-						</a>
+						{legalLinks.map(({ key, label }) => (
+							<Link
+								key={key}
+								to="/$lang/$section"
+								params={{ lang: locale, section: sectionSlug(key, locale) }}
+								className="link-animated transition-colors duration-200 hover:text-white"
+							>
+								{label}
+							</Link>
+						))}
 					</div>
 				</div>
 			</div>

@@ -4,6 +4,7 @@ import { PageSkeleton } from "#/components/PageSkeleton.js";
 import { CareJourney } from "#/components/sections/CareJourney.js";
 import { CtaBand } from "#/components/sections/CtaBand.js";
 import { Hero } from "#/components/sections/Hero.js";
+import { Pillars } from "#/components/sections/Pillars.js";
 import { Specialties } from "#/components/sections/Specialties.js";
 import { StatsBand } from "#/components/sections/StatsBand.js";
 import { Testimonials } from "#/components/sections/Testimonials.js";
@@ -47,12 +48,12 @@ function Home() {
 		<>
 			<Hero hero={page.hero} />
 			<StatsBand stats={page.stats} />
+			<Pillars />
 			<Specialties
 				specialtiesEyebrow={page.specialtiesEyebrow}
 				specialtiesTitle={page.specialtiesTitle}
 				specialtiesSubtitle={page.specialtiesSubtitle}
 				specialtiesLinkLabel={page.specialtiesLinkLabel}
-				specialties={page.specialties}
 			/>
 			<CareJourney
 				processEyebrow={page.processEyebrow}

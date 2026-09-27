@@ -2,6 +2,8 @@ import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { AboutPage } from "#/components/pages/AboutPage.js";
 import { BlogPage } from "#/components/pages/BlogPage.js";
 import { ContactPage } from "#/components/pages/ContactPage.js";
+import { LegalPage } from "#/components/pages/LegalPage.js";
+import { PillarPage } from "#/components/pages/PillarPage.js";
 import { ServicesPage } from "#/components/pages/ServicesPage.js";
 import { TeamPage } from "#/components/pages/TeamPage.js";
 import {
@@ -11,11 +13,14 @@ import {
 	sectionSlug,
 	toLocale,
 } from "#/lib/localizedRoutes.js";
+import { PILLAR_SEO, pillarBySlug } from "#/lib/pillars.js";
 import { seoHead } from "#/lib/seo.js";
 
 export const Route = createFileRoute("/$lang/$section/")({
 	beforeLoad: ({ params }) => {
 		const locale = toLocale(params.lang);
+		// Pillar slugs are identical across locales → render directly, no redirect.
+		if (pillarBySlug(params.section)) return;
 		// Slug is valid for THIS locale → render it. (Checking current-locale first
 		// is essential for slugs shared across locales, e.g. "blog", otherwise the
 		// wrong-locale redirect would loop back to the same URL.)
@@ -34,6 +39,16 @@ export const Route = createFileRoute("/$lang/$section/")({
 	},
 	head: ({ params }) => {
 		const locale = toLocale(params.lang);
+		const pillar = pillarBySlug(params.section);
+		if (pillar) {
+			const seo = PILLAR_SEO[pillar.key][locale];
+			return seoHead({
+				locale,
+				path: `/${params.section}`,
+				title: seo.title,
+				description: seo.description,
+			});
+		}
 		const key = sectionFromSlug(params.section, locale);
 		const seo = key
 			? SECTION_SEO[key][locale]
@@ -50,6 +65,9 @@ export const Route = createFileRoute("/$lang/$section/")({
 
 function SectionPage() {
 	const { lang, section } = Route.useParams();
+	const pillar = pillarBySlug(section);
+	if (pillar) return <PillarPage pillar={pillar} />;
+
 	const key = sectionFromSlug(section, toLocale(lang));
 	switch (key) {
 		case "services":
@@ -62,6 +80,12 @@ function SectionPage() {
 			return <AboutPage />;
 		case "contact":
 			return <ContactPage />;
+		case "privacy":
+			return <LegalPage kind="privacy" />;
+		case "terms":
+			return <LegalPage kind="terms" />;
+		case "cookies":
+			return <LegalPage kind="cookies" />;
 		default:
 			return null; // beforeLoad already guards unknown slugs
 	}

@@ -5,36 +5,19 @@ import { BrandMark } from "#/components/ui/BrandMark.js";
 import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useLang } from "#/i18n.js";
 import { useBookingLink } from "#/lib/booking.js";
-import {
-	NAV_SECTIONS,
-	type SectionKey,
-	sectionSlug,
-} from "#/lib/localizedRoutes.js";
+import { PILLAR_ORDER, pillarByKey } from "#/lib/pillars.js";
 import { m } from "#/paraglide/messages.js";
 import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
 import TopBar from "./TopBar";
-
-function sectionLabel(key: SectionKey): string {
-	switch (key) {
-		case "services":
-			return m.nav_services();
-		case "team":
-			return m.nav_our_team();
-		case "blog":
-			return m.nav_blog();
-		case "about":
-			return m.nav_about();
-		case "contact":
-			return m.nav_contact();
-	}
-}
 
 export function Header() {
 	const { locale } = useLang();
 	const booking = useBookingLink();
 	const [open, setOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+
+	const pillars = PILLAR_ORDER.map(pillarByKey);
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 8);
@@ -58,14 +41,14 @@ export function Header() {
 					</Link>
 
 					<nav className="hidden items-center gap-8 lg:flex">
-						{NAV_SECTIONS.map((key) => (
+						{pillars.map((pillar) => (
 							<Link
-								key={key}
+								key={pillar.key}
 								to="/$lang/$section"
-								params={{ lang: locale, section: sectionSlug(key, locale) }}
+								params={{ lang: locale, section: pillar.slug }}
 								className="link-animated text-sm font-semibold text-text-secondary transition-colors duration-200 hover:text-primary-600"
 							>
-								{sectionLabel(key)}
+								{pillar.navLabel}
 							</Link>
 						))}
 					</nav>
@@ -95,10 +78,7 @@ export function Header() {
 				{open && (
 					<MobileMenu
 						setOpen={setOpen}
-						sections={NAV_SECTIONS.map((key) => ({
-							key,
-							label: sectionLabel(key),
-						}))}
+						pillars={pillars.map((p) => ({ slug: p.slug, label: p.navLabel }))}
 						booking={booking}
 					/>
 				)}

@@ -1,12 +1,21 @@
 import {
+	Activity,
+	Apple,
 	Award,
 	Baby,
 	Bone,
+	Brain,
+	Briefcase,
 	ClipboardCheck,
+	CreditCard,
+	Droplets,
+	Dumbbell,
 	Eye,
 	HeartPulse,
+	Leaf,
 	Microscope,
 	Phone,
+	Salad,
 	Scale,
 	ShieldCheck,
 	Smile,
@@ -14,6 +23,7 @@ import {
 	Star,
 	Stethoscope,
 	UserRound,
+	Video,
 } from "lucide-react";
 
 type IconProps = {
@@ -46,6 +56,16 @@ const ICON_MAP: Record<
 	ClipboardCheck,
 	UserRound,
 	Star,
+	Activity,
+	Apple,
+	Brain,
+	Briefcase,
+	CreditCard,
+	Droplets,
+	Dumbbell,
+	Leaf,
+	Salad,
+	Video,
 };
 
 export function IconComponent({
