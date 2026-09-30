@@ -156,6 +156,23 @@
   --z-overlay: 300;
   --z-modal: 400;
   --z-toast: 500;
+
+  /* ANIMATIONS */
+  --animate-scroll-cue: scroll-cue 2s cubic-bezier(0.65, 0, 0.35, 1) infinite;
+
+  @keyframes scroll-cue {
+    0% {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    30% {
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(200%);
+      opacity: 0;
+    }
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────
@@ -181,7 +198,8 @@
   }
 
   .link-animated:hover::after,
-  .link-animated:focus-visible::after {
+  .link-animated:focus-visible::after,
+  .link-animated[data-status='active']::after {
     transform: scaleX(1);
   }
 }

@@ -38,15 +38,16 @@ export function PillarPage({ pillar }: { pillar: Pillar }) {
 									section: pillar.slug,
 									item: item.slug,
 								}}
-								className="group flex flex-col"
+								className="group flex flex-col border border-border-default bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
 							>
 								<div className="relative aspect-[3/4] overflow-hidden">
+									{/* Image layer zooms slowly on hover; the frame clips it. */}
 									<div
-										className="absolute inset-0"
+										className="absolute inset-0 transition-transform duration-700 ease-out group-hover:scale-105 motion-reduce:transition-none motion-reduce:group-hover:scale-100"
 										style={{ background: IMG_GRADIENT }}
 									/>
 									<div className="absolute inset-0 bg-primary-900/45 transition-colors duration-300 group-hover:bg-primary-900/30" />
-									<div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 text-center">
+									<div className="absolute inset-0 flex flex-col items-center justify-center gap-3 p-4 text-center transition-transform duration-500 ease-out group-hover:-translate-y-1.5 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
 										<IconComponent
 											name={item.icon}
 											size={34}
@@ -62,8 +63,8 @@ export function PillarPage({ pillar }: { pillar: Pillar }) {
 									</span>
 								</div>
 
-								<div className="mt-4">
-									<p className="text-sm leading-relaxed text-text-secondary">
+								<div className="flex flex-1 flex-col p-5 sm:p-6">
+									<p className="flex-1 text-sm leading-relaxed text-text-secondary">
 										{item.body[locale]}
 									</p>
 									<span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors duration-200 group-hover:text-primary-700">

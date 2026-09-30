@@ -13,7 +13,7 @@ export interface MobileMenuProps {
 }
 
 const linkClass =
-	"link-animated px-3 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-primary-50 hover:text-primary-700";
+	"link-animated px-3 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-primary-50 hover:text-primary-700 data-[status=active]:bg-primary-50 data-[status=active]:text-primary-700 data-[status=active]:after:hidden";
 
 export default function MobileMenu({
 	setOpen,
@@ -28,6 +28,7 @@ export default function MobileMenu({
 				<Link
 					to="/$lang"
 					params={{ lang: locale }}
+					activeOptions={{ exact: true }}
 					onClick={close}
 					className={linkClass}
 				>

@@ -27,7 +27,10 @@ export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 
 			{/* Scroll indicator */}
 			<div className="absolute bottom-10 left-1/2 hidden -translate-x-1/2 flex-col items-center gap-2 lg:flex">
-				<div className="h-10 w-px bg-linear-to-b from-white/50 to-transparent" />
+				{/* Faint track with a light pulse travelling down it on a loop. */}
+				<div className="relative h-10 w-px overflow-hidden bg-white/15">
+					<span className="absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-transparent to-white motion-safe:animate-scroll-cue motion-reduce:translate-y-1/2" />
+				</div>
 				<span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
 					Scroll
 				</span>

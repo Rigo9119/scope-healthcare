@@ -50,10 +50,12 @@ export function Header() {
 		return () => window.removeEventListener("keydown", onKey);
 	}, []);
 
+	// TanStack Router marks the link matching the current route with
+	// data-status="active" (+ aria-current="page"); style it as selected.
 	const utilityLinkCls = `link-animated text-sm font-medium transition-colors duration-200 ${
 		light
-			? "text-white/80 hover:text-white"
-			: "text-text-secondary hover:text-primary-600"
+			? "text-white/80 hover:text-white data-[status=active]:text-white"
+			: "text-text-secondary hover:text-primary-600 data-[status=active]:text-primary-600"
 	}`;
 	const iconBtnCls = light ? "text-white" : "text-text-primary";
 	const barCls = light
@@ -77,6 +79,7 @@ export function Header() {
 							<Link
 								to="/$lang"
 								params={{ lang: locale }}
+								activeOptions={{ exact: true }}
 								className={utilityLinkCls}
 							>
 								{m.nav_home()}
@@ -101,7 +104,11 @@ export function Header() {
 						</div>
 
 						<div className="flex justify-center">
-							<Link to="/$lang" params={{ lang: locale }}>
+							<Link
+								to="/$lang"
+								params={{ lang: locale }}
+								activeOptions={{ exact: true }}
+							>
 								<BrandMark tone={light ? "light" : "dark"} />
 								<span className="sr-only">{m.nav_home()}</span>
 							</Link>
@@ -143,8 +150,8 @@ export function Header() {
 								params={{ lang: locale, section: pillar.slug }}
 								className={`link-animated text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
 									light
-										? "text-white/90 hover:text-white"
-										: "text-text-secondary hover:text-primary-600"
+										? "text-white/90 hover:text-white data-[status=active]:text-white"
+										: "text-text-secondary hover:text-primary-600 data-[status=active]:text-primary-600"
 								}`}
 							>
 								{pillar.navLabel}
@@ -164,7 +171,11 @@ export function Header() {
 						{open ? <X size={24} /> : <Menu size={24} />}
 					</button>
 					<div className="flex justify-center">
-						<Link to="/$lang" params={{ lang: locale }}>
+						<Link
+							to="/$lang"
+							params={{ lang: locale }}
+							activeOptions={{ exact: true }}
+						>
 							<BrandMark tone={light ? "light" : "dark"} />
 							<span className="sr-only">{m.nav_home()}</span>
 						</Link>
