@@ -64,6 +64,18 @@ export function sectionFromAnySlug(
 	return null;
 }
 
+/** The same page in another locale: swaps the `/{locale}` prefix and translates
+ *  a localized section slug (e.g. /es/contacto → /en/contact). Pillar and item
+ *  slugs are identical across locales, so the rest of the path is kept as-is
+ *  (e.g. /es/scope-clinic/gastroenterologia → /en/scope-clinic/gastroenterologia). */
+export function localizedPath(pathname: string, next: Locale): string {
+	const [slug, ...rest] = pathname.split("/").filter(Boolean).slice(1);
+	if (!slug) return `/${next}`;
+	const match = sectionFromAnySlug(slug);
+	const translated = match ? sectionSlug(match.key, next) : slug;
+	return ["", next, translated, ...rest].join("/");
+}
+
 // ─── Per-section SEO copy (defaults; real copy can later come from Sanity) ──────
 export const SECTION_SEO: Record<
 	SectionKey,
