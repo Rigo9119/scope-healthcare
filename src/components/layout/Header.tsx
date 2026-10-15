@@ -68,7 +68,7 @@ export function Header() {
 
 	return (
 		<header
-			className={`z-50 ${isHome ? "fixed inset-x-0 top-0" : "sticky top-0"}`}
+			className={`z-50 [view-transition-name:site-header] ${isHome ? "fixed inset-x-0 top-0" : "sticky top-0"}`}
 		>
 			<div className={`transition-colors duration-300 ${barCls}`}>
 				{/* Desktop: utilities + centered logo, then centered pillar nav below. */}
