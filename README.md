@@ -1,204 +1,112 @@
-Welcome to your new TanStack Start app! 
+# Scope Health
 
-# Getting Started
+Marketing site for Scope Health, a medical tourism clinic.
+React SPA (TanStack Router) with content managed in Sanity CMS, prerendered to static HTML and deployed on Netlify.
 
-To run this application:
+## Stack
+
+- Vite, React 19, TanStack Router (file-based routing)
+- Tailwind CSS v4 (design tokens in `src/styles.css`)
+- Sanity CMS (project `3fyb50d2`, dataset `production`)
+- Paraglide JS for UI strings (`es` base, `en`)
+- Biome for lint and format, Vitest for tests
+- Puppeteer for prerendering `/es` and `/en`
+
+## Repository layout
+
+```text
+.
+├── src/
+│   ├── routes/          # file-based routes; real pages live under $lang/
+│   ├── components/      # ui/, layout/, sections/, pages/
+│   ├── lib/             # Sanity client, GROQ queries, fallbacks, SEO
+│   └── paraglide/       # generated, do not edit
+├── messages/            # UI strings: es.json (base), en.json
+├── scripts/prerender.mjs
+├── studio/              # Sanity Studio, separate package
+└── netlify.toml
+```
+
+The frontend and `studio/` are independent packages with their own `node_modules`, and they deploy separately.
+
+## Getting started
 
 ```bash
+bun install
+bun --bun run dev       # http://localhost:3000
+```
+
+Run the Studio locally:
+
+```bash
+cd studio
 bun install
 bun --bun run dev
 ```
 
-# Building For Production
+## Scripts
 
-To build this application for production:
+| Command | Purpose |
+| --- | --- |
+| `bun --bun run dev` | Dev server on port 3000 |
+| `bun --bun run build` | Production build, no prerender |
+| `bun --bun run build:ssg` | Build and prerender, same as Netlify |
+| `bun --bun run test` | Run Vitest |
+| `bun --bun run check` | Biome lint and format check |
+| `bun --bun run generate-routes` | Regenerate `src/routeTree.gen.ts` |
+| `bun --bun run machine-translate` | Machine-translate messages via inlang |
+
+## How it works
+
+### Routing and locales
+
+The locale is part of the URL (`/es`, `/en`).
+`beforeLoad` in `src/routes/__root.tsx` reads the first path segment, redirects `/` and unknown locales to `/es`, and syncs the Paraglide locale.
+Add new pages under `src/routes/$lang/`.
+Never edit `src/routeTree.gen.ts`, it is generated.
+
+### Content
+
+Pages fetch content from Sanity at runtime through `src/lib/sanity.ts`, with GROQ queries in `src/lib/queries.ts`.
+If a fetch fails or returns nothing, the page renders its fallback from `src/lib/*Fallback.ts`.
+Sanity documents are per locale with IDs like `homePage-es` and `siteSettings-en`.
+
+### UI strings
+
+Static copy lives in `messages/es.json` and `messages/en.json`.
+Add every key to both files, then use it with `m.key_name()` from `#/paraglide/messages.js`.
+
+### Icons
+
+Sanity stores icon names as strings.
+They map to Lucide components in `src/components/Icon.tsx` through `ICON_MAP`, so add an entry there when using a new icon in content.
+
+## Deployment
+
+### Frontend (Netlify)
+
+Netlify runs `npm run build:ssg` and publishes `dist/`.
+The prerender step loads `/es` and `/en` in headless Chrome and writes real HTML with per-locale meta tags, so crawlers and link previews see full content.
+A catch-all redirect handles client-side routes.
+
+Because pages are prerendered, Sanity edits go live only after the next build.
+Connect a Netlify build hook to a Sanity webhook (`cd studio && npx sanity hook create`) so publishing in the Studio triggers a redeploy.
+
+### Studio (Sanity hosting)
 
 ```bash
-bun --bun run build
+cd studio && bun --bun run deploy
 ```
 
-## Testing
+Re-deploy after any schema or structure change.
+Editors need project membership, invited from <https://manage.sanity.io> with the Editor role.
 
-This project uses [Vitest](https://vitest.dev/) for testing. You can run the tests with:
+## Conventions
 
-```bash
-bun --bun run test
-```
+- Spanish is the default language for all copy.
+- Styles are mobile-first.
+- Use semantic design tokens (`text-text-primary`, `bg-bg-page`) instead of raw colors.
+- Sharp corners throughout, no border radius.
+- Biome: tabs and double quotes. The Studio uses its own ESLint and Prettier config.
 
-## Styling
-
-This project uses [Tailwind CSS](https://tailwindcss.com/) for styling.
-
-### Removing Tailwind CSS
-
-If you prefer not to use Tailwind CSS:
-
-1. Remove the demo pages in `src/routes/demo/`
-2. Replace the Tailwind import in `src/styles.css` with your own styles
-3. Remove `tailwindcss()` from the plugins array in `vite.config.ts`
-4. Uninstall the packages: `bun install @tailwindcss/vite tailwindcss -D`
-
-## Linting & Formatting
-
-This project uses [Biome](https://biomejs.dev/) for linting and formatting. The following scripts are available:
-
-
-```bash
-bun --bun run lint
-bun --bun run format
-bun --bun run check
-```
-
-
-
-## Routing
-
-This project uses [TanStack Router](https://tanstack.com/router) with file-based routing. Routes are managed as files in `src/routes`.
-
-### Adding A Route
-
-To add a new route to your application just add a new file in the `./src/routes` directory.
-
-TanStack will automatically generate the content of the route file for you.
-
-Now that you have two routes you can use a `Link` component to navigate between them.
-
-### Adding Links
-
-To use SPA (Single Page Application) navigation you will need to import the `Link` component from `@tanstack/react-router`.
-
-```tsx
-import { Link } from "@tanstack/react-router";
-```
-
-Then anywhere in your JSX you can use it like so:
-
-```tsx
-<Link to="/about">About</Link>
-```
-
-This will create a link that will navigate to the `/about` route.
-
-More information on the `Link` component can be found in the [Link documentation](https://tanstack.com/router/v1/docs/framework/react/api/router/linkComponent).
-
-### Using A Layout
-
-In the File Based Routing setup the layout is located in `src/routes/__root.tsx`. Anything you add to the root route will appear in all the routes. The route content will appear in the JSX where you render `{children}` in the `shellComponent`.
-
-Here is an example layout that includes a header:
-
-```tsx
-import { HeadContent, Scripts, createRootRoute } from '@tanstack/react-router'
-
-export const Route = createRootRoute({
-  head: () => ({
-    meta: [
-      { charSet: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { title: 'My App' },
-    ],
-  }),
-  shellComponent: ({ children }) => (
-    <html lang="en">
-      <head>
-        <HeadContent />
-      </head>
-      <body>
-        <header>
-          <nav>
-            <Link to="/">Home</Link>
-            <Link to="/about">About</Link>
-          </nav>
-        </header>
-        {children}
-        <Scripts />
-      </body>
-    </html>
-  ),
-})
-```
-
-More information on layouts can be found in the [Layouts documentation](https://tanstack.com/router/latest/docs/framework/react/guide/routing-concepts#layouts).
-
-## Server Functions
-
-TanStack Start provides server functions that allow you to write server-side code that seamlessly integrates with your client components.
-
-```tsx
-import { createServerFn } from '@tanstack/react-start'
-
-const getServerTime = createServerFn({
-  method: 'GET',
-}).handler(async () => {
-  return new Date().toISOString()
-})
-
-// Use in a component
-function MyComponent() {
-  const [time, setTime] = useState('')
-  
-  useEffect(() => {
-    getServerTime().then(setTime)
-  }, [])
-  
-  return <div>Server time: {time}</div>
-}
-```
-
-## API Routes
-
-You can create API routes by using the `server` property in your route definitions:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-import { json } from '@tanstack/react-start'
-
-export const Route = createFileRoute('/api/hello')({
-  server: {
-    handlers: {
-      GET: () => json({ message: 'Hello, World!' }),
-    },
-  },
-})
-```
-
-## Data Fetching
-
-There are multiple ways to fetch data in your application. You can use TanStack Query to fetch data from a server. But you can also use the `loader` functionality built into TanStack Router to load the data for a route before it's rendered.
-
-For example:
-
-```tsx
-import { createFileRoute } from '@tanstack/react-router'
-
-export const Route = createFileRoute('/people')({
-  loader: async () => {
-    const response = await fetch('https://swapi.dev/api/people')
-    return response.json()
-  },
-  component: PeopleComponent,
-})
-
-function PeopleComponent() {
-  const data = Route.useLoaderData()
-  return (
-    <ul>
-      {data.results.map((person) => (
-        <li key={person.name}>{person.name}</li>
-      ))}
-    </ul>
-  )
-}
-```
-
-Loaders simplify your data fetching logic dramatically. Check out more information in the [Loader documentation](https://tanstack.com/router/latest/docs/framework/react/guide/data-loading#loader-parameters).
-
-# Demo files
-
-Files prefixed with `demo` can be safely deleted. They are there to provide a starting point for you to play around with the features you've installed.
-
-# Learn More
-
-You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
-
-For TanStack Start specific documentation, visit [TanStack Start](https://tanstack.com/start).
+See `CLAUDE.md` for deeper architecture notes.
