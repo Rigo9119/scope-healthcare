@@ -78,6 +78,8 @@ export interface SiteSettings {
 	footerCompany: Array<{ label: string }>;
 	footerColContactLabel: string;
 	footerAddress: string;
+	/** Google Maps search for the contact-page pin; falls back to the address. */
+	mapQuery?: string;
 	footerPhone: string;
 	footerEmail: string;
 	footerHours: string;
@@ -95,7 +97,7 @@ const SITE_SETTINGS_QUERY = `
     footerColServicesLabel, footerServices[]{ label },
     footerColCompanyLabel, footerCompany[]{ label },
     footerColContactLabel,
-    footerAddress, footerPhone, footerEmail, footerHours, whatsappNumber,
+    footerAddress, mapQuery, footerPhone, footerEmail, footerHours, whatsappNumber,
     socialLinks[]{ platform, url },
     footerCopyright, footerPrivacyLabel, footerTermsLabel, footerCookiesLabel
   }

@@ -58,6 +58,14 @@ export const siteSettingsType = defineType({
       group: 'contact',
     }),
     defineField({name: 'footerAddress', title: 'Dirección', type: 'string', group: 'contact'}),
+    defineField({
+      name: 'mapQuery',
+      title: 'Ubicación en el mapa',
+      description:
+        'Lo que se busca en Google Maps para ubicar el pin de la página de contacto, p. ej. "Edificio MPH 123, Cra. 7a #123-25, Bogotá". Si está vacío se usa la dirección.',
+      type: 'string',
+      group: 'contact',
+    }),
     defineField({name: 'footerPhone', title: 'Teléfono', type: 'string', group: 'contact'}),
     defineField({name: 'footerEmail', title: 'Email', type: 'string', group: 'contact'}),
     defineField({name: 'footerHours', title: 'Horario', type: 'string', group: 'contact'}),
