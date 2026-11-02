@@ -1,5 +1,8 @@
 import { queryOptions } from "@tanstack/react-query";
+import type { Locale } from "./localizedRoutes";
+import type { PillarContentMap, PillarItemContent } from "./pillarContent";
 import { sanityClient } from "./sanity";
+import type { TeamMember } from "./team";
 
 export interface HomePageData {
 	hero: {
@@ -104,6 +107,44 @@ export function fetchSiteSettings(
 	return sanityClient.fetch(SITE_SETTINGS_QUERY, { locale });
 }
 
+// Pillar item pages: one `pillarItem-{slug}-{locale}` document per item. All of
+// a locale's items are fetched at once (small set) and shared by the pillar
+// index cards and the item pages.
+const PILLAR_ITEMS_QUERY = `
+  *[_type == "pillarItem" && language == $locale] {
+    slug, tagline, summary, intro, audience,
+    lists[]{ title, items },
+    programs[]{ name, subtitle, description, steps[]{ title, details, price }, features },
+    steps[]{ title, subtitle, body },
+    approach, cta
+  }
+`;
+
+export async function fetchPillarItems(
+	locale: string,
+): Promise<PillarContentMap | null> {
+	const docs: Array<PillarItemContent & { slug: string }> =
+		await sanityClient.fetch(PILLAR_ITEMS_QUERY, { locale });
+	if (!docs.length) return null;
+	return Object.fromEntries(docs.map(({ slug, ...rest }) => [slug, rest]));
+}
+
+// Team members are not per-locale documents: only `role` / `credentials` are
+// translated, as `{ es, en }` fields, so a photo is uploaded once.
+const TEAM_QUERY = `
+  *[_type == "teamMember"] | order(order asc, name asc) {
+    name, service,
+    "role": role[$locale],
+    "credentials": credentials[$locale],
+    "photo": photo.asset->url
+  }
+`;
+
+export async function fetchTeam(locale: Locale): Promise<TeamMember[] | null> {
+	const docs: TeamMember[] = await sanityClient.fetch(TEAM_QUERY, { locale });
+	return docs.length ? docs : null;
+}
+
 const STALE_5_MIN = 1000 * 60 * 5;
 
 export const homePageQueryOptions = (locale: string) =>
@@ -121,3 +162,34 @@ export const siteSettingsQueryOptions = (locale: string) =>
 		staleTime: STALE_5_MIN,
 		retry: false,
 	});
+
+export const pillarItemsQueryOptions = (locale: string) =>
+	queryOptions({
+		queryKey: ["pillarItems", locale],
+		queryFn: () => fetchPillarItems(locale).catch(() => null),
+		staleTime: STALE_5_MIN,
+		retry: false,
+	});
+
+export const teamQueryOptions = (locale: Locale) =>
+	queryOptions({
+		queryKey: ["team", locale],
+		queryFn: () => fetchTeam(locale).catch(() => null),
+		staleTime: STALE_5_MIN,
+		retry: false,
+	});
+
+/** Route-loader helper: warm the cache, but never block a render on Sanity for
+ *  more than 4s (the page falls back to bundled content). */
+export async function ensureWithTimeout<T>(
+	promise: Promise<T>,
+): Promise<T | null> {
+	try {
+		return await Promise.race([
+			promise,
+			new Promise<null>((resolve) => setTimeout(() => resolve(null), 4000)),
+		]);
+	} catch {
+		return null;
+	}
+}

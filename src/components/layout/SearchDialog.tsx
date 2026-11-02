@@ -75,7 +75,7 @@ export function SearchDialog({
 					)}
 					<ul>
 						{results.map((r) => (
-							<li key={`${r.kind}-${r.title}`}>
+							<li key={`${r.kind}-${r.group}-${r.title}`}>
 								<SearchResultLink entry={r} onNavigate={onClose} />
 							</li>
 						))}

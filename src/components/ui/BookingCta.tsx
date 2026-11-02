@@ -1,12 +1,15 @@
+import { Eyebrow } from "#/components/ui/Eyebrow.js";
 import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useBookingLink } from "#/lib/booking.js";
 
 /** Reusable WhatsApp booking band for the inner pages. */
 export function BookingCta({
+	eyebrow,
 	title,
 	subtitle,
 	cta,
 }: {
+	eyebrow?: string;
 	title: string;
 	subtitle?: string;
 	cta: string;
@@ -15,6 +18,7 @@ export function BookingCta({
 	return (
 		<section className="px-4 py-16 sm:px-6 lg:py-20">
 			<div className="mx-auto max-w-4xl overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 px-6 py-12 text-center shadow-xl sm:px-12">
+				{eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}
 				<h2 className="font-heading text-2xl font-extrabold text-white sm:text-3xl">
 					{title}
 				</h2>

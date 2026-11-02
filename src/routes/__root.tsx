@@ -1,11 +1,11 @@
 import { TanStackDevtools } from "@tanstack/react-devtools";
+import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
 	Outlet,
 	redirect,
 } from "@tanstack/react-router";
-import type { QueryClient } from "@tanstack/react-query";
 import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 import { Footer } from "#/components/layout/Footer.js";
 import { Header } from "#/components/layout/Header.js";
@@ -17,25 +17,27 @@ import { SiteSettingsProvider } from "#/siteSettings.js";
 import "../styles.css";
 import NotFound from "#/components/ui/NotFound";
 
-export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
-	// Site-wide default; per-route `head` (e.g. the home page) overrides this.
-	head: () => ({ meta: [{ title: SITE_NAME }] }),
-	notFoundComponent: NotFound,
-	beforeLoad: ({ location }) => {
-		// Detectamos el idioma directamente desde el primer segmento de la URL real
-		const segments = location.pathname.split("/").filter(Boolean);
-		const currentLang = segments[0];
+export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
+	{
+		// Site-wide default; per-route `head` (e.g. the home page) overrides this.
+		head: () => ({ meta: [{ title: SITE_NAME }] }),
+		notFoundComponent: NotFound,
+		beforeLoad: ({ location }) => {
+			// Detectamos el idioma directamente desde el primer segmento de la URL real
+			const segments = location.pathname.split("/").filter(Boolean);
+			const currentLang = segments[0];
 
-		// Si el usuario entra a la raíz limpia "/" o pone un idioma inválido, lo redireccionamos a /es
-		if (currentLang !== "es" && currentLang !== "en") {
-			throw redirect({ to: "/$lang", params: { lang: "es" } });
-		}
+			// Si el usuario entra a la raíz limpia "/" o pone un idioma inválido, lo redireccionamos a /es
+			if (currentLang !== "es" && currentLang !== "en") {
+				throw redirect({ to: "/$lang", params: { lang: "es" } });
+			}
 
-		// Sincronizamos el estado interno de Paraglide
-		setLocale(currentLang, { reload: false });
+			// Sincronizamos el estado interno de Paraglide
+			setLocale(currentLang, { reload: false });
+		},
+		component: RootComponent,
 	},
-	component: RootComponent,
-});
+);
 
 function RootComponent() {
 	return (

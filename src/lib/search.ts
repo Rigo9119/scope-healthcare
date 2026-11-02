@@ -10,6 +10,7 @@ import {
 	SECTIONS,
 	type SectionKey,
 } from "./localizedRoutes";
+import { PILLAR_CONTENT } from "./pillarContent";
 import { PILLARS } from "./pillars";
 
 export type SearchEntry =
@@ -79,7 +80,7 @@ export function buildSearchIndex(locale: Locale): SearchEntry[] {
 				section: pillar.slug,
 				item: item.slug,
 				title: item.title[locale],
-				description: item.body[locale],
+				description: PILLAR_CONTENT[locale][item.slug].summary,
 				group: pillar.title[locale],
 			});
 		}

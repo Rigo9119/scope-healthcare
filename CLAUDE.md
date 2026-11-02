@@ -18,8 +18,8 @@ bun --bun run machine-translate  # auto-translate messages via inlang
 
 **Sanity Studio (studio/)**
 ```bash
-cd studio && bun --bun run dev    # run studio locally
-cd studio && bun --bun run deploy # deploy studio to Sanity hosting
+cd studio && bun run dev    # run studio locally (no --bun: the Sanity CLI needs Node)
+cd studio && bun run deploy # deploy studio to Sanity hosting
 ```
 
 ## Architecture
@@ -33,7 +33,12 @@ This is a **React SPA** (TanStack Router) backed by **Sanity CMS**, deployed on 
 
 Content is fetched at runtime from Sanity (project `3fyb50d2`, dataset `production`) via `src/lib/sanity.ts`, through TanStack Query (`homePageQueryOptions` / `siteSettingsQueryOptions` in `src/lib/queries.ts`, which also holds the GROQ queries). Route loaders call `queryClient.ensureQueryData(...)` raced against a 4s timeout; on failure, timeout, or null the page renders its `FALLBACK` (`src/lib/homeFallback.ts`, `src/lib/siteSettingsFallback.ts`).
 
-Pillar pages (Clinic / Ageless / Live) and their items are static content in `src/lib/pillars.ts`, not Sanity.
+Pillar registry (pillars, item slugs, titles, icons, nav) is static in `src/lib/pillars.ts`.
+Item page content lives in Sanity as `pillarItem` documents (`pillarItem-{slug}-{locale}`), fetched all at once per locale via `pillarItemsQueryOptions`; the bundled fallback and seed is `src/lib/pillarContent.ts` (from the client's content doc).
+An item can be listed under two pillars (`estetica-capilar`); its canonical URL is under the first one (`canonicalPillar`).
+The medical team lives in Sanity as `teamMember` documents (shared across locales, `role`/`credentials` as `{ es, en }`), fallback and seed in `src/lib/team.ts`.
+Seed missing documents with `cd studio && npx sanity exec scripts/seed-content.ts --with-user-token` (createIfNotExists, never overwrites).
+When adding an item, update `PILLARS`, `pillarContent.ts`, `studio/structure/pillarItems.ts`, `scripts/prerender.mjs` and `public/sitemap.xml`.
 
 ### Routing
 
@@ -66,7 +71,7 @@ Schemas live in `studio/schemaTypes/` split by type:
   - `siteSettings` — global footer + contact, a per-locale singleton ("Configuración del sitio")
 - `objects/` — reusable embedded types (`hero`, `statItem`, `specialtyItem`, etc.)
 
-Studio uses a custom structure (`studio/structure/index.ts`) that surfaces one editor per locale for each document ("Página de inicio" and "Configuración del sitio") instead of a generic document list. Both are registered with the document-internationalization plugin and use `{type}-{locale}` IDs (e.g. `homePage-es`, `siteSettings-en`).
+Studio uses a custom structure (`studio/structure/index.ts`) that surfaces one editor per locale for each document ("Página de inicio", "Configuración del sitio", and one per pillar item under a folder per pillar) instead of a generic document list, plus an "Equipo médico" list. `homePage`, `siteSettings` and `pillarItem` are registered with the document-internationalization plugin and use `{type}-{locale}` IDs (e.g. `homePage-es`, `siteSettings-en`).
 
 ### Design system
 
@@ -117,7 +122,7 @@ The frontend and the Studio are **two independent deploys** — they ship separa
 Deployed to Sanity's free hosting, independent of Netlify:
 
 ```bash
-cd studio && bun --bun run deploy
+cd studio && bun run deploy
 ```
 
 First run prompts for a hostname → Studio goes live at `https://<hostname>.sanity.studio`. Re-run after any schema/structure change. The project `3fyb50d2` is owned by `rigo4791@gmail.com`; the CLI login (`sanity login`) uses that same account — no new account needed.

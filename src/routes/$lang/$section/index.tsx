@@ -1,3 +1,4 @@
+import { useSuspenseQuery } from "@tanstack/react-query";
 import { createFileRoute, notFound, redirect } from "@tanstack/react-router";
 import { AboutPage } from "#/components/pages/AboutPage.js";
 import { BlogPage } from "#/components/pages/BlogPage.js";
@@ -13,7 +14,12 @@ import {
 	sectionSlug,
 	toLocale,
 } from "#/lib/localizedRoutes.js";
-import { PILLAR_SEO, pillarBySlug } from "#/lib/pillars.js";
+import { PILLAR_SEO, type Pillar, pillarBySlug } from "#/lib/pillars.js";
+import {
+	ensureWithTimeout,
+	pillarItemsQueryOptions,
+	teamQueryOptions,
+} from "#/lib/queries.js";
 import { seoHead } from "#/lib/seo.js";
 
 export const Route = createFileRoute("/$lang/$section/")({
@@ -36,6 +42,20 @@ export const Route = createFileRoute("/$lang/$section/")({
 		}
 		// Unknown slug → 404.
 		throw notFound();
+	},
+	// Only the Sanity-backed pages prefetch; the rest are static.
+	loader: ({ context: { queryClient }, params }) => {
+		const locale = toLocale(params.lang);
+		if (pillarBySlug(params.section)) {
+			return ensureWithTimeout(
+				queryClient.ensureQueryData(pillarItemsQueryOptions(locale)),
+			);
+		}
+		if (sectionFromSlug(params.section, locale) === "team") {
+			return ensureWithTimeout(
+				queryClient.ensureQueryData(teamQueryOptions(locale)),
+			);
+		}
 	},
 	head: ({ params }) => {
 		const locale = toLocale(params.lang);
@@ -66,7 +86,7 @@ export const Route = createFileRoute("/$lang/$section/")({
 function SectionPage() {
 	const { lang, section } = Route.useParams();
 	const pillar = pillarBySlug(section);
-	if (pillar) return <PillarPage pillar={pillar} />;
+	if (pillar) return <PillarSection pillar={pillar} />;
 
 	const key = sectionFromSlug(section, toLocale(lang));
 	switch (key) {
@@ -89,4 +109,10 @@ function SectionPage() {
 		default:
 			return null; // beforeLoad already guards unknown slugs
 	}
+}
+
+function PillarSection({ pillar }: { pillar: Pillar }) {
+	const { lang } = Route.useParams();
+	const { data } = useSuspenseQuery(pillarItemsQueryOptions(toLocale(lang)));
+	return <PillarPage pillar={pillar} content={data} />;
 }

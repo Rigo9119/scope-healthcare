@@ -4,6 +4,8 @@ import { IconComponent } from "#/components/Icon.js";
 import { BookingCta } from "#/components/ui/BookingCta.js";
 import { PageHeader } from "#/components/ui/PageHeader.js";
 import { useLang } from "#/i18n.js";
+import type { PillarContentMap } from "#/lib/pillarContent.js";
+import { itemContent } from "#/lib/pillarContent.js";
 import { PILLAR_UI, type Pillar } from "#/lib/pillars.js";
 
 // Placeholder image gradient (matches ui/ImagePlaceholder) so the specialty
@@ -14,7 +16,13 @@ const IMG_GRADIENT =
 /** Pillar index page: hero + grid of specialty cards, each a tall image with the
  *  title overlaid and the description below (wireframe pages 1.1 / 2.1 / 3.1;
  *  reference: Nescory/Nescens "Longevity · Wellbeing · Aesthetics" layout). */
-export function PillarPage({ pillar }: { pillar: Pillar }) {
+export function PillarPage({
+	pillar,
+	content,
+}: {
+	pillar: Pillar;
+	content: PillarContentMap | null;
+}) {
 	const { locale } = useLang();
 	const ui = PILLAR_UI[locale];
 
@@ -64,8 +72,8 @@ export function PillarPage({ pillar }: { pillar: Pillar }) {
 								</div>
 
 								<div className="flex flex-1 flex-col p-5 sm:p-6">
-									<p className="flex-1 text-sm leading-relaxed text-text-secondary">
-										{item.body[locale]}
+									<p className="line-clamp-4 flex-1 text-sm leading-relaxed text-text-secondary">
+										{itemContent(item.slug, locale, content).summary}
 									</p>
 									<span className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors duration-200 group-hover:text-primary-700">
 										<span className="link-animated">{ui.readMore}</span>

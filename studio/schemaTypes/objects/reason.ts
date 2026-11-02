@@ -1,5 +1,5 @@
-import { defineField, defineType } from 'sanity'
-import { iconNameField } from './iconName'
+import {defineField, defineType} from 'sanity'
+import {iconNameField} from './iconName'
 
 export const reasonType = defineType({
   name: 'reason',
@@ -7,10 +7,10 @@ export const reasonType = defineType({
   type: 'object',
   fields: [
     iconNameField,
-    defineField({ name: 'title', title: 'Título', type: 'string' }),
-    defineField({ name: 'body', title: 'Descripción', type: 'text', rows: 3 }),
+    defineField({name: 'title', title: 'Título', type: 'string'}),
+    defineField({name: 'body', title: 'Descripción', type: 'text', rows: 3}),
   ],
   preview: {
-    select: { title: 'title', subtitle: 'icon' },
+    select: {title: 'title', subtitle: 'icon'},
   },
 })

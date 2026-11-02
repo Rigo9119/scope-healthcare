@@ -61,7 +61,7 @@ export function Footer() {
 									<Link
 										to="/$lang/$section"
 										params={{ lang: locale, section: pillar.slug }}
-										className="link-animated transition-colors duration-200 hover:text-primary-300"
+										className="link-animated text-inherit transition-colors duration-200 hover:text-primary-300"
 									>
 										{pillar.navLabel}
 									</Link>
@@ -80,7 +80,7 @@ export function Footer() {
 									<Link
 										to="/$lang/$section"
 										params={{ lang: locale, section: sectionSlug(key, locale) }}
-										className="link-animated transition-colors duration-200 hover:text-primary-300"
+										className="link-animated text-inherit transition-colors duration-200 hover:text-primary-300"
 									>
 										{label()}
 									</Link>
@@ -133,7 +133,7 @@ export function Footer() {
 								key={key}
 								to="/$lang/$section"
 								params={{ lang: locale, section: sectionSlug(key, locale) }}
-								className="link-animated transition-colors duration-200 hover:text-white"
+								className="link-animated text-inherit transition-colors duration-200 hover:text-white"
 							>
 								{label}
 							</Link>

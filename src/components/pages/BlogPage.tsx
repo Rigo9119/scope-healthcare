@@ -5,16 +5,19 @@ import { PageHeader } from "#/components/ui/PageHeader.js";
 // Placeholder posts — real articles will come from Sanity later.
 const POSTS = [
 	{
+		id: 1,
 		title: "Título del artículo",
 		excerpt: "Breve descripción del artículo que aparecerá aquí.",
 		date: "Jun 2026",
 	},
 	{
+		id: 2,
 		title: "Título del artículo",
 		excerpt: "Breve descripción del artículo que aparecerá aquí.",
 		date: "Jun 2026",
 	},
 	{
+		id: 3,
 		title: "Título del artículo",
 		excerpt: "Breve descripción del artículo que aparecerá aquí.",
 		date: "May 2026",
@@ -33,9 +36,9 @@ export function BlogPage() {
 			<section className="px-4 py-16 sm:px-6 lg:py-24">
 				<div className="mx-auto max-w-7xl">
 					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-						{POSTS.map((post, i) => (
+						{POSTS.map((post) => (
 							<article
-								key={`${post.title}-${i}`}
+								key={post.id}
 								className="flex flex-col overflow-hidden border border-border-default bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-card"
 							>
 								<ImagePlaceholder

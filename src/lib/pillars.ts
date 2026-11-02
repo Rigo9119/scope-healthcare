@@ -15,12 +15,11 @@ import type { Locale } from "./localizedRoutes";
 export type PillarKey = "clinic" | "ageless" | "live";
 
 export interface PillarItem {
-	/** URL slug, same in both locales. */
+	/** URL slug, same in both locales. Also the Sanity id stem (`pillarItem-{slug}-{locale}`). */
 	slug: string;
 	/** Icon name resolved in `ICON_MAP` (src/components/Icon.tsx). */
 	icon: string;
 	title: Record<Locale, string>;
-	body: Record<Locale, string>;
 }
 
 export interface Pillar {
@@ -35,6 +34,17 @@ export interface Pillar {
 	tagline: Record<Locale, string>;
 	items: PillarItem[];
 }
+
+// Listed under both Clinic and Ageless (client request); one content document,
+// canonical URL under the first pillar that lists it (see `canonicalPillar`).
+const AESTHETICS: PillarItem = {
+	slug: "estetica-capilar",
+	icon: "Sparkles",
+	title: {
+		es: "Medicina Estética y Capilar",
+		en: "Aesthetic & Hair Medicine",
+	},
+};
 
 export const PILLARS: Pillar[] = [
 	{
@@ -55,19 +65,11 @@ export const PILLARS: Pillar[] = [
 				slug: "gastroenterologia",
 				icon: "Activity",
 				title: { es: "Gastroenterología", en: "Gastroenterology" },
-				body: {
-					es: "Diagnóstico y tratamiento integral del sistema digestivo con tecnología de última generación.",
-					en: "Comprehensive diagnosis and treatment of the digestive system with state-of-the-art technology.",
-				},
 			},
 			{
 				slug: "urologia",
 				icon: "Droplets",
 				title: { es: "Urología", en: "Urology" },
-				body: {
-					es: "Cuidado especializado de la salud urinaria y reproductiva con un enfoque preventivo.",
-					en: "Specialized care for urinary and reproductive health with a preventive focus.",
-				},
 			},
 			{
 				slug: "medicina-fisica-deporte",
@@ -76,37 +78,22 @@ export const PILLARS: Pillar[] = [
 					es: "Medicina Física y del Deporte",
 					en: "Physical & Sports Medicine",
 				},
-				body: {
-					es: "Recuperación funcional, rendimiento y prevención de lesiones para cada etapa de tu vida.",
-					en: "Functional recovery, performance and injury prevention for every stage of your life.",
-				},
 			},
 			{
 				slug: "reumatologia",
 				icon: "Bone",
 				title: { es: "Reumatología", en: "Rheumatology" },
-				body: {
-					es: "Manejo integral de enfermedades articulares y autoinmunes para mejorar tu calidad de vida.",
-					en: "Comprehensive management of joint and autoimmune conditions to improve your quality of life.",
-				},
+			},
+			AESTHETICS,
+			{
+				slug: "psicologia",
+				icon: "Brain",
+				title: { es: "Psicología", en: "Psychology" },
 			},
 			{
 				slug: "nutricion",
 				icon: "Salad",
 				title: { es: "Nutrición", en: "Nutrition" },
-				body: {
-					es: "Planes de alimentación personalizados basados en evidencia para tu bienestar a largo plazo.",
-					en: "Personalized, evidence-based nutrition plans for your long-term wellbeing.",
-				},
-			},
-			{
-				slug: "psicologia",
-				icon: "Brain",
-				title: { es: "Psicología", en: "Psychology" },
-				body: {
-					es: "Acompañamiento emocional y salud mental con especialistas dedicados a tu equilibrio.",
-					en: "Emotional support and mental health with specialists dedicated to your balance.",
-				},
 			},
 		],
 	},
@@ -116,58 +103,34 @@ export const PILLARS: Pillar[] = [
 		navLabel: "Scope Ageless",
 		title: { es: "Scope Ageless", en: "Scope Ageless" },
 		eyebrow: {
-			es: "Medicina estética y antienvejecimiento",
-			en: "Aesthetic & anti-aging medicine",
+			es: "Longevidad · Bienestar · Estética",
+			en: "Longevity · Wellbeing · Aesthetics",
 		},
 		tagline: {
-			es: "Medicina estética y antienvejecimiento respaldada por evidencia científica, para que te veas y te sientas como quieres, con seguridad y resultados naturales.",
-			en: "Aesthetic and anti-aging medicine backed by scientific evidence, so you look and feel the way you want — safely and with natural results.",
+			es: "Te acompañamos en la construcción de una vida con mayor bienestar, vitalidad y calidad de vida, a través de estrategias personalizadas de prevención, cuidado y envejecimiento saludable.",
+			en: "We support you in building a life with more wellbeing, vitality and quality of life, through personalized strategies for prevention, care and healthy aging.",
 		},
 		items: [
-			{
-				slug: "bienestar-longevidad",
-				icon: "Leaf",
-				title: { es: "Bienestar y Longevidad", en: "Wellness & Longevity" },
-				body: {
-					es: "Programas de longevidad que optimizan tu energía, vitalidad y salud a lo largo del tiempo.",
-					en: "Longevity programs that optimize your energy, vitality and health over time.",
-				},
-			},
 			{
 				slug: "peso-saludable",
 				icon: "Scale",
 				title: { es: "Peso Saludable", en: "Healthy Weight" },
-				body: {
-					es: "Control de peso médico y sostenible con acompañamiento nutricional y metabólico.",
-					en: "Medical, sustainable weight management with nutritional and metabolic support.",
-				},
 			},
 			{
-				slug: "estetica-medica",
-				icon: "Sparkles",
-				title: { es: "Estética Médica", en: "Medical Aesthetics" },
-				body: {
-					es: "Procedimientos estéticos mínimamente invasivos con resultados naturales y seguros.",
-					en: "Minimally invasive aesthetic procedures with natural, safe results.",
-				},
+				slug: "bienestar-longevidad",
+				icon: "Leaf",
+				title: { es: "Bienestar y Longevidad", en: "Wellness & Longevity" },
 			},
+			AESTHETICS,
 			{
 				slug: "enfoque-deportivo",
 				icon: "Activity",
 				title: { es: "Enfoque Deportivo", en: "Sports Focus" },
-				body: {
-					es: "Optimización del rendimiento físico y recuperación con un enfoque de medicina deportiva.",
-					en: "Physical performance optimization and recovery with a sports-medicine approach.",
-				},
 			},
 			{
 				slug: "prevencion-ejecutiva",
 				icon: "Briefcase",
 				title: { es: "Prevención Ejecutiva", en: "Executive Prevention" },
-				body: {
-					es: "Chequeos preventivos integrales diseñados para agendas exigentes y vidas de alto rendimiento.",
-					en: "Comprehensive preventive check-ups designed for demanding schedules and high-performance lives.",
-				},
 			},
 		],
 	},
@@ -189,28 +152,16 @@ export const PILLARS: Pillar[] = [
 				slug: "living-medical",
 				icon: "HeartPulse",
 				title: { es: "Living Medical", en: "Living Medical" },
-				body: {
-					es: "Un modelo de atención continua que cuida tu salud más allá de la consulta.",
-					en: "A continuous-care model that looks after your health beyond the appointment.",
-				},
-			},
-			{
-				slug: "financiamiento",
-				icon: "CreditCard",
-				title: { es: "Financiamiento", en: "Financing" },
-				body: {
-					es: "Opciones de pago flexibles para que accedas a tu tratamiento sin barreras.",
-					en: "Flexible payment options so you can access your treatment without barriers.",
-				},
 			},
 			{
 				slug: "telemedicina",
 				icon: "Video",
 				title: { es: "Telemedicina", en: "Telemedicine" },
-				body: {
-					es: "Consultas médicas a distancia con la misma calidad y cercanía, dondequiera que estés.",
-					en: "Remote medical consultations with the same quality and closeness, wherever you are.",
-				},
+			},
+			{
+				slug: "financiamiento",
+				icon: "CreditCard",
+				title: { es: "Financiamiento", en: "Financing" },
 			},
 		],
 	},
@@ -232,6 +183,27 @@ export function itemBySlug(pillar: Pillar, slug: string): PillarItem | null {
 	return pillar.items.find((i) => i.slug === slug) ?? null;
 }
 
+/** First pillar (in nav order) listing the item: owns its canonical URL. */
+export function canonicalPillar(itemSlug: string): Pillar | null {
+	return (
+		PILLAR_ORDER.map(pillarByKey).find((p) => itemBySlug(p, itemSlug)) ?? null
+	);
+}
+
+/** Every item once, paired with its canonical pillar (sitemap, Studio seed). */
+export function uniqueItems(): Array<{ pillar: Pillar; item: PillarItem }> {
+	const seen = new Set<string>();
+	const out: Array<{ pillar: Pillar; item: PillarItem }> = [];
+	for (const pillar of PILLAR_ORDER.map(pillarByKey)) {
+		for (const item of pillar.items) {
+			if (seen.has(item.slug)) continue;
+			seen.add(item.slug);
+			out.push({ pillar, item });
+		}
+	}
+	return out;
+}
+
 // ─── Per-pillar SEO copy (defaults; can later come from Sanity) ─────────────────
 export const PILLAR_SEO: Record<
 	PillarKey,
@@ -241,36 +213,36 @@ export const PILLAR_SEO: Record<
 		es: {
 			title: "Scope Clinic | Atención médica especializada | Scope Health",
 			description:
-				"Especialidades médicas de Scope Clinic: gastroenterología, urología, reumatología, nutrición, psicología y medicina física y del deporte.",
+				"Especialidades médicas de Scope Clinic: gastroenterología, urología, medicina física y del deporte, reumatología, medicina estética y capilar, psicología y nutrición.",
 		},
 		en: {
 			title: "Scope Clinic | Specialized Medical Care | Scope Health",
 			description:
-				"Scope Clinic medical specialties: gastroenterology, urology, rheumatology, nutrition, psychology and physical & sports medicine.",
+				"Scope Clinic medical specialties: gastroenterology, urology, physical & sports medicine, rheumatology, aesthetic & hair medicine, psychology and nutrition.",
 		},
 	},
 	ageless: {
 		es: {
 			title: "Scope Ageless | Medicina estética y longevidad | Scope Health",
 			description:
-				"Programas de Scope Ageless: bienestar y longevidad, peso saludable, estética médica, enfoque deportivo y prevención ejecutiva.",
+				"Programas de Scope Ageless: peso saludable, bienestar y longevidad, medicina estética y capilar, enfoque deportivo y prevención ejecutiva.",
 		},
 		en: {
 			title: "Scope Ageless | Aesthetic & Longevity Medicine | Scope Health",
 			description:
-				"Scope Ageless programs: wellness & longevity, healthy weight, medical aesthetics, sports focus and executive prevention.",
+				"Scope Ageless programs: healthy weight, wellness & longevity, aesthetic & hair medicine, sports focus and executive prevention.",
 		},
 	},
 	live: {
 		es: {
 			title: "Live by Scope | Bienestar integrado a tu vida | Scope Health",
 			description:
-				"Live by Scope: Living Medical, financiamiento y telemedicina para integrar la medicina de Scope a tu estilo de vida.",
+				"Live by Scope: Living Medical, telemedicina y financiamiento para integrar la medicina de Scope a tu estilo de vida.",
 		},
 		en: {
 			title: "Live by Scope | Wellbeing built into your life | Scope Health",
 			description:
-				"Live by Scope: Living Medical, financing and telemedicine to weave Scope's medicine into your lifestyle.",
+				"Live by Scope: Living Medical, telemedicine and financing to weave Scope's medicine into your lifestyle.",
 		},
 	},
 };
@@ -283,7 +255,11 @@ export const PILLAR_UI: Record<
 		backTo: (name: string) => string;
 		programTitle: string;
 		programBody: string;
-		faqTitle: string;
+		programsEyebrow: string;
+		programsTitle: string;
+		programIncludes: string;
+		stepsEyebrow: string;
+		stepsTitle: string;
 		bookTitle: string;
 		bookSubtitle: string;
 		bookCta: string;
@@ -295,7 +271,11 @@ export const PILLAR_UI: Record<
 		programTitle: "Experiencia exclusiva",
 		programBody:
 			"Cada programa se diseña a la medida de tus objetivos, con un equipo que te acompaña de principio a fin.",
-		faqTitle: "Preguntas frecuentes",
+		programsEyebrow: "Programas",
+		programsTitle: "Elige el programa para ti",
+		programIncludes: "Incluye",
+		stepsEyebrow: "Paso a paso",
+		stepsTitle: "Qué incluye",
 		bookTitle: "¿Listo para empezar?",
 		bookSubtitle:
 			"Escríbenos por WhatsApp y un coordinador te orienta sin costo.",
@@ -307,7 +287,11 @@ export const PILLAR_UI: Record<
 		programTitle: "Exclusive experience",
 		programBody:
 			"Each program is tailored to your goals, with a team that supports you from start to finish.",
-		faqTitle: "Frequently asked questions",
+		programsEyebrow: "Programs",
+		programsTitle: "Choose the program for you",
+		programIncludes: "Includes",
+		stepsEyebrow: "Step by step",
+		stepsTitle: "What's included",
 		bookTitle: "Ready to get started?",
 		bookSubtitle:
 			"Message us on WhatsApp and a coordinator guides you at no cost.",

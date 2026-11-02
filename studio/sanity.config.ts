@@ -1,13 +1,13 @@
-import { defineConfig } from 'sanity'
-import { structureTool } from 'sanity/structure'
-import { visionTool } from '@sanity/vision'
-import { documentInternationalization } from '@sanity/document-internationalization'
-import { schemaTypes } from './schemaTypes'
-import { structure } from './structure'
+import {defineConfig} from 'sanity'
+import {structureTool} from 'sanity/structure'
+import {visionTool} from '@sanity/vision'
+import {documentInternationalization} from '@sanity/document-internationalization'
+import {schemaTypes} from './schemaTypes'
+import {structure} from './structure'
 
 const LOCALES = [
-  { id: 'es', title: 'Español' },
-  { id: 'en', title: 'English' },
+  {id: 'es', title: 'Español'},
+  {id: 'en', title: 'English'},
 ]
 
 export default defineConfig({
@@ -18,20 +18,18 @@ export default defineConfig({
   dataset: 'production',
 
   plugins: [
-    structureTool({ structure }),
+    structureTool({structure}),
     visionTool(),
     documentInternationalization({
       supportedLanguages: LOCALES,
-      schemaTypes: ['homePage', 'siteSettings'],
+      schemaTypes: ['homePage', 'siteSettings', 'pillarItem'],
     }),
   ],
 
-  schema: { types: schemaTypes },
+  schema: {types: schemaTypes},
 
   document: {
     newDocumentOptions: (prev) =>
-      prev.filter(
-        (item) => item.templateId !== 'homePage' && item.templateId !== 'siteSettings',
-      ),
+      prev.filter((item) => !['homePage', 'siteSettings', 'pillarItem'].includes(item.templateId)),
   },
 })

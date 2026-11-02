@@ -95,7 +95,7 @@ Connect a Netlify build hook to a Sanity webhook (`cd studio && npx sanity hook 
 ### Studio (Sanity hosting)
 
 ```bash
-cd studio && bun --bun run deploy
+cd studio && bun run deploy
 ```
 
 Re-deploy after any schema or structure change.
