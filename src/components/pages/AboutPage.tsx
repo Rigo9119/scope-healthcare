@@ -56,7 +56,7 @@ const COPY: Record<
 			},
 		],
 		ctaTitle: "¿Tienes preguntas?",
-		ctaSubtitle: "Conversemos por WhatsApp, sin compromiso.",
+		ctaSubtitle: "Conversemos, sin compromiso.",
 		cta: "Hablar con nosotros",
 	},
 	en: {
@@ -92,7 +92,7 @@ const COPY: Record<
 			},
 		],
 		ctaTitle: "Have questions?",
-		ctaSubtitle: "Let's talk on WhatsApp, no strings attached.",
+		ctaSubtitle: "Let's talk, no strings attached.",
 		cta: "Talk to us",
 	},
 };

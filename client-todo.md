@@ -59,6 +59,8 @@ Content can be edited directly in the Studio (https://scopehealth.sanity.studio/
 - [ ] In the Studio, Configuración del sitio (es): phone is "+57 310 3445645"; the English one is "+57 310 344 5645". Pick one format.
 
 - [ ] Contact email.
+- [ ] WhatsApp number for bookings (the flyers only show 310 344 56 45 as a phone line).
+  Until then every booking button calls the phone; once it's entered in Configuración del sitio → WhatsApp (es and en), the buttons open WhatsApp automatically.
 - [ ] Add "Piso 7, Edificio MPH 123" to the Spanish address in Sanity.
 - [ ] Fill in the English "Configuración del sitio" document in the Studio (it doesn't exist yet).
 - [ ] Social media links (the flyers mention Instagram @scopehealthcare_).

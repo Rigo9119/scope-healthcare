@@ -1,23 +1,36 @@
+import { Phone } from "lucide-react";
+import type { ComponentType } from "react";
+import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { m } from "#/paraglide/messages.js";
 import { useSiteSettings } from "#/siteSettings.js";
 
-/** Builds a WhatsApp click-to-chat URL (wa.me) with a prefilled message. */
-function waLink(number: string | undefined, message: string): string {
-	const digits = (number ?? "").replace(/\D/g, "");
-	return `https://wa.me/${digits}?text=${encodeURIComponent(message)}`;
-}
-
 /**
- * The booking flow = a WhatsApp chat with whoever handles appointments. The
- * number is editable in Sanity (siteSettings.whatsappNumber); the prefilled
- * message is locale-aware (Paraglide). `forSpecialty` prefills the procedure
- * the patient tapped, so the agent gets context.
+ * The booking CTA. With a WhatsApp number in Sanity (siteSettings.whatsappNumber)
+ * it opens a chat with a locale-aware prefilled message; without one it calls
+ * the clinic phone. Spread `link` on the <a> and render `Icon` next to the label,
+ * so labels stay channel-neutral ("Agendar consulta").
  */
-export function useBookingLink() {
-	const { whatsappNumber } = useSiteSettings();
+export function useBookingLink(): {
+	channel: "whatsapp" | "phone";
+	link: { href: string; target?: string; rel?: string };
+	Icon: ComponentType<{ size?: number }>;
+} {
+	const { whatsappNumber, footerPhone } = useSiteSettings();
+	const digits = whatsappNumber.replace(/\D/g, "");
+	if (digits) {
+		return {
+			channel: "whatsapp",
+			link: {
+				href: `https://wa.me/${digits}?text=${encodeURIComponent(m.whatsapp_cta_message())}`,
+				target: "_blank",
+				rel: "noopener noreferrer",
+			},
+			Icon: WhatsappIcon,
+		};
+	}
 	return {
-		general: waLink(whatsappNumber, m.whatsapp_cta_message()),
-		forSpecialty: (name: string) =>
-			waLink(whatsappNumber, m.whatsapp_specialty_message({ specialty: name })),
+		channel: "phone",
+		link: { href: `tel:${footerPhone.replace(/[^\d+]/g, "")}` },
+		Icon: Phone,
 	};
 }

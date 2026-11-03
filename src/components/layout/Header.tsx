@@ -3,7 +3,6 @@ import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import { BrandMark } from "#/components/ui/BrandMark.js";
 import { SocialLinks } from "#/components/ui/SocialLinks.js";
-import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useLang } from "#/i18n.js";
 import { useBookingLink } from "#/lib/booking.js";
 import { sectionSlug } from "#/lib/localizedRoutes.js";
@@ -147,12 +146,12 @@ export function Header() {
 								<Search size={16} /> {m.nav_search()}
 							</button>
 							<a
-								href={booking.general}
-								target="_blank"
-								rel="noopener noreferrer"
+								href={booking.link.href}
+								target={booking.link.target}
+								rel={booking.link.rel}
 								className="inline-flex items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-btn-primary-hover active:translate-y-0 active:shadow-btn-primary-active"
 							>
-								<WhatsappIcon size={16} /> {m.nav_book()}
+								<booking.Icon size={16} /> {m.nav_book()}
 							</a>
 							<SocialLinks light={light} />
 						</div>

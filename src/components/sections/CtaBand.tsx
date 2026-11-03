@@ -1,5 +1,4 @@
 import { Phone, Sparkles } from "lucide-react";
-import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useBookingLink } from "#/lib/booking.js";
 import type { HomePageData } from "#/lib/queries.js";
 
@@ -33,19 +32,22 @@ export function CtaBand({
 					</p>
 					<div className="mt-7 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
 						<a
-							href={booking.general}
-							target="_blank"
-							rel="noopener noreferrer"
+							href={booking.link.href}
+							target={booking.link.target}
+							rel={booking.link.rel}
 							className="inline-flex w-full items-center justify-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md sm:w-auto"
 						>
-							<WhatsappIcon size={18} /> {ctaPrimaryLabel}
+							<booking.Icon size={18} /> {ctaPrimaryLabel}
 						</a>
-						<a
-							href={`tel:${ctaPhone?.replace(/\s/g, "")}`}
-							className="inline-flex w-full items-center justify-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_6px_16px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none sm:w-auto"
-						>
-							<Phone size={16} /> {ctaPhone}
-						</a>
+						{/* Without WhatsApp the primary button already calls this number. */}
+						{booking.channel === "whatsapp" && ctaPhone && (
+							<a
+								href={`tel:${ctaPhone?.replace(/\s/g, "")}`}
+								className="inline-flex w-full items-center justify-center gap-2 border border-white/40 px-7 py-3.5 text-sm font-semibold text-white shadow-[0_2px_8px_rgba(0,0,0,0.15)] transition duration-200 hover:-translate-y-0.5 hover:border-white/60 hover:bg-white/10 hover:shadow-[0_6px_16px_rgba(0,0,0,0.22)] active:translate-y-0 active:shadow-none sm:w-auto"
+							>
+								<Phone size={16} /> {ctaPhone}
+							</a>
+						)}
 					</div>
 				</div>
 			</div>

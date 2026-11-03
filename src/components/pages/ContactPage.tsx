@@ -1,6 +1,5 @@
 import { Clock, Mail, MapPin, Navigation, Phone } from "lucide-react";
 import { PageHeader } from "#/components/ui/PageHeader.js";
-import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useLang } from "#/i18n.js";
 import { useBookingLink } from "#/lib/booking.js";
 import type { Locale } from "#/lib/localizedRoutes.js";
@@ -32,7 +31,7 @@ const COPY: Record<
 		phone: "Teléfono",
 		email: "Email",
 		hours: "Horario",
-		book: "Agendar por WhatsApp",
+		book: "Agendar consulta",
 		mapTitle: "Mapa de la ubicación de Scope Healthcare",
 		directions: "Cómo llegar",
 	},
@@ -46,7 +45,7 @@ const COPY: Record<
 		phone: "Phone",
 		email: "Email",
 		hours: "Hours",
-		book: "Book on WhatsApp",
+		book: "Book a consultation",
 		mapTitle: "Map of the Scope Healthcare location",
 		directions: "Get directions",
 	},
@@ -99,12 +98,12 @@ export function ContactPage() {
 						</ul>
 
 						<a
-							href={booking.general}
-							target="_blank"
-							rel="noopener noreferrer"
+							href={booking.link.href}
+							target={booking.link.target}
+							rel={booking.link.rel}
 							className="mt-10 inline-flex items-center gap-2 bg-primary-500 px-7 py-3.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600"
 						>
-							<WhatsappIcon size={18} /> {copy.book}
+							<booking.Icon size={18} /> {copy.book}
 						</a>
 					</div>
 

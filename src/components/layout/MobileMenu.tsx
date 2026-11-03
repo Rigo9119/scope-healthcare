@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
 import { SocialLinks } from "#/components/ui/SocialLinks.js";
-import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useLang } from "#/i18n.js";
+import type { useBookingLink } from "#/lib/booking.js";
 import { sectionSlug } from "#/lib/localizedRoutes.js";
 import { m } from "#/paraglide/messages.js";
 import LanguageSwitcherMobile from "./LanguageSwitcherMobile";
@@ -9,7 +9,7 @@ import LanguageSwitcherMobile from "./LanguageSwitcherMobile";
 export interface MobileMenuProps {
 	setOpen: (open: boolean) => void;
 	pillars: { slug: string; label: string }[];
-	booking: { general: string };
+	booking: ReturnType<typeof useBookingLink>;
 }
 
 const linkClass =
@@ -69,13 +69,13 @@ export default function MobileMenu({
 				</Link>
 
 				<a
-					href={booking.general}
-					target="_blank"
-					rel="noopener noreferrer"
+					href={booking.link.href}
+					target={booking.link.target}
+					rel={booking.link.rel}
 					onClick={close}
 					className="mt-3 inline-flex items-center justify-center gap-2 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:bg-primary-600 active:shadow-btn-primary-active"
 				>
-					<WhatsappIcon size={16} /> {m.nav_book()}
+					<booking.Icon size={16} /> {m.nav_book()}
 				</a>
 
 				{/* Language switcher mobile */}

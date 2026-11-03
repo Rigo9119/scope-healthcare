@@ -26,8 +26,8 @@ const COPY: Record<
 		subtitle:
 			"Un equipo médico interconectado, con criterio especializado y trato humano en cada consulta.",
 		ctaTitle: "¿Quieres una segunda opinión?",
-		ctaSubtitle: "Habla directamente con nuestro equipo por WhatsApp.",
-		cta: "Escribir por WhatsApp",
+		ctaSubtitle: "Habla directamente con nuestro equipo.",
+		cta: "Contáctanos",
 	},
 	en: {
 		eyebrow: "Our team",
@@ -35,8 +35,8 @@ const COPY: Record<
 		subtitle:
 			"An interconnected medical team, with specialist judgment and a human touch at every visit.",
 		ctaTitle: "Want a second opinion?",
-		ctaSubtitle: "Talk to our team directly on WhatsApp.",
-		cta: "Message us on WhatsApp",
+		ctaSubtitle: "Talk to our team directly.",
+		cta: "Contact us",
 	},
 };
 

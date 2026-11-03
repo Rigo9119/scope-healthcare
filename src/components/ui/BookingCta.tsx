@@ -1,8 +1,7 @@
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
-import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
 import { useBookingLink } from "#/lib/booking.js";
 
-/** Reusable WhatsApp booking band for the inner pages. */
+/** Reusable booking band for the inner pages (WhatsApp or phone, see useBookingLink). */
 export function BookingCta({
 	eyebrow,
 	title,
@@ -26,12 +25,12 @@ export function BookingCta({
 					<p className="mx-auto mt-3 max-w-md text-primary-50">{subtitle}</p>
 				)}
 				<a
-					href={booking.general}
-					target="_blank"
-					rel="noopener noreferrer"
+					href={booking.link.href}
+					target={booking.link.target}
+					rel={booking.link.rel}
 					className="mt-7 inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50"
 				>
-					<WhatsappIcon size={18} /> {cta}
+					<booking.Icon size={18} /> {cta}
 				</a>
 			</div>
 		</section>

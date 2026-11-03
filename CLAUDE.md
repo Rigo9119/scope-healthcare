@@ -102,7 +102,7 @@ Components under `src/components/`:
 - `sections/` - home page sections: Hero, StatsBand, Pillars, CareJourney, WhyUs, Testimonials, CtaBand. Props are typed via `Pick<HomePageData, …>`.
 - `pages/` - full page bodies for `$section` routes (AboutPage, ServicesPage, PillarPage, PillarItemPage, etc.)
 
-**Header and Footer are global chrome rendered once in `src/routes/__root.tsx`** — inside `LangProvider` and `SiteSettingsProvider`, not per page. New routes render only their own content into the `<Outlet />`. Footer, contact, social and booking data come from the shared `useSiteSettings()` context (`src/siteSettings.tsx`, one site-settings query for the whole app); home-page content comes from `homePageQueryOptions(locale)`.
+**Header and Footer are global chrome rendered once in `src/routes/__root.tsx`** — inside `LangProvider` and `SiteSettingsProvider`, not per page. New routes render only their own content into the `<Outlet />`. Booking CTAs use `useBookingLink()` (`src/lib/booking.ts`): a WhatsApp chat when `whatsappNumber` is set in Sanity, otherwise a `tel:` link to `footerPhone`, so CTA labels stay channel-neutral. Footer, contact, social and booking data come from the shared `useSiteSettings()` context (`src/siteSettings.tsx`, one site-settings query for the whole app); home-page content comes from `homePageQueryOptions(locale)`.
 
 ### Path alias
 

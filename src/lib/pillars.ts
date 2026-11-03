@@ -304,8 +304,7 @@ export const PILLAR_UI: Record<
 		stepsEyebrow: "Paso a paso",
 		stepsTitle: "Qué incluye",
 		bookTitle: "¿Listo para empezar?",
-		bookSubtitle:
-			"Escríbenos por WhatsApp y un coordinador te orienta sin costo.",
+		bookSubtitle: "Contáctanos y un coordinador te orienta sin costo.",
 		bookCta: "Agendar consulta",
 	},
 	en: {
@@ -320,8 +319,7 @@ export const PILLAR_UI: Record<
 		stepsEyebrow: "Step by step",
 		stepsTitle: "What's included",
 		bookTitle: "Ready to get started?",
-		bookSubtitle:
-			"Message us on WhatsApp and a coordinator guides you at no cost.",
+		bookSubtitle: "Get in touch and a coordinator guides you at no cost.",
 		bookCta: "Book a consultation",
 	},
 };

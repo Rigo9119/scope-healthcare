@@ -10,7 +10,8 @@ const SHARED = {
 	mapQuery: "Cra. 7a #123-25, Bogotá, Colombia",
 	footerPhone: "+57 310 344 5645",
 	footerEmail: "",
-	whatsappNumber: "573103445645",
+	// Empty until the client has a WhatsApp line: booking CTAs call the phone.
+	whatsappNumber: "",
 	// Empty until the client adds real URLs in "Configuración del sitio" → Redes
 	// sociales; the header/menu render the social row only when this is non-empty.
 	socialLinks: [],

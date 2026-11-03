@@ -25,9 +25,8 @@ const COPY: Record<
 		soonBody:
 			"Estamos preparando los primeros artículos de nuestro equipo médico.",
 		ctaTitle: "¿Tienes una pregunta ahora?",
-		ctaSubtitle:
-			"Escríbenos por WhatsApp y un coordinador te orienta sin costo.",
-		cta: "Escribir por WhatsApp",
+		ctaSubtitle: "Contáctanos y un coordinador te orienta sin costo.",
+		cta: "Contáctanos",
 	},
 	en: {
 		title: "Health guides and articles",
@@ -35,9 +34,8 @@ const COPY: Record<
 		soon: "Coming soon",
 		soonBody: "Our medical team is preparing the first articles.",
 		ctaTitle: "Have a question now?",
-		ctaSubtitle:
-			"Message us on WhatsApp and a coordinator guides you at no cost.",
-		cta: "Message us on WhatsApp",
+		ctaSubtitle: "Get in touch and a coordinator guides you at no cost.",
+		cta: "Contact us",
 	},
 };
 
