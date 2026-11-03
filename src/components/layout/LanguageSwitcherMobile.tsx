@@ -10,11 +10,15 @@ export default function LanguageSwitcherMobile({
 	const { locale, switchLocale } = useLang();
 	return (
 		<div className="mt-3 flex items-center gap-2 border-t border-border-default pt-4">
-			<span className="text-xs text-text-muted">Idioma:</span>
+			<span className="text-xs text-text-muted">
+				{locale === "en" ? "Language:" : "Idioma:"}
+			</span>
 			{(["es", "en"] as const).map((lang) => (
 				<button
 					key={lang}
 					type="button"
+					lang={lang}
+					aria-current={locale === lang ? "true" : undefined}
 					onClick={() => {
 						switchLocale(lang);
 						setOpen(false);

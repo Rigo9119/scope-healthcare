@@ -25,27 +25,9 @@ export const siteSettingsType = defineType({
       group: 'footer',
     }),
     defineField({
-      name: 'footerServices',
-      title: 'Columna Servicios — links',
-      type: 'array',
-      of: [
-        {type: 'object', fields: [defineField({name: 'label', title: 'Texto', type: 'string'})]},
-      ],
-      group: 'footer',
-    }),
-    defineField({
       name: 'footerColCompanyLabel',
       title: 'Columna Empresa — título',
       type: 'string',
-      group: 'footer',
-    }),
-    defineField({
-      name: 'footerCompany',
-      title: 'Columna Empresa — links',
-      type: 'array',
-      of: [
-        {type: 'object', fields: [defineField({name: 'label', title: 'Texto', type: 'string'})]},
-      ],
       group: 'footer',
     }),
     defineField({name: 'footerCopyright', title: 'Copyright', type: 'string', group: 'footer'}),

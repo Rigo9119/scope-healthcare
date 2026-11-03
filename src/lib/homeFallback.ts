@@ -44,7 +44,7 @@ const ES: HomePageData = {
 	whyUsTitle: "La mejor opción para tu salud",
 	whyUsSubtitle:
 		"Nos comprometemos con tu bienestar en cada etapa del proceso.",
-	whyUsBadgeText: "Satisfacción garantizada",
+	whyUsBadgeText: "Especialistas certificados",
 	reasons: [
 		{
 			icon: "ShieldCheck",
@@ -131,7 +131,7 @@ const EN: HomePageData = {
 	whyUsEyebrow: "Why choose us",
 	whyUsTitle: "The right choice for your health",
 	whyUsSubtitle: "We're committed to your wellbeing at every stage.",
-	whyUsBadgeText: "Satisfaction guaranteed",
+	whyUsBadgeText: "Certified specialists",
 	reasons: [
 		{
 			icon: "ShieldCheck",

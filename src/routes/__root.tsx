@@ -3,6 +3,7 @@ import type { QueryClient } from "@tanstack/react-query";
 import {
 	createRootRouteWithContext,
 	HeadContent,
+	notFound,
 	Outlet,
 	redirect,
 } from "@tanstack/react-router";
@@ -27,10 +28,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 			const segments = location.pathname.split("/").filter(Boolean);
 			const currentLang = segments[0];
 
-			// Si el usuario entra a la raíz limpia "/" o pone un idioma inválido, lo redireccionamos a /es
-			if (currentLang !== "es" && currentLang !== "en") {
-				throw redirect({ to: "/$lang", params: { lang: "es" } });
+			// La raíz "/" va a /es; cualquier otro prefijo inválido es un 404 real.
+			if (!currentLang) {
+				throw redirect({ to: "/$lang/", params: { lang: "es" } });
 			}
+			if (currentLang !== "es" && currentLang !== "en") throw notFound();
 
 			// Sincronizamos el estado interno de Paraglide
 			setLocale(currentLang, { reload: false });

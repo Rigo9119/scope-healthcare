@@ -31,7 +31,7 @@ This is a **React SPA** (TanStack Router) backed by **Sanity CMS**, deployed on 
 
 ### Data flow
 
-Content is fetched at runtime from Sanity (project `3fyb50d2`, dataset `production`) via `src/lib/sanity.ts`, through TanStack Query (`homePageQueryOptions` / `siteSettingsQueryOptions` in `src/lib/queries.ts`, which also holds the GROQ queries). Route loaders call `queryClient.ensureQueryData(...)` raced against a 4s timeout; on failure, timeout, or null the page renders its per-locale fallback (`HOME_FALLBACK` in `src/lib/homeFallback.ts`; site settings are filled field by field from `src/lib/siteSettingsFallback.ts`).
+Content is fetched at runtime from Sanity (project `3fyb50d2`, dataset `production`) via `src/lib/sanity.ts`, through TanStack Query (`homePageQueryOptions` / `siteSettingsQueryOptions` in `src/lib/queries.ts`, which also holds the GROQ queries). Every Sanity read aborts after 4s (`fetchSanity` in `queries.ts`) and resolves to null on failure, so route loaders just call `queryClient.ensureQueryData(...)`. Pages merge the result field by field over their per-locale fallback with `withFallback` (`src/lib/fallback.ts`): `HOME_FALLBACK` in `src/lib/homeFallback.ts`, `SITE_SETTINGS_FALLBACK` in `src/lib/siteSettingsFallback.ts`. A half-filled document never breaks a page.
 
 Pillar registry (pillars, item slugs, titles, icons, nav) is static in `src/lib/pillars.ts`.
 Item page content lives in Sanity as `pillarItem` documents (`pillarItem-{slug}-{locale}`), fetched all at once per locale via `pillarItemsQueryOptions`; the bundled fallback and seed is `src/lib/pillarContent.ts` (from the client's content doc).
@@ -39,7 +39,7 @@ Item URL segments are translated per locale (`path` on each item, e.g. `/es/scop
 An item can be listed under two pillars (`estetica-capilar`); its canonical URL is under the first one (`canonicalPillar`).
 The medical team lives in Sanity as `teamMember` documents (shared across locales, `role`/`credentials` as `{ es, en }`), fallback and seed in `src/lib/team.ts`.
 Seed missing documents (home page, site settings, pillar items, team) with `cd studio && npx sanity exec scripts/seed-content.ts --with-user-token` (createIfNotExists, never overwrites; site settings only get empty fields filled). Prefix `REPLACE_LOCALE=en` to overwrite that locale's pillar items after editing `pillarContent.ts` (discards Studio edits to them).
-When adding an item, update `PILLARS`, `pillarContent.ts`, `studio/structure/pillarItems.ts`, `scripts/prerender.mjs` and `public/sitemap.xml`.
+When adding an item, update `PILLARS`, `pillarContent.ts`, `studio/structure/pillarItems.ts`, `scripts/prerender.mjs` and `public/sitemap.xml` (`src/lib/__tests__/routeLists.test.ts` fails if the last two drift).
 
 ### Routing
 
@@ -51,6 +51,12 @@ File-based routing via TanStack Router. Add route files under `src/routes/`. **N
   - `$lang/index.tsx` - home page.
   - `$lang/$section/index.tsx` - pillar pages (slugs shared across locales) and localized sections (about, services, team, blog, contact, privacy, terms, cookies). Section slugs are per locale in `SECTIONS` (`src/lib/localizedRoutes.ts`); a slug from the other locale redirects to the localized one, unknown slugs 404. Renders components from `src/components/pages/`.
   - `$lang/$section/$item/index.tsx` - a single pillar item.
+
+**Trailing slashes:** Netlify serves each prerendered page as `<path>/index.html` and 301s the slash-less address, so every URL ends in `/`: the router uses `trailingSlash: "always"` (typed `to` paths are `"/$lang/$section/"`), and `seoHead`/`localizedPath`/the sitemap emit slash URLs.
+The old services overview (`/es/nuestros-servicios`) redirects home; the blog is a noindex "coming soon" page until there are articles.
+
+**Head tags:** `seoHead` (`src/lib/seo.ts`) owns title, meta, canonical, hreflang and the clinic JSON-LD per route; `index.html` has none. `main.tsx` removes the snapshot's head tags before mounting so they don't linger next to the live ones.
+`netlify.toml` sets a CSP: a new external origin (images, API, iframe, fonts) must be added there.
 
 ### i18n (two-layer)
 

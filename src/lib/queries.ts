@@ -2,6 +2,17 @@ import { queryOptions } from "@tanstack/react-query";
 import type { Locale } from "./localizedRoutes";
 import type { PillarContentMap, PillarItemContent } from "./pillarContent";
 import { sanityClient } from "./sanity";
+
+const TIMEOUT_MS = 4000;
+
+/** Sanity read that aborts after 4s, so a hung request ends in the bundled
+ *  fallback instead of leaving the page on its skeleton. */
+function fetchSanity<T>(query: string, params: Record<string, unknown>) {
+	return sanityClient.fetch<T>(query, params, {
+		signal: AbortSignal.timeout(TIMEOUT_MS),
+	});
+}
+
 import type { TeamMember } from "./team";
 
 export interface HomePageData {
@@ -58,7 +69,7 @@ const HOME_PAGE_QUERY = `
 `;
 
 export function fetchHomePage(locale: string): Promise<HomePageData | null> {
-	return sanityClient.fetch(HOME_PAGE_QUERY, { locale });
+	return fetchSanity(HOME_PAGE_QUERY, { locale });
 }
 
 // Global site chrome (footer + contact), edited once in the "Configuración del
@@ -66,9 +77,7 @@ export function fetchHomePage(locale: string): Promise<HomePageData | null> {
 export interface SiteSettings {
 	footerTagline: string;
 	footerColServicesLabel: string;
-	footerServices: Array<{ label: string }>;
 	footerColCompanyLabel: string;
-	footerCompany: Array<{ label: string }>;
 	footerColContactLabel: string;
 	footerAddress: string;
 	/** Google Maps search for the contact-page pin; falls back to the address. */
@@ -87,8 +96,7 @@ export interface SiteSettings {
 const SITE_SETTINGS_QUERY = `
   *[_id == "siteSettings-" + $locale][0] {
     footerTagline,
-    footerColServicesLabel, footerServices[]{ label },
-    footerColCompanyLabel, footerCompany[]{ label },
+    footerColServicesLabel, footerColCompanyLabel,
     footerColContactLabel,
     footerAddress, mapQuery, footerPhone, footerEmail, footerHours, whatsappNumber,
     socialLinks[]{ platform, url },
@@ -99,7 +107,7 @@ const SITE_SETTINGS_QUERY = `
 export function fetchSiteSettings(
 	locale: string,
 ): Promise<SiteSettings | null> {
-	return sanityClient.fetch(SITE_SETTINGS_QUERY, { locale });
+	return fetchSanity(SITE_SETTINGS_QUERY, { locale });
 }
 
 // Pillar item pages: one `pillarItem-{slug}-{locale}` document per item. All of
@@ -118,8 +126,10 @@ const PILLAR_ITEMS_QUERY = `
 export async function fetchPillarItems(
 	locale: string,
 ): Promise<PillarContentMap | null> {
-	const docs: Array<PillarItemContent & { slug: string }> =
-		await sanityClient.fetch(PILLAR_ITEMS_QUERY, { locale });
+	const docs: Array<PillarItemContent & { slug: string }> = await fetchSanity(
+		PILLAR_ITEMS_QUERY,
+		{ locale },
+	);
 	if (!docs.length) return null;
 	return Object.fromEntries(docs.map(({ slug, ...rest }) => [slug, rest]));
 }
@@ -131,12 +141,13 @@ const TEAM_QUERY = `
     name, service,
     "role": role[$locale],
     "credentials": credentials[$locale],
-    "photo": photo.asset->url
+    "photo": photo.asset->url,
+    "hotspot": photo.hotspot{ x, y }
   }
 `;
 
 export async function fetchTeam(locale: Locale): Promise<TeamMember[] | null> {
-	const docs: TeamMember[] = await sanityClient.fetch(TEAM_QUERY, { locale });
+	const docs: TeamMember[] = await fetchSanity(TEAM_QUERY, { locale });
 	return docs.length ? docs : null;
 }
 
@@ -173,18 +184,3 @@ export const teamQueryOptions = (locale: Locale) =>
 		staleTime: STALE_5_MIN,
 		retry: false,
 	});
-
-/** Route-loader helper: warm the cache, but never block a render on Sanity for
- *  more than 4s (the page falls back to bundled content). */
-export async function ensureWithTimeout<T>(
-	promise: Promise<T>,
-): Promise<T | null> {
-	try {
-		return await Promise.race([
-			promise,
-			new Promise<null>((resolve) => setTimeout(() => resolve(null), 4000)),
-		]);
-	} catch {
-		return null;
-	}
-}

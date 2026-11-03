@@ -6,42 +6,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="theme-color" content="#1059b5" />
 
-    <!-- Fallback title only. Per-route, per-locale title/description/OG/Twitter/
-         canonical/hreflang are owned by TanStack Router's <head> (HeadContent)
-         and baked into the prerendered /es and /en HTML. Keeping description/OG
-         out of here avoids duplicate tags in the SSG snapshots. -->
-    <title>Scope Health | Turismo médico en Bogotá</title>
+    <!-- All <head> tags (title, meta, canonical, hreflang, JSON-LD) are owned
+         per route by TanStack Router's HeadContent; see src/lib/seo.ts. -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+    <!-- Loaded here, not via @import in styles.css, so it downloads in parallel
+         with the app CSS instead of after it. -->
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap"
+    />
 
-    <!-- Structured data for local/medical search. ⚠️ Keep address/phone/hours in
-         sync with the "Configuración del sitio" Sanity singleton, and set "url". -->
-    <script type="application/ld+json">
-      {
-        "@context": "https://schema.org",
-        "@type": "MedicalClinic",
-        "name": "Scope Health",
-        "url": "https://scope-healthcare.netlify.app",
-        "description": "Turismo médico en Bogotá, Colombia para pacientes internacionales.",
-        "telephone": "+57 (1) 000 0000",
-        "email": "hola@scopehealth.co",
-        "address": {
-          "@type": "PostalAddress",
-          "streetAddress": "Calle 100 #19-61",
-          "addressLocality": "Bogotá",
-          "addressCountry": "CO"
-        },
-        "openingHoursSpecification": {
-          "@type": "OpeningHoursSpecification",
-          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-          "opens": "08:00",
-          "closes": "18:00"
-        },
-        "areaServed": "Worldwide",
-        "availableLanguage": ["es", "en"]
-      }
-    </script>
   </head>
   <body>
     <div id="app"></div>

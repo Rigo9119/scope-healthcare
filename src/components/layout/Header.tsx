@@ -1,6 +1,6 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, Search, X } from "lucide-react";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { BrandMark } from "#/components/ui/BrandMark.js";
 import { SocialLinks } from "#/components/ui/SocialLinks.js";
 import { WhatsappIcon } from "#/components/ui/WhatsappIcon.js";
@@ -13,6 +13,11 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import MobileMenu from "./MobileMenu";
 import { SearchDialog } from "./SearchDialog";
 
+const MENU_COPY = {
+	es: { open: "Abrir menú", close: "Cerrar menú" },
+	en: { open: "Open menu", close: "Close menu" },
+} as const;
+
 export function Header() {
 	const { locale } = useLang();
 	const booking = useBookingLink();
@@ -20,6 +25,7 @@ export function Header() {
 	const [open, setOpen] = useState(false);
 	const [searchOpen, setSearchOpen] = useState(false);
 	const [scrolled, setScrolled] = useState(false);
+	const menuToggleRef = useRef<HTMLButtonElement>(null);
 	const pillars = PILLAR_ORDER.map(pillarByKey);
 
 	// The home page has a dark full-bleed hero, so the header overlays it
@@ -37,6 +43,20 @@ export function Header() {
 		window.addEventListener("scroll", onScroll, { passive: true });
 		return () => window.removeEventListener("scroll", onScroll);
 	}, []);
+
+	// Escape closes the mobile menu and returns focus to its toggle (the search
+	// dialog handles its own Escape when it is open on top).
+	useEffect(() => {
+		if (!open || searchOpen) return;
+		const onKey = (e: KeyboardEvent) => {
+			if (e.key === "Escape") {
+				setOpen(false);
+				menuToggleRef.current?.focus();
+			}
+		};
+		window.addEventListener("keydown", onKey);
+		return () => window.removeEventListener("keydown", onKey);
+	}, [open, searchOpen]);
 
 	// Cmd/Ctrl+K opens the search overlay.
 	useEffect(() => {
@@ -77,7 +97,7 @@ export function Header() {
 						<div className="flex items-center gap-5">
 							<LanguageSwitcher light={light} />
 							<Link
-								to="/$lang"
+								to="/$lang/"
 								params={{ lang: locale }}
 								activeOptions={{ exact: true }}
 								className={utilityLinkCls}
@@ -85,14 +105,14 @@ export function Header() {
 								{m.nav_home()}
 							</Link>
 							<Link
-								to="/$lang/$section"
+								to="/$lang/$section/"
 								params={{ lang: locale, section: sectionSlug("about", locale) }}
 								className={utilityLinkCls}
 							>
 								{m.nav_find_us()}
 							</Link>
 							<Link
-								to="/$lang/$section"
+								to="/$lang/$section/"
 								params={{
 									lang: locale,
 									section: sectionSlug("contact", locale),
@@ -105,7 +125,7 @@ export function Header() {
 
 						<div className="flex justify-center">
 							<Link
-								to="/$lang"
+								to="/$lang/"
 								params={{ lang: locale }}
 								activeOptions={{ exact: true }}
 							>
@@ -146,7 +166,7 @@ export function Header() {
 						{pillars.map((pillar) => (
 							<Link
 								key={pillar.key}
-								to="/$lang/$section"
+								to="/$lang/$section/"
 								params={{ lang: locale, section: pillar.slug }}
 								className={`link-animated text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
 									light
@@ -163,16 +183,19 @@ export function Header() {
 				{/* Mobile: hamburger · centered logo · search. */}
 				<div className="mx-auto grid max-w-7xl grid-cols-3 items-center px-4 py-4 lg:hidden">
 					<button
+						ref={menuToggleRef}
 						type="button"
 						onClick={() => setOpen(!open)}
 						className={`justify-self-start ${iconBtnCls}`}
-						aria-label="Menú"
+						aria-expanded={open}
+						aria-controls="mobile-menu"
+						aria-label={open ? MENU_COPY[locale].close : MENU_COPY[locale].open}
 					>
 						{open ? <X size={24} /> : <Menu size={24} />}
 					</button>
 					<div className="flex justify-center">
 						<Link
-							to="/$lang"
+							to="/$lang/"
 							params={{ lang: locale }}
 							activeOptions={{ exact: true }}
 						>

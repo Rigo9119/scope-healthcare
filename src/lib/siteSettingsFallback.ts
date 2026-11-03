@@ -1,3 +1,4 @@
+import { withFallback } from "./fallback";
 import type { Locale } from "./localizedRoutes";
 import type { SiteSettings } from "./queries";
 
@@ -13,8 +14,6 @@ const SHARED = {
 	// Empty until the client adds real URLs in "Configuración del sitio" → Redes
 	// sociales; the header/menu render the social row only when this is non-empty.
 	socialLinks: [],
-	footerServices: [],
-	footerCompany: [],
 };
 
 export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
@@ -51,13 +50,5 @@ export function withSettingsFallback(
 	data: Partial<SiteSettings> | null | undefined,
 	locale: Locale,
 ): SiteSettings {
-	const out = { ...SITE_SETTINGS_FALLBACK[locale] };
-	for (const [key, value] of Object.entries(data ?? {})) {
-		const empty =
-			value == null ||
-			value === "" ||
-			(Array.isArray(value) && value.length === 0);
-		if (!empty) Object.assign(out, { [key]: value });
-	}
-	return out;
+	return withFallback(data, SITE_SETTINGS_FALLBACK[locale]);
 }

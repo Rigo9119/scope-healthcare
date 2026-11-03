@@ -23,10 +23,13 @@ export default function MobileMenu({
 	const { locale } = useLang();
 	const close = () => setOpen(false);
 	return (
-		<div className="border-t border-border-default bg-white px-6 pb-5 lg:hidden">
+		<div
+			id="mobile-menu"
+			className="border-t border-border-default bg-white px-6 pb-5 lg:hidden"
+		>
 			<nav className="flex flex-col gap-1 pt-3">
 				<Link
-					to="/$lang"
+					to="/$lang/"
 					params={{ lang: locale }}
 					activeOptions={{ exact: true }}
 					onClick={close}
@@ -37,7 +40,7 @@ export default function MobileMenu({
 				{pillars.map(({ slug, label }) => (
 					<Link
 						key={slug}
-						to="/$lang/$section"
+						to="/$lang/$section/"
 						params={{ lang: locale, section: slug }}
 						onClick={close}
 						className={linkClass}
@@ -49,7 +52,7 @@ export default function MobileMenu({
 				<span className="mt-2 border-t border-border-default" />
 
 				<Link
-					to="/$lang/$section"
+					to="/$lang/$section/"
 					params={{ lang: locale, section: sectionSlug("about", locale) }}
 					onClick={close}
 					className={linkClass}
@@ -57,7 +60,7 @@ export default function MobileMenu({
 					{m.nav_find_us()}
 				</Link>
 				<Link
-					to="/$lang/$section"
+					to="/$lang/$section/"
 					params={{ lang: locale, section: sectionSlug("contact", locale) }}
 					onClick={close}
 					className={linkClass}

@@ -39,7 +39,7 @@ export function PillarItemPage({
 			<section className="px-4 py-12 sm:px-6 lg:py-20">
 				<div className="mx-auto max-w-6xl">
 					<Link
-						to="/$lang/$section"
+						to="/$lang/$section/"
 						params={{ lang: locale, section: pillar.slug }}
 						className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary-600 transition-colors duration-200 hover:text-primary-700"
 					>

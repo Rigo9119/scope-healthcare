@@ -15,12 +15,10 @@ import puppeteer from "puppeteer";
 
 const DIST = "dist";
 // Keep in sync with src/lib/localizedRoutes.ts (SECTIONS), src/lib/pillars.ts
-// (PILLARS) + sitemap.xml.
+// (PILLARS) + sitemap.xml; src/lib/__tests__/routeLists.test.ts checks it.
 const ROUTES = [
 	"/es",
 	"/en",
-	"/es/nuestros-servicios",
-	"/en/our-services",
 	"/es/nuestro-equipo",
 	"/en/our-team",
 	"/es/blog",
@@ -141,9 +139,11 @@ async function run() {
 				.waitForNetworkIdle({ idleTime: 500, timeout: 5000 })
 				.catch(() => {});
 
+			// The router writes absolute modulepreload URLs (this server's origin);
+			// make them root-relative so the snapshot works on any host.
 			const html = `<!doctype html>\n${await page.evaluate(
 				() => document.documentElement.outerHTML,
-			)}`;
+			)}`.replaceAll(`http://localhost:${PORT}/`, "/");
 			const outDir = join(DIST, route.slice(1));
 			await mkdir(outDir, { recursive: true });
 			await writeFile(join(outDir, "index.html"), html);

@@ -53,7 +53,7 @@ export const homePageType = defineType({
     defineField({name: 'whyUsSubtitle', title: 'Subtítulo', type: 'text', rows: 2, group: 'whyUs'}),
     defineField({
       name: 'whyUsBadgeText',
-      title: 'Texto del badge (ej: Satisfacción garantizada)',
+      title: 'Texto del badge (ej: Especialistas certificados)',
       type: 'string',
       group: 'whyUs',
     }),

@@ -98,7 +98,7 @@ function MemberCard({ member }: { member: TeamMember }) {
 		<div className="flex flex-col overflow-hidden border border-border-default bg-white shadow-sm">
 			{member.photo ? (
 				<img
-					src={`${member.photo}?w=600&h=600&fit=crop&auto=format`}
+					src={photoUrl(member)}
 					alt={member.name}
 					loading="lazy"
 					className="aspect-square w-full object-cover"
@@ -121,4 +121,12 @@ function MemberCard({ member }: { member: TeamMember }) {
 			</div>
 		</div>
 	);
+}
+
+/** Square crop centred on the hotspot the editor set in the Studio. */
+function photoUrl({ photo, hotspot }: TeamMember) {
+	const focus = hotspot
+		? `&crop=focalpoint&fp-x=${hotspot.x}&fp-y=${hotspot.y}`
+		: "";
+	return `${photo}?w=600&h=600&fit=crop${focus}&auto=format`;
 }

@@ -13,6 +13,7 @@ export default function LanguageSwitcher({
 				<div key={lang} className="flex items-center">
 					{i > 0 && (
 						<span
+							aria-hidden="true"
 							className={`text-xs ${light ? "text-white/40" : "text-border-default"}`}
 						>
 							|
@@ -20,6 +21,8 @@ export default function LanguageSwitcher({
 					)}
 					<button
 						type="button"
+						lang={lang}
+						aria-current={locale === lang ? "true" : undefined}
 						onClick={() => switchLocale(lang)}
 						className={`px-2 py-1 text-xs font-bold uppercase tracking-wide transition-colors duration-200 ${
 							locale === lang

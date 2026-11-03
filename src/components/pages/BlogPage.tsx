@@ -1,69 +1,70 @@
 import { Newspaper } from "lucide-react";
-import { ImagePlaceholder } from "#/components/ui/ImagePlaceholder.js";
+import { BookingCta } from "#/components/ui/BookingCta.js";
 import { PageHeader } from "#/components/ui/PageHeader.js";
+import { useLang } from "#/i18n.js";
+import type { Locale } from "#/lib/localizedRoutes.js";
 
-// Placeholder posts — real articles will come from Sanity later.
-const POSTS = [
+// No articles yet: a "coming soon" page (noindex, see the route head) until the
+// client sends the first posts.
+const COPY: Record<
+	Locale,
 	{
-		id: 1,
-		title: "Título del artículo",
-		excerpt: "Breve descripción del artículo que aparecerá aquí.",
-		date: "Jun 2026",
+		title: string;
+		subtitle: string;
+		soon: string;
+		soonBody: string;
+		ctaTitle: string;
+		ctaSubtitle: string;
+		cta: string;
+	}
+> = {
+	es: {
+		title: "Guías y artículos de salud",
+		subtitle: "Información útil sobre tratamientos, prevención y bienestar.",
+		soon: "Próximamente",
+		soonBody:
+			"Estamos preparando los primeros artículos de nuestro equipo médico.",
+		ctaTitle: "¿Tienes una pregunta ahora?",
+		ctaSubtitle:
+			"Escríbenos por WhatsApp y un coordinador te orienta sin costo.",
+		cta: "Escribir por WhatsApp",
 	},
-	{
-		id: 2,
-		title: "Título del artículo",
-		excerpt: "Breve descripción del artículo que aparecerá aquí.",
-		date: "Jun 2026",
+	en: {
+		title: "Health guides and articles",
+		subtitle: "Useful information on treatments, prevention and wellbeing.",
+		soon: "Coming soon",
+		soonBody: "Our medical team is preparing the first articles.",
+		ctaTitle: "Have a question now?",
+		ctaSubtitle:
+			"Message us on WhatsApp and a coordinator guides you at no cost.",
+		cta: "Message us on WhatsApp",
 	},
-	{
-		id: 3,
-		title: "Título del artículo",
-		excerpt: "Breve descripción del artículo que aparecerá aquí.",
-		date: "May 2026",
-	},
-];
+};
 
 export function BlogPage() {
+	const { locale } = useLang();
+	const copy = COPY[locale];
 	return (
 		<>
-			<PageHeader
-				eyebrow="Blog"
-				title="Guías y artículos de salud"
-				subtitle="Información útil sobre turismo médico, tratamientos y bienestar."
-			/>
+			<PageHeader eyebrow="Blog" title={copy.title} subtitle={copy.subtitle} />
 
 			<section className="px-4 py-16 sm:px-6 lg:py-24">
-				<div className="mx-auto max-w-7xl">
-					<div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-						{POSTS.map((post) => (
-							<article
-								key={post.id}
-								className="flex flex-col overflow-hidden border border-border-default bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:shadow-card"
-							>
-								<ImagePlaceholder
-									icon={Newspaper}
-									className="aspect-[16/9] w-full"
-								/>
-								<div className="flex flex-1 flex-col p-6">
-									<span className="text-xs font-semibold uppercase tracking-wide text-primary-600">
-										{post.date}
-									</span>
-									<h3 className="mt-2 font-heading text-lg font-bold text-text-primary">
-										{post.title}
-									</h3>
-									<p className="mt-2 flex-1 text-sm leading-relaxed text-text-secondary">
-										{post.excerpt}
-									</p>
-								</div>
-							</article>
-						))}
-					</div>
-					<p className="mt-12 text-center text-sm text-text-muted">
-						Próximamente más artículos.
-					</p>
+				<div className="mx-auto flex max-w-xl flex-col items-center border border-border-default bg-white p-8 text-center shadow-sm sm:p-12">
+					<span className="flex h-14 w-14 items-center justify-center bg-primary-50">
+						<Newspaper size={26} className="text-primary-600" aria-hidden />
+					</span>
+					<h2 className="mt-5 font-heading text-2xl font-extrabold text-text-primary">
+						{copy.soon}
+					</h2>
+					<p className="mt-2 text-text-secondary">{copy.soonBody}</p>
 				</div>
 			</section>
+
+			<BookingCta
+				title={copy.ctaTitle}
+				subtitle={copy.ctaSubtitle}
+				cta={copy.cta}
+			/>
 		</>
 	);
 }

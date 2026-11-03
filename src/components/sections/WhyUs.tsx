@@ -24,7 +24,7 @@ export function WhyUs({
 						icon={HeartPulse}
 						className="aspect-[5/4] w-full shadow-[0_30px_60px_-20px_rgba(16,89,181,0.3)]"
 					/>
-					<div className="absolute -bottom-5 left-6 right-6 flex items-center justify-between bg-white px-5 py-4 shadow-lg">
+					<div className="absolute -bottom-5 left-6 right-6 flex items-center bg-white px-5 py-4 shadow-lg">
 						<div className="flex items-center gap-3">
 							<span className="flex h-10 w-10 items-center justify-center bg-primary-50">
 								<ShieldCheck size={18} className="text-primary-600" />
@@ -33,9 +33,6 @@ export function WhyUs({
 								{whyUsBadgeText}
 							</span>
 						</div>
-						<span className="font-heading text-lg font-extrabold text-primary-600">
-							100%
-						</span>
 					</div>
 				</div>
 

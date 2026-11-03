@@ -9,6 +9,11 @@ import {
 } from "#/lib/search.js";
 import { m } from "#/paraglide/messages.js";
 
+const COPY = {
+	es: { dialog: "Búsqueda en el sitio", input: "Buscar en el sitio" },
+	en: { dialog: "Site search", input: "Search the site" },
+} as const;
+
 /** Full-site search overlay. Opens from the header (button or Cmd/Ctrl+K),
  *  filters the client-side index, and links to any route. */
 export function SearchDialog({
@@ -21,6 +26,12 @@ export function SearchDialog({
 	const { locale } = useLang();
 	const [query, setQuery] = useState("");
 	const inputRef = useRef<HTMLInputElement>(null);
+	const panelRef = useRef<HTMLDivElement>(null);
+	const copy = COPY[locale];
+	// Callers pass an inline onClose; a ref keeps the open/close effect from
+	// re-running (and bouncing focus) on every parent render.
+	const onCloseRef = useRef(onClose);
+	onCloseRef.current = onClose;
 	const index = useMemo(() => buildSearchIndex(locale), [locale]);
 	const results = useMemo(() => searchEntries(index, query), [index, query]);
 
@@ -29,13 +40,46 @@ export function SearchDialog({
 			setQuery("");
 			return;
 		}
+		// Remember the opener (button or Cmd/Ctrl+K origin) to restore focus on close.
+		const opener = document.activeElement as HTMLElement | null;
+		const prevOverflow = document.body.style.overflow;
+		document.body.style.overflow = "hidden";
 		inputRef.current?.focus();
 		const onKey = (e: KeyboardEvent) => {
-			if (e.key === "Escape") onClose();
+			if (e.key === "Escape") {
+				e.preventDefault();
+				onCloseRef.current();
+				return;
+			}
+			if (e.key !== "Tab" || !panelRef.current) return;
+			const focusables = panelRef.current.querySelectorAll<HTMLElement>(
+				'a[href], button:not([disabled]), input:not([disabled]), [tabindex]:not([tabindex="-1"])',
+			);
+			if (focusables.length === 0) return;
+			const first = focusables[0];
+			const last = focusables[focusables.length - 1];
+			const active = document.activeElement;
+			if (
+				e.shiftKey &&
+				(active === first || !panelRef.current.contains(active))
+			) {
+				e.preventDefault();
+				last.focus();
+			} else if (
+				!e.shiftKey &&
+				(active === last || !panelRef.current.contains(active))
+			) {
+				e.preventDefault();
+				first.focus();
+			}
 		};
 		window.addEventListener("keydown", onKey);
-		return () => window.removeEventListener("keydown", onKey);
-	}, [open, onClose]);
+		return () => {
+			window.removeEventListener("keydown", onKey);
+			document.body.style.overflow = prevOverflow;
+			opener?.focus?.();
+		};
+	}, [open]);
 
 	if (!open) return null;
 
@@ -44,14 +88,26 @@ export function SearchDialog({
 			<button
 				type="button"
 				aria-label={m.search_close()}
+				tabIndex={-1}
 				onClick={onClose}
 				className="absolute inset-0 h-full w-full cursor-default bg-black/40"
 			/>
-			<div className="relative w-full max-w-xl border border-border-default bg-white shadow-2xl">
+			<div
+				ref={panelRef}
+				role="dialog"
+				aria-modal="true"
+				aria-label={copy.dialog}
+				className="relative w-full max-w-xl border border-border-default bg-white shadow-2xl"
+			>
 				<div className="flex items-center gap-3 border-b border-border-default px-4">
-					<Search size={18} className="shrink-0 text-text-muted" />
+					<Search
+						size={18}
+						aria-hidden="true"
+						className="shrink-0 text-text-muted"
+					/>
 					<input
 						ref={inputRef}
+						aria-label={copy.input}
 						value={query}
 						onChange={(e) => setQuery(e.target.value)}
 						placeholder={m.search_placeholder()}
@@ -114,7 +170,7 @@ function SearchResultLink({
 	if (entry.kind === "home") {
 		return (
 			<Link
-				to="/$lang"
+				to="/$lang/"
 				params={{ lang: locale }}
 				onClick={onNavigate}
 				className={resultCls}
@@ -126,7 +182,7 @@ function SearchResultLink({
 	if (entry.kind === "section") {
 		return (
 			<Link
-				to="/$lang/$section"
+				to="/$lang/$section/"
 				params={{ lang: locale, section: entry.slug }}
 				onClick={onNavigate}
 				className={resultCls}
@@ -137,7 +193,7 @@ function SearchResultLink({
 	}
 	return (
 		<Link
-			to="/$lang/$section/$item"
+			to="/$lang/$section/$item/"
 			params={{ lang: locale, section: entry.section, item: entry.item }}
 			onClick={onNavigate}
 			className={resultCls}

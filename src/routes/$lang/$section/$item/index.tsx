@@ -4,7 +4,7 @@ import { PillarItemPage } from "#/components/pages/PillarItemPage.js";
 import { toLocale } from "#/lib/localizedRoutes.js";
 import { itemContent } from "#/lib/pillarContent.js";
 import { canonicalPillar, itemFromPath, pillarBySlug } from "#/lib/pillars.js";
-import { ensureWithTimeout, pillarItemsQueryOptions } from "#/lib/queries.js";
+import { pillarItemsQueryOptions } from "#/lib/queries.js";
 import { seoHead } from "#/lib/seo.js";
 
 export const Route = createFileRoute("/$lang/$section/$item/")({
@@ -16,15 +16,13 @@ export const Route = createFileRoute("/$lang/$section/$item/")({
 		const segment = match.item.path[toLocale(params.lang)];
 		if (segment !== params.item) {
 			throw redirect({
-				to: "/$lang/$section/$item",
+				to: "/$lang/$section/$item/",
 				params: { ...params, item: segment },
 			});
 		}
 	},
 	loader: ({ context: { queryClient }, params }) =>
-		ensureWithTimeout(
-			queryClient.ensureQueryData(pillarItemsQueryOptions(params.lang)),
-		),
+		queryClient.ensureQueryData(pillarItemsQueryOptions(params.lang)),
 	head: ({ params, loaderData }) => {
 		const locale = toLocale(params.lang);
 		const pillar = pillarBySlug(params.section);

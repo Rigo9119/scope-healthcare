@@ -1,11 +1,33 @@
 [build]
-  # SSG: vite build + prerender /es and /en to static HTML (see scripts/prerender.mjs).
+  # SSG: vite build + prerender every route to static HTML (see scripts/prerender.mjs).
   command = "npm run build:ssg"
   publish = "dist"
 
-# Static files win over redirects, so prerendered /es and /en are served as real
+# "/" has a file (the SPA shell), so the redirect must be forced.
+[[redirects]]
+  from = "/"
+  to = "/es/"
+  status = 301
+  force = true
+
+# Static files win over redirects, so prerendered pages are served as real
 # HTML. This catch-all only handles paths without a matching file (client routing).
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    Content-Security-Policy = "default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://cdn.sanity.io; connect-src 'self' https://3fyb50d2.apicdn.sanity.io https://3fyb50d2.api.sanity.io; frame-src https://www.google.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+    X-Content-Type-Options = "nosniff"
+    X-Frame-Options = "DENY"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "camera=(), microphone=(), geolocation=(), payment=()"
+
+# Vite fingerprints everything under /assets, so it can be cached forever.
+[[headers]]
+  for = "/assets/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

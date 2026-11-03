@@ -1,4 +1,5 @@
 import { type LucideIcon, UserRound } from "lucide-react";
+import { useLang } from "#/i18n.js";
 
 // A soft, intentional image placeholder (calming clinic photography goes here).
 export function ImagePlaceholder({
@@ -8,6 +9,7 @@ export function ImagePlaceholder({
 	className?: string;
 	icon?: LucideIcon;
 }) {
+	const { locale } = useLang();
 	return (
 		<div
 			className={`relative flex items-center justify-center overflow-hidden ${className}`}
@@ -18,7 +20,7 @@ export function ImagePlaceholder({
 		>
 			<Icon size={80} className="text-white/70" strokeWidth={1.25} />
 			<span className="absolute bottom-3 right-4 bg-white/85 px-3 py-1 text-[11px] font-semibold text-primary-700">
-				Imagen
+				{locale === "en" ? "Image" : "Imagen"}
 			</span>
 		</div>
 	);

@@ -9,6 +9,7 @@ export const LOCALES = ["es", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 
 export const SECTIONS = {
+	// Retired page; kept so old links redirect to home.
 	services: { es: "nuestros-servicios", en: "our-services" },
 	team: { es: "nuestro-equipo", en: "our-team" },
 	blog: { es: "blog", en: "blog" },
@@ -20,15 +21,6 @@ export const SECTIONS = {
 } as const;
 
 export type SectionKey = keyof typeof SECTIONS;
-
-/** Order the sections appear in the navbar. */
-export const NAV_SECTIONS: SectionKey[] = [
-	"services",
-	"team",
-	"blog",
-	"about",
-	"contact",
-];
 
 export function toLocale(lang: string): Locale {
 	return lang === "en" ? "en" : "es";
@@ -66,19 +58,20 @@ export function sectionFromAnySlug(
 	return null;
 }
 
-/** The same page in another locale: swaps the `/{locale}` prefix, translates a
+/** The same page in another locale (with a trailing slash, like every URL on
+ *  the site): swaps the `/{locale}` prefix, translates a
  *  localized section slug (e.g. /es/contacto → /en/contact) and a pillar item
  *  segment (e.g. /es/scope-clinic/urologia → /en/scope-clinic/urology). Pillar
  *  slugs are identical across locales. */
 export function localizedPath(pathname: string, next: Locale): string {
 	const [slug, ...rest] = pathname.split("/").filter(Boolean).slice(1);
-	if (!slug) return `/${next}`;
+	if (!slug) return `/${next}/`;
 	const match = sectionFromAnySlug(slug);
 	const translated = match ? sectionSlug(match.key, next) : slug;
 	const pillar = pillarBySlug(slug);
 	const item = pillar && rest[0] ? itemFromPath(pillar, rest[0]) : null;
 	if (item) rest[0] = item.item.path[next];
-	return ["", next, translated, ...rest].join("/");
+	return `${["", next, translated, ...rest].join("/")}/`;
 }
 
 // ─── Per-section SEO copy (defaults; real copy can later come from Sanity) ──────

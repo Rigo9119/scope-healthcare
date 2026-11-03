@@ -48,7 +48,7 @@ describe("seoHead — meta tags", () => {
 		});
 		expect(meta).toContainEqual({
 			property: "og:url",
-			content: `${SITE_URL}/es/nuestros-servicios`,
+			content: `${SITE_URL}/es/nuestros-servicios/`,
 		});
 	});
 
@@ -97,7 +97,7 @@ describe("seoHead — link tags", () => {
 		const { links } = seoHead({ ...BASE, locale: "en", path: "/about-us" });
 		expect(links).toContainEqual({
 			rel: "canonical",
-			href: `${SITE_URL}/en/about-us`,
+			href: `${SITE_URL}/en/about-us/`,
 		});
 	});
 
@@ -106,24 +106,24 @@ describe("seoHead — link tags", () => {
 		expect(links).toContainEqual({
 			rel: "alternate",
 			hrefLang: "es",
-			href: `${SITE_URL}/es/blog`,
+			href: `${SITE_URL}/es/blog/`,
 		});
 		expect(links).toContainEqual({
 			rel: "alternate",
 			hrefLang: "en",
-			href: `${SITE_URL}/en/blog`,
+			href: `${SITE_URL}/en/blog/`,
 		});
 		expect(links).toContainEqual({
 			rel: "alternate",
 			hrefLang: "x-default",
-			href: `${SITE_URL}/es/blog`,
+			href: `${SITE_URL}/es/blog/`,
 		});
 	});
 
 	it("defaults x-default to the Spanish URL", () => {
 		const { links } = seoHead({ ...BASE, locale: "en", path: "/contact" });
 		const xDefault = links.find((l) => l.hrefLang === "x-default");
-		expect(xDefault?.href).toBe(`${SITE_URL}/es/contacto`);
+		expect(xDefault?.href).toBe(`${SITE_URL}/es/contacto/`);
 	});
 
 	it("points alternates at the translated section and item paths", () => {
@@ -133,7 +133,7 @@ describe("seoHead — link tags", () => {
 			path: "/scope-clinic/urology",
 		});
 		const href = (l: string) => links.find((x) => x.hrefLang === l)?.href;
-		expect(href("es")).toBe(`${SITE_URL}/es/scope-clinic/urologia`);
-		expect(href("en")).toBe(`${SITE_URL}/en/scope-clinic/urology`);
+		expect(href("es")).toBe(`${SITE_URL}/es/scope-clinic/urologia/`);
+		expect(href("en")).toBe(`${SITE_URL}/en/scope-clinic/urology/`);
 	});
 });

@@ -58,6 +58,6 @@ describe("NotFound", () => {
 		vi.mocked(useLang).mockReturnValue({ locale: "en", switchLocale: vi.fn() });
 		render(<NotFound />);
 		const link = screen.getByRole("link", { name: "Back home" });
-		expect(link).toHaveAttribute("href", "/en");
+		expect(link).toHaveAttribute("href", "/en/");
 	});
 });

@@ -12,6 +12,8 @@ export interface TeamMember {
 	role: string;
 	credentials?: string[];
 	photo?: string;
+	/** Focal point (0-1) set in the Studio image editor. */
+	hotspot?: { x: number; y: number };
 }
 
 /** Order the services appear on the team page (as in the client's doc). */

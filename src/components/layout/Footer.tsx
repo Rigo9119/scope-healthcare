@@ -59,7 +59,7 @@ export function Footer() {
 							{pillars.map((pillar) => (
 								<li key={pillar.key}>
 									<Link
-										to="/$lang/$section"
+										to="/$lang/$section/"
 										params={{ lang: locale, section: pillar.slug }}
 										className="link-animated text-inherit transition-colors duration-200 hover:text-primary-300"
 									>
@@ -78,7 +78,7 @@ export function Footer() {
 							{COMPANY_LINKS.map(({ key, label }) => (
 								<li key={key}>
 									<Link
-										to="/$lang/$section"
+										to="/$lang/$section/"
 										params={{ lang: locale, section: sectionSlug(key, locale) }}
 										className="link-animated text-inherit transition-colors duration-200 hover:text-primary-300"
 									>
@@ -131,7 +131,7 @@ export function Footer() {
 						{legalLinks.map(({ key, label }) => (
 							<Link
 								key={key}
-								to="/$lang/$section"
+								to="/$lang/$section/"
 								params={{ lang: locale, section: sectionSlug(key, locale) }}
 								className="link-animated text-inherit transition-colors duration-200 hover:text-white"
 							>

@@ -1,10 +1,11 @@
 import { type Locale, localizedPath } from "./localizedRoutes";
+import { SITE_SETTINGS_FALLBACK } from "./siteSettingsFallback";
 
 // Central SEO config + per-route <head> builders for TanStack Router.
 //
 // Production base URL (no trailing slash). Currently the live Netlify URL —
 // switch to the custom domain once the client migrates it. Also hardcoded in
-// `public/robots.txt`, `public/sitemap.xml`, and the JSON-LD in `index.html`.
+// `public/robots.txt` and `public/sitemap.xml`.
 export const SITE_URL = "https://scope-healthcare.netlify.app";
 export const SITE_NAME = "Scope Health";
 export const DEFAULT_OG_IMAGE = "/logo512.png";
@@ -16,11 +17,15 @@ interface SeoInput {
 	/** Path WITHOUT the locale prefix, e.g. "" for home, "/servicios". */
 	path?: string;
 	image?: string;
+	/** Keep the page out of search results (e.g. a "coming soon" page). */
+	noindex?: boolean;
 }
 
 /**
  * Builds a TanStack Router `head` object: title, description, Open Graph,
- * Twitter cards, canonical, and es/en/x-default hreflang alternates.
+ * Twitter cards, canonical, es/en/x-default hreflang alternates and the clinic
+ * JSON-LD. URLs end in "/" because Netlify serves each prerendered page as
+ * `<path>/index.html` and 301s the slash-less address.
  */
 export function seoHead({
 	title,
@@ -28,8 +33,9 @@ export function seoHead({
 	locale,
 	path = "",
 	image = DEFAULT_OG_IMAGE,
+	noindex = false,
 }: SeoInput) {
-	const url = `${SITE_URL}/${locale}${path}`;
+	const url = `${SITE_URL}/${locale}${path}/`;
 	// Section and item slugs are translated, so each alternate has its own path.
 	const alt = (l: Locale) =>
 		`${SITE_URL}${localizedPath(`/${locale}${path}`, l)}`;
@@ -46,10 +52,15 @@ export function seoHead({
 			{ property: "og:description", content: description },
 			{ property: "og:url", content: url },
 			{ property: "og:image", content: imageUrl },
-			{ name: "twitter:card", content: "summary_large_image" },
+			{
+				name: "twitter:card",
+				// The default image is the square logo, which only suits the small card.
+				content: image === DEFAULT_OG_IMAGE ? "summary" : "summary_large_image",
+			},
 			{ name: "twitter:title", content: title },
 			{ name: "twitter:description", content: description },
 			{ name: "twitter:image", content: imageUrl },
+			...(noindex ? [{ name: "robots", content: "noindex" }] : []),
 		],
 		links: [
 			{ rel: "canonical", href: url },
@@ -57,6 +68,46 @@ export function seoHead({
 			{ rel: "alternate", hrefLang: "en", href: alt("en") },
 			{ rel: "alternate", hrefLang: "x-default", href: alt("es") },
 		],
+		scripts: [
+			{
+				type: "application/ld+json",
+				children: JSON.stringify(clinicJsonLd(locale)),
+			},
+		],
+	};
+}
+
+/** schema.org MedicalClinic for local/medical search, from the real contact data. */
+export function clinicJsonLd(locale: Locale) {
+	const s = SITE_SETTINGS_FALLBACK[locale];
+	return {
+		"@context": "https://schema.org",
+		"@type": "MedicalClinic",
+		name: SITE_NAME,
+		url: `${SITE_URL}/${locale}/`,
+		description: HOME_SEO[locale].description,
+		telephone: s.footerPhone,
+		...(s.footerEmail && { email: s.footerEmail }),
+		address: {
+			"@type": "PostalAddress",
+			streetAddress: s.footerAddress.replace(/, Bogotá$/, ""),
+			addressLocality: "Bogotá",
+			addressCountry: "CO",
+		},
+		openingHoursSpecification: {
+			"@type": "OpeningHoursSpecification",
+			dayOfWeek: [
+				"Monday",
+				"Tuesday",
+				"Wednesday",
+				"Thursday",
+				"Friday",
+				"Saturday",
+			],
+			opens: "08:00",
+			closes: "18:00",
+		},
+		availableLanguage: ["es", "en"],
 	};
 }
 

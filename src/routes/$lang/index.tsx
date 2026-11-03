@@ -8,22 +8,15 @@ import { Pillars } from "#/components/sections/Pillars.js";
 import { StatsBand } from "#/components/sections/StatsBand.js";
 import { Testimonials } from "#/components/sections/Testimonials.js";
 import { WhyUs } from "#/components/sections/WhyUs.js";
+import { withFallback } from "#/lib/fallback.js";
 import { HOME_FALLBACK } from "#/lib/homeFallback.js";
 import { toLocale } from "#/lib/localizedRoutes.js";
 import { homePageQueryOptions } from "#/lib/queries.js";
 import { HOME_SEO, seoHead } from "#/lib/seo.js";
 
 export const Route = createFileRoute("/$lang/")({
-	loader: async ({ context: { queryClient }, params }) => {
-		try {
-			return await Promise.race([
-				queryClient.ensureQueryData(homePageQueryOptions(params.lang)),
-				new Promise<null>((resolve) => setTimeout(() => resolve(null), 4000)),
-			]);
-		} catch {
-			return null;
-		}
-	},
+	loader: ({ context: { queryClient }, params }) =>
+		queryClient.ensureQueryData(homePageQueryOptions(params.lang)),
 	head: ({ params, loaderData }) => {
 		const locale = params.lang === "en" ? "en" : "es";
 		const seo = loaderData?.seo;
@@ -42,7 +35,7 @@ export const Route = createFileRoute("/$lang/")({
 function Home() {
 	const { lang } = Route.useParams();
 	const { data } = useSuspenseQuery(homePageQueryOptions(lang));
-	const page = data ?? HOME_FALLBACK[toLocale(lang)];
+	const page = withFallback(data, HOME_FALLBACK[toLocale(lang)]);
 
 	return (
 		<>

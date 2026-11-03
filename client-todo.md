@@ -54,6 +54,10 @@ Content can be edited directly in the Studio (https://scopehealth.sanity.studio/
 
 ## Contact and site settings
 
+- [ ] In the Studio, Página de inicio (es and en) → Por qué elegirnos → badge text still says "Satisfacción garantizada" / "Satisfaction guaranteed".
+  We removed the "100%" and suggest "Especialistas certificados" / "Certified specialists" (a guarantee is a risky claim for a clinic).
+- [ ] In the Studio, Configuración del sitio (es): phone is "+57 310 3445645"; the English one is "+57 310 344 5645". Pick one format.
+
 - [ ] Contact email.
 - [ ] Add "Piso 7, Edificio MPH 123" to the Spanish address in Sanity.
 - [ ] Fill in the English "Configuración del sitio" document in the Studio (it doesn't exist yet).

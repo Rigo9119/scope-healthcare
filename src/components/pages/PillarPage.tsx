@@ -40,7 +40,7 @@ export function PillarPage({
 						{pillar.items.map((item) => (
 							<Link
 								key={item.slug}
-								to="/$lang/$section/$item"
+								to="/$lang/$section/$item/"
 								params={{
 									lang: locale,
 									section: pillar.slug,
@@ -67,7 +67,7 @@ export function PillarPage({
 										</h3>
 									</div>
 									<span className="absolute right-3 bottom-3 bg-white/85 px-2 py-0.5 text-[10px] font-semibold text-primary-700">
-										Imagen
+										{locale === "en" ? "Image" : "Imagen"}
 									</span>
 								</div>
 

@@ -1,4 +1,3 @@
-@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Open+Sans:wght@400;500;600;700&display=swap");
 @import "tailwindcss";
 
 @theme {
@@ -36,7 +35,7 @@
   /* COLORS — Semantic text */
   --color-text-primary: #1f2937;
   --color-text-secondary: #4b5563;
-  --color-text-muted: #9ca3af;
+  --color-text-muted: #5f6673; /* 5.8:1 on white, 4.9:1 on primary-50 (WCAG AA) */
   --color-text-inverse: #ffffff;
   --color-text-link: #1059b5;
 

@@ -37,7 +37,6 @@ const GROUP: Record<Locale, { pillar: string; page: string; home: string }> = {
 };
 
 const SEARCHABLE_SECTIONS: SectionKey[] = [
-	"services",
 	"team",
 	"blog",
 	"about",

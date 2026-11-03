@@ -5,7 +5,6 @@ import { BlogPage } from "#/components/pages/BlogPage.js";
 import { ContactPage } from "#/components/pages/ContactPage.js";
 import { LegalPage } from "#/components/pages/LegalPage.js";
 import { PillarPage } from "#/components/pages/PillarPage.js";
-import { ServicesPage } from "#/components/pages/ServicesPage.js";
 import { TeamPage } from "#/components/pages/TeamPage.js";
 import {
 	SECTION_SEO,
@@ -15,11 +14,7 @@ import {
 	toLocale,
 } from "#/lib/localizedRoutes.js";
 import { PILLAR_SEO, type Pillar, pillarBySlug } from "#/lib/pillars.js";
-import {
-	ensureWithTimeout,
-	pillarItemsQueryOptions,
-	teamQueryOptions,
-} from "#/lib/queries.js";
+import { pillarItemsQueryOptions, teamQueryOptions } from "#/lib/queries.js";
 import { seoHead } from "#/lib/seo.js";
 
 export const Route = createFileRoute("/$lang/$section/")({
@@ -27,6 +22,10 @@ export const Route = createFileRoute("/$lang/$section/")({
 		const locale = toLocale(params.lang);
 		// Pillar slugs are identical across locales → render directly, no redirect.
 		if (pillarBySlug(params.section)) return;
+		// The services overview was retired: the pillars on home are the services.
+		if (sectionFromAnySlug(params.section)?.key === "services") {
+			throw redirect({ to: "/$lang/", params: { lang: locale } });
+		}
 		// Slug is valid for THIS locale → render it. (Checking current-locale first
 		// is essential for slugs shared across locales, e.g. "blog", otherwise the
 		// wrong-locale redirect would loop back to the same URL.)
@@ -36,7 +35,7 @@ export const Route = createFileRoute("/$lang/$section/")({
 		const match = sectionFromAnySlug(params.section);
 		if (match) {
 			throw redirect({
-				to: "/$lang/$section",
+				to: "/$lang/$section/",
 				params: { lang: locale, section: sectionSlug(match.key, locale) },
 			});
 		}
@@ -47,14 +46,10 @@ export const Route = createFileRoute("/$lang/$section/")({
 	loader: ({ context: { queryClient }, params }) => {
 		const locale = toLocale(params.lang);
 		if (pillarBySlug(params.section)) {
-			return ensureWithTimeout(
-				queryClient.ensureQueryData(pillarItemsQueryOptions(locale)),
-			);
+			return queryClient.ensureQueryData(pillarItemsQueryOptions(locale));
 		}
 		if (sectionFromSlug(params.section, locale) === "team") {
-			return ensureWithTimeout(
-				queryClient.ensureQueryData(teamQueryOptions(locale)),
-			);
+			return queryClient.ensureQueryData(teamQueryOptions(locale));
 		}
 	},
 	head: ({ params }) => {
@@ -78,6 +73,8 @@ export const Route = createFileRoute("/$lang/$section/")({
 			path: `/${params.section}`,
 			title: seo.title,
 			description: seo.description,
+			// Unknown slugs render the 404; the blog has no articles yet.
+			noindex: !key || key === "blog",
 		});
 	},
 	component: SectionPage,
@@ -90,8 +87,6 @@ function SectionPage() {
 
 	const key = sectionFromSlug(section, toLocale(lang));
 	switch (key) {
-		case "services":
-			return <ServicesPage />;
 		case "team":
 			return <TeamPage />;
 		case "blog":
