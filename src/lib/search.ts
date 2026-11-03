@@ -78,7 +78,7 @@ export function buildSearchIndex(locale: Locale): SearchEntry[] {
 			entries.push({
 				kind: "item",
 				section: pillar.slug,
-				item: item.slug,
+				item: item.path[locale],
 				title: item.title[locale],
 				description: PILLAR_CONTENT[locale][item.slug].summary,
 				group: pillar.title[locale],

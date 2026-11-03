@@ -21,7 +21,7 @@ export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
 	es: {
 		...SHARED,
 		footerTagline:
-			"Conectamos pacientes con los mejores especialistas médicos internacionales.",
+			"Conectamos pacientes con especialistas médicos líderes en Bogotá.",
 		footerColServicesLabel: "Servicios",
 		footerColCompanyLabel: "Empresa",
 		footerColContactLabel: "Contacto",
@@ -34,7 +34,7 @@ export const SITE_SETTINGS_FALLBACK: Record<Locale, SiteSettings> = {
 	en: {
 		...SHARED,
 		footerTagline:
-			"We connect patients with the best international medical specialists.",
+			"We connect patients with leading medical specialists in Bogotá.",
 		footerColServicesLabel: "Services",
 		footerColCompanyLabel: "Company",
 		footerColContactLabel: "Contact",

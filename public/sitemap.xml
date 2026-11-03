@@ -173,137 +173,137 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/cookies" />
   </url>
 
-  <!-- Pillar items (canonical paths only; estetica-capilar is also under scope-ageless) -->
+  <!-- Pillar items (canonical paths only; the aesthetics item is also under scope-ageless) -->
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-clinic/gastroenterologia</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/gastroenterologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/gastroenterologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/gastroenterology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/gastroenterologia" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/gastroenterologia</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/gastroenterology</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/gastroenterologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/gastroenterologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/gastroenterology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/gastroenterologia" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-clinic/urologia</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/urologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/urologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/urology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/urologia" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/urologia</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/urology</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/urologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/urologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/urology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/urologia" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-clinic/medicina-fisica-deporte</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/medicina-fisica-deporte" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/medicina-fisica-deporte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/physical-sports-medicine" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/medicina-fisica-deporte" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/medicina-fisica-deporte</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/physical-sports-medicine</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/medicina-fisica-deporte" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/medicina-fisica-deporte" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/physical-sports-medicine" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/medicina-fisica-deporte" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-clinic/reumatologia</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/reumatologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/reumatologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/rheumatology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/reumatologia" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/reumatologia</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/rheumatology</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/reumatologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/reumatologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/rheumatology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/reumatologia" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-clinic/estetica-capilar</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/estetica-capilar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/estetica-capilar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/aesthetic-hair-medicine" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/estetica-capilar" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/estetica-capilar</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/aesthetic-hair-medicine</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/estetica-capilar" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/estetica-capilar" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/aesthetic-hair-medicine" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/estetica-capilar" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-clinic/psicologia</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/psicologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/psicologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/psychology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/psicologia" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/psicologia</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/psychology</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/psicologia" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/psicologia" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/psychology" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/psicologia" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-clinic/nutricion</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/nutricion" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/nutricion" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/nutrition" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/nutricion" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/nutricion</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-clinic/nutrition</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-clinic/nutricion" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/nutricion" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-clinic/nutrition" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-clinic/nutricion" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-ageless/peso-saludable</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/peso-saludable" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/peso-saludable" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/healthy-weight" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/peso-saludable" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/peso-saludable</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/healthy-weight</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/peso-saludable" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/peso-saludable" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/healthy-weight" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/peso-saludable" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-ageless/bienestar-longevidad</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/bienestar-longevidad" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/bienestar-longevidad" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/wellness-longevity" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/bienestar-longevidad" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/bienestar-longevidad</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/wellness-longevity</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/bienestar-longevidad" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/bienestar-longevidad" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/wellness-longevity" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/bienestar-longevidad" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-ageless/enfoque-deportivo</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/enfoque-deportivo" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/enfoque-deportivo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/sports-focus" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/enfoque-deportivo" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/enfoque-deportivo</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/sports-focus</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/enfoque-deportivo" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/enfoque-deportivo" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/sports-focus" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/enfoque-deportivo" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/scope-ageless/prevencion-ejecutiva</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/prevencion-ejecutiva" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/prevencion-ejecutiva" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/executive-prevention" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/prevencion-ejecutiva" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/prevencion-ejecutiva</loc>
+    <loc>https://scope-healthcare.netlify.app/en/scope-ageless/executive-prevention</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/scope-ageless/prevencion-ejecutiva" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/prevencion-ejecutiva" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/scope-ageless/executive-prevention" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/scope-ageless/prevencion-ejecutiva" />
   </url>
   <url>
@@ -321,25 +321,25 @@
   <url>
     <loc>https://scope-healthcare.netlify.app/es/live-by-scope/telemedicina</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/live-by-scope/telemedicina" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/telemedicina" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/telemedicine" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/live-by-scope/telemedicina" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/live-by-scope/telemedicina</loc>
+    <loc>https://scope-healthcare.netlify.app/en/live-by-scope/telemedicine</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/live-by-scope/telemedicina" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/telemedicina" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/telemedicine" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/live-by-scope/telemedicina" />
   </url>
   <url>
     <loc>https://scope-healthcare.netlify.app/es/live-by-scope/financiamiento</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/live-by-scope/financiamiento" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/financiamiento" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/financing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/live-by-scope/financiamiento" />
   </url>
   <url>
-    <loc>https://scope-healthcare.netlify.app/en/live-by-scope/financiamiento</loc>
+    <loc>https://scope-healthcare.netlify.app/en/live-by-scope/financing</loc>
     <xhtml:link rel="alternate" hreflang="es" href="https://scope-healthcare.netlify.app/es/live-by-scope/financiamiento" />
-    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/financiamiento" />
+    <xhtml:link rel="alternate" hreflang="en" href="https://scope-healthcare.netlify.app/en/live-by-scope/financing" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://scope-healthcare.netlify.app/es/live-by-scope/financiamiento" />
   </url>
 </urlset>

@@ -4,19 +4,20 @@
 // navbar, the pillar index pages (grid of items), the per-item detail pages, the
 // per-pillar SEO, the sitemap, and the home-page pillar cards.
 //
-// Content here is static placeholder ("Imagen + descripción" in the client's
-// wireframe) — the client refines the real copy later (or we move it to Sanity).
+// Item page content lives in Sanity (`pillarItem`, fallback in pillarContent.ts).
 //
-// Pillar and item slugs are brand/Spanish-based and IDENTICAL across locales, so
-// no cross-locale slug redirect is needed (unlike the legacy `SECTIONS`).
+// Pillar slugs are brand names, identical across locales. Item URL segments are
+// translated per locale (`path`); the other locale's segment redirects.
 
 import type { Locale } from "./localizedRoutes";
 
 export type PillarKey = "clinic" | "ageless" | "live";
 
 export interface PillarItem {
-	/** URL slug, same in both locales. Also the Sanity id stem (`pillarItem-{slug}-{locale}`). */
+	/** Stable id: content key and Sanity id stem (`pillarItem-{slug}-{locale}`). */
 	slug: string;
+	/** URL segment per locale. */
+	path: Record<Locale, string>;
 	/** Icon name resolved in `ICON_MAP` (src/components/Icon.tsx). */
 	icon: string;
 	title: Record<Locale, string>;
@@ -39,6 +40,7 @@ export interface Pillar {
 // canonical URL under the first pillar that lists it (see `canonicalPillar`).
 const AESTHETICS: PillarItem = {
 	slug: "estetica-capilar",
+	path: { es: "estetica-capilar", en: "aesthetic-hair-medicine" },
 	icon: "Sparkles",
 	title: {
 		es: "Medicina Estética y Capilar",
@@ -63,16 +65,19 @@ export const PILLARS: Pillar[] = [
 		items: [
 			{
 				slug: "gastroenterologia",
+				path: { es: "gastroenterologia", en: "gastroenterology" },
 				icon: "Activity",
 				title: { es: "Gastroenterología", en: "Gastroenterology" },
 			},
 			{
 				slug: "urologia",
+				path: { es: "urologia", en: "urology" },
 				icon: "Droplets",
 				title: { es: "Urología", en: "Urology" },
 			},
 			{
 				slug: "medicina-fisica-deporte",
+				path: { es: "medicina-fisica-deporte", en: "physical-sports-medicine" },
 				icon: "Dumbbell",
 				title: {
 					es: "Medicina Física y del Deporte",
@@ -81,17 +86,20 @@ export const PILLARS: Pillar[] = [
 			},
 			{
 				slug: "reumatologia",
+				path: { es: "reumatologia", en: "rheumatology" },
 				icon: "Bone",
 				title: { es: "Reumatología", en: "Rheumatology" },
 			},
 			AESTHETICS,
 			{
 				slug: "psicologia",
+				path: { es: "psicologia", en: "psychology" },
 				icon: "Brain",
 				title: { es: "Psicología", en: "Psychology" },
 			},
 			{
 				slug: "nutricion",
+				path: { es: "nutricion", en: "nutrition" },
 				icon: "Salad",
 				title: { es: "Nutrición", en: "Nutrition" },
 			},
@@ -113,22 +121,26 @@ export const PILLARS: Pillar[] = [
 		items: [
 			{
 				slug: "peso-saludable",
+				path: { es: "peso-saludable", en: "healthy-weight" },
 				icon: "Scale",
 				title: { es: "Peso Saludable", en: "Healthy Weight" },
 			},
 			{
 				slug: "bienestar-longevidad",
+				path: { es: "bienestar-longevidad", en: "wellness-longevity" },
 				icon: "Leaf",
 				title: { es: "Bienestar y Longevidad", en: "Wellness & Longevity" },
 			},
 			AESTHETICS,
 			{
 				slug: "enfoque-deportivo",
+				path: { es: "enfoque-deportivo", en: "sports-focus" },
 				icon: "Activity",
 				title: { es: "Enfoque Deportivo", en: "Sports Focus" },
 			},
 			{
 				slug: "prevencion-ejecutiva",
+				path: { es: "prevencion-ejecutiva", en: "executive-prevention" },
 				icon: "Briefcase",
 				title: { es: "Prevención Ejecutiva", en: "Executive Prevention" },
 			},
@@ -150,16 +162,19 @@ export const PILLARS: Pillar[] = [
 		items: [
 			{
 				slug: "living-medical",
+				path: { es: "living-medical", en: "living-medical" },
 				icon: "HeartPulse",
 				title: { es: "Living Medical", en: "Living Medical" },
 			},
 			{
 				slug: "telemedicina",
+				path: { es: "telemedicina", en: "telemedicine" },
 				icon: "Video",
 				title: { es: "Telemedicina", en: "Telemedicine" },
 			},
 			{
 				slug: "financiamiento",
+				path: { es: "financiamiento", en: "financing" },
 				icon: "CreditCard",
 				title: { es: "Financiamiento", en: "Financing" },
 			},
@@ -181,6 +196,18 @@ export function pillarBySlug(slug: string): Pillar | null {
 
 export function itemBySlug(pillar: Pillar, slug: string): PillarItem | null {
 	return pillar.items.find((i) => i.slug === slug) ?? null;
+}
+
+/** Item whose URL segment (in either locale) is `segment`, and that locale. */
+export function itemFromPath(
+	pillar: Pillar,
+	segment: string,
+): { item: PillarItem; locale: Locale } | null {
+	for (const item of pillar.items) {
+		if (item.path.es === segment) return { item, locale: "es" };
+		if (item.path.en === segment) return { item, locale: "en" };
+	}
+	return null;
 }
 
 /** First pillar (in nav order) listing the item: owns its canonical URL. */

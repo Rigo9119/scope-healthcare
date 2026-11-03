@@ -31,13 +31,14 @@ This is a **React SPA** (TanStack Router) backed by **Sanity CMS**, deployed on 
 
 ### Data flow
 
-Content is fetched at runtime from Sanity (project `3fyb50d2`, dataset `production`) via `src/lib/sanity.ts`, through TanStack Query (`homePageQueryOptions` / `siteSettingsQueryOptions` in `src/lib/queries.ts`, which also holds the GROQ queries). Route loaders call `queryClient.ensureQueryData(...)` raced against a 4s timeout; on failure, timeout, or null the page renders its `FALLBACK` (`src/lib/homeFallback.ts`, `src/lib/siteSettingsFallback.ts`).
+Content is fetched at runtime from Sanity (project `3fyb50d2`, dataset `production`) via `src/lib/sanity.ts`, through TanStack Query (`homePageQueryOptions` / `siteSettingsQueryOptions` in `src/lib/queries.ts`, which also holds the GROQ queries). Route loaders call `queryClient.ensureQueryData(...)` raced against a 4s timeout; on failure, timeout, or null the page renders its per-locale fallback (`HOME_FALLBACK` in `src/lib/homeFallback.ts`; site settings are filled field by field from `src/lib/siteSettingsFallback.ts`).
 
 Pillar registry (pillars, item slugs, titles, icons, nav) is static in `src/lib/pillars.ts`.
 Item page content lives in Sanity as `pillarItem` documents (`pillarItem-{slug}-{locale}`), fetched all at once per locale via `pillarItemsQueryOptions`; the bundled fallback and seed is `src/lib/pillarContent.ts` (from the client's content doc).
+Item URL segments are translated per locale (`path` on each item, e.g. `/es/scope-clinic/urologia` ⇄ `/en/scope-clinic/urology`); the other locale's segment redirects, and `slug` stays the stable content/Sanity key.
 An item can be listed under two pillars (`estetica-capilar`); its canonical URL is under the first one (`canonicalPillar`).
 The medical team lives in Sanity as `teamMember` documents (shared across locales, `role`/`credentials` as `{ es, en }`), fallback and seed in `src/lib/team.ts`.
-Seed missing documents with `cd studio && npx sanity exec scripts/seed-content.ts --with-user-token` (createIfNotExists, never overwrites).
+Seed missing documents (home page, site settings, pillar items, team) with `cd studio && npx sanity exec scripts/seed-content.ts --with-user-token` (createIfNotExists, never overwrites; site settings only get empty fields filled). Prefix `REPLACE_LOCALE=en` to overwrite that locale's pillar items after editing `pillarContent.ts` (discards Studio edits to them).
 When adding an item, update `PILLARS`, `pillarContent.ts`, `studio/structure/pillarItems.ts`, `scripts/prerender.mjs` and `public/sitemap.xml`.
 
 ### Routing

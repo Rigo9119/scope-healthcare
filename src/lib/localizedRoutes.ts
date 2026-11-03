@@ -3,6 +3,8 @@
 // locale (e.g. /es/nuestros-servicios ⇄ /en/our-services). Used by the dynamic
 // `$lang/$section` route, the navbar, the per-section SEO, and the sitemap.
 
+import { itemFromPath, pillarBySlug } from "./pillars";
+
 export const LOCALES = ["es", "en"] as const;
 export type Locale = (typeof LOCALES)[number];
 
@@ -64,15 +66,18 @@ export function sectionFromAnySlug(
 	return null;
 }
 
-/** The same page in another locale: swaps the `/{locale}` prefix and translates
- *  a localized section slug (e.g. /es/contacto → /en/contact). Pillar and item
- *  slugs are identical across locales, so the rest of the path is kept as-is
- *  (e.g. /es/scope-clinic/gastroenterologia → /en/scope-clinic/gastroenterologia). */
+/** The same page in another locale: swaps the `/{locale}` prefix, translates a
+ *  localized section slug (e.g. /es/contacto → /en/contact) and a pillar item
+ *  segment (e.g. /es/scope-clinic/urologia → /en/scope-clinic/urology). Pillar
+ *  slugs are identical across locales. */
 export function localizedPath(pathname: string, next: Locale): string {
 	const [slug, ...rest] = pathname.split("/").filter(Boolean).slice(1);
 	if (!slug) return `/${next}`;
 	const match = sectionFromAnySlug(slug);
 	const translated = match ? sectionSlug(match.key, next) : slug;
+	const pillar = pillarBySlug(slug);
+	const item = pillar && rest[0] ? itemFromPath(pillar, rest[0]) : null;
+	if (item) rest[0] = item.item.path[next];
 	return ["", next, translated, ...rest].join("/");
 }
 
@@ -90,7 +95,7 @@ export const SECTION_SEO: Record<
 		en: {
 			title: "Our Services & Specialties | Scope Health",
 			description:
-				"Scope Health's medical services and specialties in Bogotá — certified treatments for international patients.",
+				"Scope Health's medical services and specialties in Bogotá: certified treatments for international patients.",
 		},
 	},
 	team: {

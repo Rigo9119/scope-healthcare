@@ -123,6 +123,17 @@ describe("seoHead — link tags", () => {
 	it("defaults x-default to the Spanish URL", () => {
 		const { links } = seoHead({ ...BASE, locale: "en", path: "/contact" });
 		const xDefault = links.find((l) => l.hrefLang === "x-default");
-		expect(xDefault?.href).toBe(`${SITE_URL}/es/contact`);
+		expect(xDefault?.href).toBe(`${SITE_URL}/es/contacto`);
+	});
+
+	it("points alternates at the translated section and item paths", () => {
+		const { links } = seoHead({
+			...BASE,
+			locale: "en",
+			path: "/scope-clinic/urology",
+		});
+		const href = (l: string) => links.find((x) => x.hrefLang === l)?.href;
+		expect(href("es")).toBe(`${SITE_URL}/es/scope-clinic/urologia`);
+		expect(href("en")).toBe(`${SITE_URL}/en/scope-clinic/urology`);
 	});
 });

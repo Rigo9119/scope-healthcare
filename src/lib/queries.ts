@@ -14,11 +14,6 @@ export interface HomePageData {
 		ctaSecondaryLabel: string;
 	};
 	stats: Array<{ value: string; label: string; icon: string }>;
-	specialtiesEyebrow: string;
-	specialtiesTitle: string;
-	specialtiesSubtitle: string;
-	specialtiesLinkLabel: string;
-	specialties: Array<{ icon: string; title: string; body: string }>;
 	processEyebrow: string;
 	processTitle: string;
 	journey: Array<{ icon: string; title: string; body: string }>;
@@ -51,8 +46,6 @@ const HOME_PAGE_QUERY = `
   *[_id == "homePage-" + $locale][0] {
     hero,
     stats,
-    specialtiesEyebrow, specialtiesTitle, specialtiesSubtitle, specialtiesLinkLabel,
-    specialties,
     processEyebrow, processTitle,
     journey,
     whyUsEyebrow, whyUsTitle, whyUsSubtitle, whyUsBadgeText,

@@ -1,3 +1,5 @@
+import { type Locale, localizedPath } from "./localizedRoutes";
+
 // Central SEO config + per-route <head> builders for TanStack Router.
 //
 // Production base URL (no trailing slash). Currently the live Netlify URL —
@@ -6,8 +8,6 @@
 export const SITE_URL = "https://scope-healthcare.netlify.app";
 export const SITE_NAME = "Scope Health";
 export const DEFAULT_OG_IMAGE = "/logo512.png";
-
-type Locale = "es" | "en";
 
 interface SeoInput {
 	title: string;
@@ -30,6 +30,9 @@ export function seoHead({
 	image = DEFAULT_OG_IMAGE,
 }: SeoInput) {
 	const url = `${SITE_URL}/${locale}${path}`;
+	// Section and item slugs are translated, so each alternate has its own path.
+	const alt = (l: Locale) =>
+		`${SITE_URL}${localizedPath(`/${locale}${path}`, l)}`;
 	const imageUrl = image.startsWith("http") ? image : `${SITE_URL}${image}`;
 
 	return {
@@ -50,13 +53,9 @@ export function seoHead({
 		],
 		links: [
 			{ rel: "canonical", href: url },
-			{ rel: "alternate", hrefLang: "es", href: `${SITE_URL}/es${path}` },
-			{ rel: "alternate", hrefLang: "en", href: `${SITE_URL}/en${path}` },
-			{
-				rel: "alternate",
-				hrefLang: "x-default",
-				href: `${SITE_URL}/es${path}`,
-			},
+			{ rel: "alternate", hrefLang: "es", href: alt("es") },
+			{ rel: "alternate", hrefLang: "en", href: alt("en") },
+			{ rel: "alternate", hrefLang: "x-default", href: alt("es") },
 		],
 	};
 }
@@ -67,12 +66,12 @@ export const HOME_SEO: Record<Locale, { title: string; description: string }> =
 	{
 		es: {
 			title:
-				"Scope Health | Turismo médico en Bogotá — atención de clase mundial",
+				"Scope Health | Turismo médico en Bogotá, atención de clase mundial",
 			description:
 				"Cirugías y tratamientos médicos de alta calidad en Bogotá, Colombia, para pacientes internacionales. Especialistas certificados, precios transparentes y acompañamiento integral.",
 		},
 		en: {
-			title: "Scope Health | Medical Tourism in Bogotá — World-Class Care",
+			title: "Scope Health | Medical Tourism in Bogotá, World-Class Care",
 			description:
 				"High-quality surgery and medical treatments in Bogotá, Colombia for international patients. Board-certified specialists, transparent pricing, and full-journey support.",
 		},

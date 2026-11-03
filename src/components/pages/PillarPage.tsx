@@ -44,7 +44,7 @@ export function PillarPage({
 								params={{
 									lang: locale,
 									section: pillar.slug,
-									item: item.slug,
+									item: item.path[locale],
 								}}
 								className="group flex flex-col border border-border-default bg-white shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary-500 motion-reduce:transition-none motion-reduce:hover:translate-y-0"
 							>

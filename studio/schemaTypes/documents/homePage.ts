@@ -9,7 +9,6 @@ export const homePageType = defineType({
   groups: [
     {name: 'hero', title: 'Hero'},
     {name: 'stats', title: 'Estadísticas'},
-    {name: 'specialties', title: 'Especialidades'},
     {name: 'process', title: 'Proceso'},
     {name: 'whyUs', title: 'Por qué elegirnos'},
     {name: 'testimonials', title: 'Testimonios'},
@@ -34,35 +33,6 @@ export const homePageType = defineType({
       of: [{type: 'statItem'}],
       group: 'stats',
       validation: (r) => r.max(4),
-    }),
-
-    // ── Specialties ───────────────────────────────────────────────────────────
-    defineField({
-      name: 'specialtiesEyebrow',
-      title: 'Eyebrow',
-      type: 'string',
-      group: 'specialties',
-    }),
-    defineField({name: 'specialtiesTitle', title: 'Título', type: 'string', group: 'specialties'}),
-    defineField({
-      name: 'specialtiesSubtitle',
-      title: 'Subtítulo',
-      type: 'text',
-      rows: 2,
-      group: 'specialties',
-    }),
-    defineField({
-      name: 'specialtiesLinkLabel',
-      title: 'Texto del link',
-      type: 'string',
-      group: 'specialties',
-    }),
-    defineField({
-      name: 'specialties',
-      title: 'Lista de especialidades',
-      type: 'array',
-      of: [{type: 'specialtyItem'}],
-      group: 'specialties',
     }),
 
     // ── Process ───────────────────────────────────────────────────────────────

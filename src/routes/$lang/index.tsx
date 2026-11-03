@@ -8,7 +8,8 @@ import { Pillars } from "#/components/sections/Pillars.js";
 import { StatsBand } from "#/components/sections/StatsBand.js";
 import { Testimonials } from "#/components/sections/Testimonials.js";
 import { WhyUs } from "#/components/sections/WhyUs.js";
-import { FALLBACK } from "#/lib/homeFallback.js";
+import { HOME_FALLBACK } from "#/lib/homeFallback.js";
+import { toLocale } from "#/lib/localizedRoutes.js";
 import { homePageQueryOptions } from "#/lib/queries.js";
 import { HOME_SEO, seoHead } from "#/lib/seo.js";
 
@@ -41,12 +42,12 @@ export const Route = createFileRoute("/$lang/")({
 function Home() {
 	const { lang } = Route.useParams();
 	const { data } = useSuspenseQuery(homePageQueryOptions(lang));
-	const page = data ?? FALLBACK;
+	const page = data ?? HOME_FALLBACK[toLocale(lang)];
 
 	return (
 		<>
 			<Hero hero={page.hero} />
-			<StatsBand stats={page.stats} />
+			{page.stats?.length ? <StatsBand stats={page.stats} /> : null}
 			<Pillars />
 			<CareJourney
 				processEyebrow={page.processEyebrow}

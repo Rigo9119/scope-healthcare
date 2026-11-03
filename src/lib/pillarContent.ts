@@ -36,7 +36,7 @@ export interface PillarItemContent {
 
 export type PillarContentMap = Record<string, PillarItemContent>;
 
-const APPROACH = { es: "Enfoque SCOPE", en: "The SCOPE approach" };
+const APPROACH = { es: "Enfoque SCOPE", en: "The Scope approach" };
 const WHEN = { es: "¿Cuándo consultar?", en: "When to see us" };
 const FOR_WHO = { es: "¿Para quién es?", en: "Who is it for?" };
 const CONDITIONS = {
@@ -50,7 +50,8 @@ const PROCEDURES = {
 const INCLUDES = { es: "Qué incluye", en: "What's included" };
 
 // Shared steps of the gastric-balloon programs (6M / 12M only differ in the
-// placement price), as printed on the client's "Scope Vital" flyers.
+// placement price), as printed on the client's "Scope Vital" flyers. English
+// prices add a rounded USD figure (≈ 3,200 COP/USD, Nov 2026).
 function vitalProgram(
 	locale: Locale,
 	months: 6 | 12,
@@ -71,7 +72,7 @@ function vitalProgram(
 						? "Consulta con médico especialista en Gastroenterología"
 						: "Consultation with a gastroenterology specialist",
 				],
-				price: "$0",
+				price: es ? "$0" : "Included",
 			},
 			{
 				title: es ? "Colocación" : "Placement",
@@ -97,7 +98,7 @@ function vitalProgram(
 							"At-home nursing care for 2 days (2 visits)",
 							"Nutritional assessment and education",
 						],
-				price: "$0",
+				price: es ? "$0" : "Included",
 			},
 			{
 				title: es ? "Retiro" : "Removal",
@@ -106,7 +107,7 @@ function vitalProgram(
 						? "Acompañamiento médico especializado continuo"
 						: "Continuous specialized medical support",
 				],
-				price: es ? "$1.500.000 COP" : "COP 1,500,000",
+				price: es ? "$1.500.000 COP" : "COP 1,500,000 (≈ USD 470)",
 			},
 		],
 		features: es
@@ -117,7 +118,7 @@ function vitalProgram(
 					"Soporte online 24 h",
 				]
 			: [
-					"Personalized care at every stage of your process",
+					"Personalized care at every stage",
 					"Trained nurses for your safety and peace of mind",
 					"Nutritional guidance with personalized plans",
 					"24/7 online support",
@@ -475,7 +476,7 @@ const EN: PillarContentMap = {
 		],
 		audience: {
 			title: WHEN.en,
-			body: "Persistent reflux or heartburn, recurring abdominal pain, changes in bowel habits (chronic diarrhea or constipation), digestive bleeding, bloating, unexplained weight loss, or a family history of inflammatory bowel disease or colorectal cancer are all good reasons for a specialist assessment, with a preventive and personalized approach.",
+			body: "Persistent reflux or heartburn, recurring abdominal pain, changes in bowel habits (chronic diarrhea or constipation), digestive bleeding, bloating, unexplained weight loss, or a family history of inflammatory bowel disease or colorectal cancer are all good reasons to see a specialist.",
 		},
 		lists: [
 			{
@@ -508,12 +509,12 @@ const EN: PillarContentMap = {
 		],
 		approach: {
 			title: APPROACH.en,
-			body: "We believe in diagnostic transparency: we explain what we found, what it means and which treatment options exist, without unnecessary jargon but without leaving out anything relevant to your decision. Clinical follow-up is part of the treatment, not an extra step.",
+			body: "We believe in diagnostic transparency: we explain what we found, what it means and what your treatment options are, in plain language and without leaving out anything you need to decide. Follow-up is part of the treatment, not an add-on.",
 		},
 	},
 	urologia: {
 		summary:
-			"We care for the urinary system of men and women (kidneys, ureters, bladder) and the male reproductive system, from preventive check-ups to chronic-condition management and support through oncology care.",
+			"We care for the urinary system of men and women (kidneys, ureters, bladder) and the male reproductive system, from preventive check-ups to chronic-condition management and support through cancer care.",
 		intro: [
 			"Urology naturally combines clinical and surgical care: many conditions are resolved with medical treatment, and surgery is considered only when truly necessary.",
 		],
@@ -549,7 +550,7 @@ const EN: PillarContentMap = {
 		],
 		approach: {
 			title: APPROACH.en,
-			body: "Many urology visits involve topics that aren't always easy to talk about, so we prioritize privacy, direct and judgment-free care, and an honest explanation of every treatment option, surgical or not. We specialize in technologies performed under sedation that significantly reduce pain and discomfort.",
+			body: "Many urology visits involve topics that aren't always easy to talk about, so we prioritize privacy, direct and judgment-free care, and an honest explanation of every treatment option, surgical or not. Many of our procedures are performed under sedation, which greatly reduces pain and discomfort.",
 		},
 	},
 	"medicina-fisica-deporte": {
@@ -582,7 +583,7 @@ const EN: PillarContentMap = {
 		],
 		approach: {
 			title: APPROACH.en,
-			body: "Every recovery plan is designed around the sport, the level of demand and the patient's real goals: there are no generic protocols. The aim is not only to treat the injury, but to understand why it happened and how to keep it from happening again. From a safe return to activity to your best possible performance: we assess, treat and support you.",
+			body: "Every recovery plan is designed around the sport, the level of demand and the patient's real goals: there are no generic protocols. We don't just treat the injury: we work out why it happened and how to keep it from happening again. Whether your goal is a safe return to activity or your best performance, we assess, treat and support you.",
 		},
 	},
 	reumatologia: {
@@ -619,7 +620,7 @@ const EN: PillarContentMap = {
 		],
 		approach: {
 			title: APPROACH.en,
-			body: "Behind joint pain, fatigue or inflammation are people looking for answers, relief and support. That's why we offer personalized care, with close and human listening, supporting each patient on the way to a diagnosis and a comprehensive treatment that improves their quality of life and helps them regain mobility, wellbeing and confidence.",
+			body: "Behind joint pain, fatigue or inflammation is a person looking for answers, relief and support. We listen closely and stay with each patient from diagnosis through comprehensive treatment, to improve their quality of life and help them regain mobility, wellbeing and confidence.",
 		},
 	},
 	psicologia: {
@@ -631,7 +632,7 @@ const EN: PillarContentMap = {
 	},
 	nutricion: {
 		summary:
-			"A nutrition plan is of little use if it isn't designed for the specific condition being treated.",
+			"A nutrition plan only works if it's designed for the condition being treated.",
 		intro: [
 			"Our nutritional support includes assessment of nutritional status and body composition, personalized (never generic) meal plans and long-term nutrition re-education, always coordinated with the treating physician of each program.",
 		],
@@ -643,8 +644,8 @@ const EN: PillarContentMap = {
 		summary:
 			"A medical, personalized and sustainable approach to reaching a healthy weight and improving your long-term wellbeing.",
 		intro: [
-			"It's a supervised process, with realistic and measurable goals, and the honesty to say when the plan needs adjusting instead of insisting on something that isn't working.",
-			"At SCOPE AGELESS we see body weight as part of a wider health picture. Lifestyle, body composition, metabolic factors, environment, rest and individual conditions can all influence how weight evolves and how each person feels.",
+			"A medically supervised process with realistic, measurable goals, and the honesty to adjust the plan when something isn't working.",
+			"At Scope Ageless we see body weight as part of a wider health picture. Lifestyle, body composition, metabolic factors, environment, rest and individual conditions can all influence how weight evolves and how each person feels.",
 			"Our program supports people who want to improve their metabolic health, manage their weight responsibly and build sustainable habits, through an individualized strategy based on professional assessment and clinical evidence.",
 		],
 		audience: {
@@ -675,8 +676,8 @@ const EN: PillarContentMap = {
 					"A comfortable, trustworthy setting",
 				],
 			},
-			vitalProgram("en", 6, "COP 6,500,000"),
-			vitalProgram("en", 12, "COP 8,500,000"),
+			vitalProgram("en", 6, "COP 6,500,000 (≈ USD 2,000)"),
+			vitalProgram("en", 12, "COP 8,500,000 (≈ USD 2,650)"),
 			{
 				name: "Endoscopic gastroplasty",
 				description: "Ask about this procedure at your initial assessment.",
@@ -687,8 +688,8 @@ const EN: PillarContentMap = {
 		summary:
 			"Strength, mobility, independence and energy: that's what truly shapes the quality of the years ahead.",
 		intro: [
-			"There are no shortcuts or magic formulas; there's rigorous assessment, a plan grounded in the available evidence and real follow-up over time.",
-			"The SCOPE AGELESS Wellness & Longevity Program supports each person in caring for their health as a whole, promoting sustainable habits, prevention and personalized strategies for healthy aging.",
+			"No shortcuts or magic formulas: just a rigorous assessment, an evidence-based plan and real follow-up over time.",
+			"The Scope Ageless Wellness & Longevity Program supports each person in caring for their health as a whole, promoting sustainable habits, prevention and personalized strategies for healthy aging.",
 		],
 		audience: {
 			title: FOR_WHO.en,
@@ -761,8 +762,8 @@ const EN: PillarContentMap = {
 			"An experience that starts before you arrive: care and support for patients traveling from other cities or countries to access healthcare.",
 		intro: [
 			"Getting healthcare outside your city or country takes much more than booking an appointment. It means making important decisions, planning a trip and trusting your wellbeing to a team that understands your needs.",
-			"That's why we created LIVING MEDICAL, our support and coordination program for patients who want to access our services from other cities in Colombia or from abroad. Through personalized care, we coordinate consultations, help plan the visit and guide you through each stage, so every patient has clear information and a single point of contact.",
-			"From the first contact to follow-up after your care, we make sure every step fits your needs, your care plan and your travel. More than getting to an appointment, we want to help you live a coordinated, close and thoughtful care experience.",
+			"That's why we created Living Medical, our support and coordination program for patients who want to access our services from other cities in Colombia or from abroad. Through personalized care, we coordinate consultations, help plan the visit and guide you through each stage, so every patient has clear information and a single point of contact.",
+			"From the first contact to follow-up after your care, we make sure every step fits your needs, your care plan and your travel. More than getting to an appointment, we want to give you a care experience that is coordinated, personal and well thought out.",
 		],
 		steps: [
 			{

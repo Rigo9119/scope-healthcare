@@ -17,9 +17,16 @@ describe("localizedPath", () => {
 		expect(localizedPath("/es/scope-clinic", "en")).toBe("/en/scope-clinic");
 	});
 
-	it("keeps pillar item paths", () => {
+	it("translates pillar item segments", () => {
 		expect(localizedPath("/es/scope-clinic/gastroenterologia", "en")).toBe(
-			"/en/scope-clinic/gastroenterologia",
+			"/en/scope-clinic/gastroenterology",
+		);
+		expect(localizedPath("/en/scope-ageless/healthy-weight", "es")).toBe(
+			"/es/scope-ageless/peso-saludable",
+		);
+		// A wrong-locale segment still maps to the target locale.
+		expect(localizedPath("/en/scope-clinic/urologia", "en")).toBe(
+			"/en/scope-clinic/urology",
 		);
 	});
 });
