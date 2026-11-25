@@ -47,7 +47,7 @@ function RootComponent() {
 			<HeadContent />
 			<LangProvider>
 				<SiteSettingsProvider>
-					<div className="min-h-screen overflow-x-hidden bg-bg-page font-body text-text-secondary">
+					<div className="min-h-screen overflow-x-clip bg-bg-page font-body text-text-secondary">
 						<Header />
 						<main>
 							<Outlet />
