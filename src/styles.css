@@ -202,6 +202,27 @@
   }
 }
 
+/* btn-glass for white surfaces: primary-600 outline and text, bluish glass on hover. */
+@utility btn-glass-dark {
+  border: 1px solid var(--color-primary-600);
+  background-color: transparent;
+  color: var(--color-primary-600);
+  transition-property: background-color, box-shadow, transform, backdrop-filter;
+  transition-duration: 200ms;
+  &:hover {
+    background-color: rgb(16 89 181 / 0.08);
+    backdrop-filter: blur(12px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.6),
+      0 8px 24px rgb(16 89 181 / 0.18);
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
 /* ─────────────────────────────────────────────────────────────
    COMPONENT — Animated text links
    ───────────────────────────────────────────────────────────── */

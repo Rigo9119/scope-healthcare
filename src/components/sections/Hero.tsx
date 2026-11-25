@@ -1,13 +1,12 @@
 import { Link } from "@tanstack/react-router";
 import { ArrowRight } from "lucide-react";
+import { BookingButton } from "#/components/ui/BookingButton.js";
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
 import { useLang } from "#/i18n.js";
-import { useBookingLink } from "#/lib/booking.js";
 import type { HomePageData } from "#/lib/queries.js";
 
 export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 	const { locale } = useLang();
-	const booking = useBookingLink();
 	return (
 		<section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-hero pt-28 sm:min-h-[90vh] lg:pt-36">
 			{/* Centered copy */}
@@ -24,14 +23,10 @@ export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 					</p>
 				)}
 				<div className="mt-8 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
-					<a
-						href={booking.link.href}
-						target={booking.link.target}
-						rel={booking.link.rel}
-						className="inline-flex w-full items-center justify-center gap-2 btn-glass px-8 py-3.5 text-sm font-bold sm:w-auto"
-					>
-						<booking.Icon size={18} /> {hero.ctaPrimaryLabel}
-					</a>
+					<BookingButton
+						label={hero.ctaPrimaryLabel}
+						className="w-full sm:w-auto"
+					/>
 					<Link
 						to="/$lang/$section/"
 						params={{ lang: locale, section: "scope-clinic" }}

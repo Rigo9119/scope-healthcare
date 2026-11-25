@@ -1,10 +1,10 @@
 import { Link, useLocation } from "@tanstack/react-router";
 import { Menu, Search, X } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
+import { BookingButton } from "#/components/ui/BookingButton.js";
 import { BrandMark } from "#/components/ui/BrandMark.js";
 import { SocialLinks } from "#/components/ui/SocialLinks.js";
 import { useLang } from "#/i18n.js";
-import { useBookingLink } from "#/lib/booking.js";
 import { sectionSlug } from "#/lib/localizedRoutes.js";
 import { PILLAR_ORDER, pillarByKey } from "#/lib/pillars.js";
 import { m } from "#/paraglide/messages.js";
@@ -19,7 +19,6 @@ const MENU_COPY = {
 
 export function Header() {
 	const { locale } = useLang();
-	const booking = useBookingLink();
 	const pathname = useLocation({ select: (l) => l.pathname });
 	const [open, setOpen] = useState(false);
 	const [searchOpen, setSearchOpen] = useState(false);
@@ -145,14 +144,11 @@ export function Header() {
 							>
 								<Search size={16} /> {m.nav_search()}
 							</button>
-							<a
-								href={booking.link.href}
-								target={booking.link.target}
-								rel={booking.link.rel}
-								className="inline-flex items-center gap-2 bg-primary-500 px-5 py-2.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600 hover:shadow-btn-primary-hover active:translate-y-0 active:shadow-btn-primary-active"
-							>
-								<booking.Icon size={16} /> {m.nav_book()}
-							</a>
+							<BookingButton
+								label={m.nav_book()}
+								tone={light ? "light" : "dark"}
+								size="sm"
+							/>
 							<SocialLinks light={light} />
 						</div>
 					</div>
@@ -216,7 +212,6 @@ export function Header() {
 					<MobileMenu
 						setOpen={setOpen}
 						pillars={pillars.map((p) => ({ slug: p.slug, label: p.navLabel }))}
-						booking={booking}
 					/>
 				)}
 			</div>

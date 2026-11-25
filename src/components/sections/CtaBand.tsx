@@ -1,4 +1,5 @@
 import { Phone, Sparkles } from "lucide-react";
+import { BookingButton } from "#/components/ui/BookingButton.js";
 import { useBookingLink } from "#/lib/booking.js";
 import type { HomePageData } from "#/lib/queries.js";
 
@@ -31,14 +32,10 @@ export function CtaBand({
 						{ctaSubtitle}
 					</p>
 					<div className="mt-7 flex flex-col items-center gap-3 sm:mt-10 sm:flex-row sm:justify-center">
-						<a
-							href={booking.link.href}
-							target={booking.link.target}
-							rel={booking.link.rel}
-							className="inline-flex w-full items-center justify-center gap-2 btn-glass px-8 py-3.5 text-sm font-bold sm:w-auto"
-						>
-							<booking.Icon size={18} /> {ctaPrimaryLabel}
-						</a>
+						<BookingButton
+							label={ctaPrimaryLabel}
+							className="w-full sm:w-auto"
+						/>
 						{/* Without WhatsApp the primary button already calls this number. */}
 						{booking.channel === "whatsapp" && ctaPhone && (
 							<a

@@ -1,7 +1,7 @@
 import { Link } from "@tanstack/react-router";
+import { BookingButton } from "#/components/ui/BookingButton.js";
 import { SocialLinks } from "#/components/ui/SocialLinks.js";
 import { useLang } from "#/i18n.js";
-import type { useBookingLink } from "#/lib/booking.js";
 import { sectionSlug } from "#/lib/localizedRoutes.js";
 import { m } from "#/paraglide/messages.js";
 import LanguageSwitcherMobile from "./LanguageSwitcherMobile";
@@ -9,17 +9,12 @@ import LanguageSwitcherMobile from "./LanguageSwitcherMobile";
 export interface MobileMenuProps {
 	setOpen: (open: boolean) => void;
 	pillars: { slug: string; label: string }[];
-	booking: ReturnType<typeof useBookingLink>;
 }
 
 const linkClass =
 	"link-animated px-3 py-3 text-base font-medium text-text-secondary transition-colors duration-200 hover:bg-primary-50 hover:text-primary-700 data-[status=active]:bg-primary-50 data-[status=active]:text-primary-700 data-[status=active]:after:hidden";
 
-export default function MobileMenu({
-	setOpen,
-	pillars,
-	booking,
-}: MobileMenuProps) {
+export default function MobileMenu({ setOpen, pillars }: MobileMenuProps) {
 	const { locale } = useLang();
 	const close = () => setOpen(false);
 	return (
@@ -68,15 +63,13 @@ export default function MobileMenu({
 					{m.nav_contact()}
 				</Link>
 
-				<a
-					href={booking.link.href}
-					target={booking.link.target}
-					rel={booking.link.rel}
+				<BookingButton
+					label={m.nav_book()}
+					tone="dark"
+					size="sm"
 					onClick={close}
-					className="mt-3 inline-flex items-center justify-center gap-2 bg-primary-500 px-5 py-3 text-center text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:bg-primary-600 active:shadow-btn-primary-active"
-				>
-					<booking.Icon size={16} /> {m.nav_book()}
-				</a>
+					className="mt-3"
+				/>
 
 				{/* Language switcher mobile */}
 				<LanguageSwitcherMobile setOpen={setOpen} />

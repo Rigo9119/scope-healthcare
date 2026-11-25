@@ -21,7 +21,7 @@ export function Pillars() {
 							params={{ lang: locale, section: pillar.slug }}
 							className="group flex flex-col border border-border-default bg-white p-7 text-center shadow-sm transition duration-300 hover:-translate-y-1 hover:border-primary-200 hover:shadow-card sm:p-9"
 						>
-							<h2 className="font-heading text-xl font-extrabold text-primary-600 sm:text-2xl">
+							<h2 className="font-heading text-xl font-extrabold text-text-primary sm:text-2xl">
 								{pillar.navLabel}
 							</h2>
 							<p className="mt-4 flex-1 text-sm leading-relaxed text-text-secondary">

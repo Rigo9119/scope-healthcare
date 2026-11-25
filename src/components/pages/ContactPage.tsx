@@ -1,7 +1,7 @@
 import { Clock, Mail, MapPin, Navigation, Phone } from "lucide-react";
+import { BookingButton } from "#/components/ui/BookingButton.js";
 import { PageHeader } from "#/components/ui/PageHeader.js";
 import { useLang } from "#/i18n.js";
-import { useBookingLink } from "#/lib/booking.js";
 import type { Locale } from "#/lib/localizedRoutes.js";
 import { useSiteSettings } from "#/siteSettings.js";
 
@@ -53,7 +53,6 @@ const COPY: Record<
 
 export function ContactPage() {
 	const { locale } = useLang();
-	const booking = useBookingLink();
 	const { footerAddress, mapQuery, footerPhone, footerEmail, footerHours } =
 		useSiteSettings();
 	const copy = COPY[locale];
@@ -97,14 +96,7 @@ export function ContactPage() {
 							))}
 						</ul>
 
-						<a
-							href={booking.link.href}
-							target={booking.link.target}
-							rel={booking.link.rel}
-							className="mt-10 inline-flex items-center gap-2 bg-primary-500 px-7 py-3.5 text-sm font-semibold text-white shadow-btn-primary transition duration-200 hover:-translate-y-0.5 hover:bg-primary-600"
-						>
-							<booking.Icon size={18} /> {copy.book}
-						</a>
+						<BookingButton label={copy.book} tone="dark" className="mt-10" />
 					</div>
 
 					{/* Map: keyless Google Maps embed, lazy so it costs nothing until scrolled to. */}
