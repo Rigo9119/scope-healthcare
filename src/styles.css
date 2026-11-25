@@ -174,6 +174,15 @@
   }
 }
 
+/* Same blue as the home hero: its placeholder gradient (ui/ImagePlaceholder)
+   under the primary-900/60 overlay and the dark vertical fade (sections/Hero). */
+@utility bg-hero {
+  background:
+    linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent, rgb(0 0 0 / 0.4)),
+    linear-gradient(rgb(5 32 78 / 0.6), rgb(5 32 78 / 0.6)),
+    linear-gradient(150deg, #b3e8e8 0%, #4dcaca 55%, #009999 100%);
+}
+
 /* ─────────────────────────────────────────────────────────────
    COMPONENT — Animated text links
    ───────────────────────────────────────────────────────────── */

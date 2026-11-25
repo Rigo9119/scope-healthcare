@@ -16,7 +16,7 @@ export function BookingCta({
 	const booking = useBookingLink();
 	return (
 		<section className="px-4 py-16 sm:px-6 lg:py-20">
-			<div className="mx-auto max-w-4xl overflow-hidden bg-gradient-to-br from-primary-600 to-primary-800 px-6 py-12 text-center shadow-xl sm:px-12">
+			<div className="mx-auto max-w-4xl overflow-hidden bg-hero px-6 py-12 text-center shadow-xl sm:px-12">
 				{eyebrow && <Eyebrow light>{eyebrow}</Eyebrow>}
 				<h2 className="font-heading text-2xl font-extrabold text-white sm:text-3xl">
 					{title}
