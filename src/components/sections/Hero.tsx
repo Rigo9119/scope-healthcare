@@ -1,7 +1,6 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, Stethoscope } from "lucide-react";
+import { ArrowRight } from "lucide-react";
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
-import { ImagePlaceholder } from "#/components/ui/ImagePlaceholder.js";
 import { useLang } from "#/i18n.js";
 import { useBookingLink } from "#/lib/booking.js";
 import type { HomePageData } from "#/lib/queries.js";
@@ -10,16 +9,7 @@ export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 	const { locale } = useLang();
 	const booking = useBookingLink();
 	return (
-		<section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden pt-28 sm:min-h-[90vh] lg:pt-36">
-			{/* Full-bleed background image */}
-			<div className="absolute inset-0">
-				<ImagePlaceholder icon={Stethoscope} className="h-full w-full" />
-			</div>
-
-			{/* Overlay */}
-			<div className="pointer-events-none absolute inset-0 bg-primary-900/60" />
-			<div className="pointer-events-none absolute inset-0 bg-linear-to-b from-black/20 via-transparent to-black/40" />
-
+		<section className="relative flex min-h-[80vh] items-center justify-center overflow-hidden bg-hero pt-28 sm:min-h-[90vh] lg:pt-36">
 			{/* Centered copy */}
 			<div className="relative mx-auto w-full max-w-2xl px-5 pb-12 text-center sm:pb-20 lg:px-12 lg:pb-40">
 				<Eyebrow light>{hero.eyebrow}</Eyebrow>

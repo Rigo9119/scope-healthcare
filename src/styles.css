@@ -174,8 +174,8 @@
   }
 }
 
-/* Same blue as the home hero: its placeholder gradient (ui/ImagePlaceholder)
-   under the primary-900/60 overlay and the dark vertical fade (sections/Hero). */
+/* The home hero blue: the clinic placeholder gradient (ui/ImagePlaceholder)
+   under a primary-900/60 overlay and a dark vertical fade. */
 @utility bg-hero {
   background:
     linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent, rgb(0 0 0 / 0.4)),
