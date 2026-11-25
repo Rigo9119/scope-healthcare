@@ -1,17 +1,13 @@
-import { Stethoscope } from "lucide-react";
-
+// The colour logo's swirl uses a multiply blend and a white centre, so it only
+// reads on white; dark surfaces get the white variant.
 export function BrandMark({ tone = "dark" }: { tone?: "dark" | "light" }) {
-	const text = tone === "light" ? "text-white" : "text-text-primary";
-	// primary-500 is too dark to read on the hero and footer backgrounds.
-	const accent = tone === "light" ? "text-primary-200" : "text-primary-500";
 	return (
-		<span className="flex items-center gap-2.5">
-			<span className="flex h-10 w-10 items-center justify-center bg-primary-500 shadow-[0_6px_16px_rgba(16,89,181,0.35)]">
-				<Stethoscope size={20} className="text-white" />
-			</span>
-			<span className={`font-heading text-lg font-bold tracking-tight ${text}`}>
-				Scope<span className={accent}>Health</span>
-			</span>
-		</span>
+		<img
+			src={tone === "light" ? "/logo-scope-white.webp" : "/logo-scope.webp"}
+			alt="Scope Healthcare"
+			width={390}
+			height={96}
+			className="h-10 w-auto lg:h-12"
+		/>
 	);
 }
