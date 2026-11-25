@@ -1,6 +1,10 @@
 import { useLang } from "#/i18n.js";
 
-export default function LanguageSwitcher() {
+export default function LanguageSwitcher({
+	light = false,
+}: {
+	light?: boolean;
+}) {
 	const { locale, switchLocale } = useLang();
 
 	return (
@@ -8,7 +12,10 @@ export default function LanguageSwitcher() {
 			{(["es", "en"] as const).map((lang, i) => (
 				<div key={lang} className="flex items-center">
 					{i > 0 && (
-						<span aria-hidden="true" className="text-xs text-border-default">
+						<span
+							aria-hidden="true"
+							className={`text-xs ${light ? "text-white/40" : "text-border-default"}`}
+						>
 							|
 						</span>
 					)}
@@ -19,8 +26,12 @@ export default function LanguageSwitcher() {
 						onClick={() => switchLocale(lang)}
 						className={`px-2 py-1 text-xs font-bold uppercase tracking-wide transition-colors duration-200 ${
 							locale === lang
-								? "text-primary-600"
-								: "text-text-muted hover:text-text-secondary"
+								? light
+									? "text-white"
+									: "text-primary-600"
+								: light
+									? "text-white/60 hover:text-white"
+									: "text-text-muted hover:text-text-secondary"
 						}`}
 					>
 						{lang}

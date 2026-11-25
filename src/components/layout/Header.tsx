@@ -27,11 +27,14 @@ export function Header() {
 	const menuToggleRef = useRef<HTMLButtonElement>(null);
 	const pillars = PILLAR_ORDER.map(pillarByKey);
 
-	// The home hero is full-bleed, so the header is fixed over it there. The bar
-	// is always white: the colour logo only reads on white.
+	// The home page has a dark full-bleed hero, so the header overlays it
+	// transparently (light text) at the top and turns solid on scroll. Every
+	// other page has a light background, so the header stays solid there.
 	const segments = pathname.split("/").filter(Boolean);
 	const isHome =
 		segments.length === 1 && (segments[0] === "es" || segments[0] === "en");
+	// Opening the mobile menu drops a white panel, so force the bar solid then too.
+	const light = isHome && !scrolled && !open;
 
 	useEffect(() => {
 		const onScroll = () => setScrolled(window.scrollY > 8);
@@ -68,14 +71,19 @@ export function Header() {
 
 	// TanStack Router marks the link matching the current route with
 	// data-status="active" (+ aria-current="page"); style it as selected.
-	const utilityLinkCls =
-		"link-animated text-sm font-medium text-text-secondary transition-colors duration-200 hover:text-primary-600 data-[status=active]:text-primary-600";
-	const iconBtnCls = "text-text-primary";
-	const barCls = `bg-white ${
-		scrolled
-			? "shadow-[0_6px_20px_-2px_rgba(16,89,181,0.18)]"
-			: "border-b border-border-default"
+	const utilityLinkCls = `link-animated text-sm font-medium transition-colors duration-200 ${
+		light
+			? "text-white/80 hover:text-white data-[status=active]:text-white"
+			: "text-text-secondary hover:text-primary-600 data-[status=active]:text-primary-600"
 	}`;
+	const iconBtnCls = light ? "text-white" : "text-text-primary";
+	const barCls = light
+		? "bg-transparent"
+		: `bg-white ${
+				scrolled
+					? "shadow-[0_6px_20px_-2px_rgba(16,89,181,0.18)]"
+					: "border-b border-border-default"
+			}`;
 
 	return (
 		<header
@@ -86,7 +94,7 @@ export function Header() {
 				<div className="mx-auto hidden max-w-7xl px-6 lg:block">
 					<div className="grid grid-cols-3 items-center py-4">
 						<div className="flex items-center gap-5">
-							<LanguageSwitcher />
+							<LanguageSwitcher light={light} />
 							<Link
 								to="/$lang/"
 								params={{ lang: locale }}
@@ -120,7 +128,7 @@ export function Header() {
 								params={{ lang: locale }}
 								activeOptions={{ exact: true }}
 							>
-								<BrandMark />
+								<BrandMark tone={light ? "light" : "dark"} />
 								<span className="sr-only">{m.nav_home()}</span>
 							</Link>
 						</div>
@@ -129,7 +137,11 @@ export function Header() {
 							<button
 								type="button"
 								onClick={() => setSearchOpen(true)}
-								className="inline-flex items-center gap-1.5 text-sm font-medium text-text-secondary transition-colors duration-200 hover:text-primary-600"
+								className={`inline-flex items-center gap-1.5 text-sm font-medium transition-colors duration-200 ${
+									light
+										? "text-white/80 hover:text-white"
+										: "text-text-secondary hover:text-primary-600"
+								}`}
 							>
 								<Search size={16} /> {m.nav_search()}
 							</button>
@@ -141,17 +153,25 @@ export function Header() {
 							>
 								<booking.Icon size={16} /> {m.nav_book()}
 							</a>
-							<SocialLinks />
+							<SocialLinks light={light} />
 						</div>
 					</div>
 
-					<nav className="flex items-center justify-center gap-10 border-t border-border-default py-3">
+					<nav
+						className={`flex items-center justify-center gap-10 border-t py-3 ${
+							light ? "border-white/20" : "border-border-default"
+						}`}
+					>
 						{pillars.map((pillar) => (
 							<Link
 								key={pillar.key}
 								to="/$lang/$section/"
 								params={{ lang: locale, section: pillar.slug }}
-								className="link-animated text-sm font-semibold uppercase tracking-wide text-text-secondary transition-colors duration-200 hover:text-primary-600 data-[status=active]:text-primary-600"
+								className={`link-animated text-sm font-semibold uppercase tracking-wide transition-colors duration-200 ${
+									light
+										? "text-white/90 hover:text-white data-[status=active]:text-white"
+										: "text-text-secondary hover:text-primary-600 data-[status=active]:text-primary-600"
+								}`}
 							>
 								{pillar.navLabel}
 							</Link>
@@ -178,7 +198,7 @@ export function Header() {
 							params={{ lang: locale }}
 							activeOptions={{ exact: true }}
 						>
-							<BrandMark />
+							<BrandMark tone={light ? "light" : "dark"} />
 							<span className="sr-only">{m.nav_home()}</span>
 						</Link>
 					</div>
