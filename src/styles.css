@@ -33,7 +33,7 @@
   --color-bg-card: #ffffff;
 
   /* COLORS — Semantic text */
-  --color-text-primary: #1f2937;
+  --color-text-primary: #112234; /* logo navy; also the footer background */
   --color-text-secondary: #4b5563;
   --color-text-muted: #5f6673; /* 5.8:1 on white, 4.9:1 on primary-50 (WCAG AA) */
   --color-text-inverse: #ffffff;
