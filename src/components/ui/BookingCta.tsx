@@ -28,7 +28,7 @@ export function BookingCta({
 					href={booking.link.href}
 					target={booking.link.target}
 					rel={booking.link.rel}
-					className="mt-7 inline-flex items-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-lg transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50"
+					className="mt-7 inline-flex items-center gap-2 btn-glass px-8 py-3.5 text-sm font-bold"
 				>
 					<booking.Icon size={18} /> {cta}
 				</a>

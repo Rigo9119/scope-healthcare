@@ -126,8 +126,6 @@
   --shadow-btn-primary-active: 0 1px 4px rgba(16, 89, 181, 0.22), 0 1px 2px rgba(0, 0, 0, 0.1);
   --shadow-btn-outline: 0 2px 6px rgba(0, 0, 0, 0.08), 0 1px 3px rgba(0, 0, 0, 0.05);
   --shadow-btn-outline-hover: 0 4px 14px rgba(16, 89, 181, 0.14), 0 2px 6px rgba(0, 0, 0, 0.08);
-  --shadow-btn-white: 0 4px 16px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.14);
-  --shadow-btn-white-hover: 0 8px 26px rgba(0, 0, 0, 0.3), 0 4px 10px rgba(0, 0, 0, 0.16);
 
   /* TRANSITIONS */
   --transition-fast: 150ms ease;
@@ -181,6 +179,27 @@
     linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent, rgb(0 0 0 / 0.4)),
     linear-gradient(rgb(5 32 78 / 0.6), rgb(5 32 78 / 0.6)),
     linear-gradient(150deg, #b3e8e8 0%, #4dcaca 55%, #009999 100%);
+}
+
+/* Outlined booking button for bg-hero surfaces; frosted bluish glass on hover. */
+@utility btn-glass {
+  border: 1px solid #fff;
+  background-color: transparent;
+  color: #fff;
+  transition-property: background-color, box-shadow, transform, backdrop-filter;
+  transition-duration: 200ms;
+  &:hover {
+    background-color: rgb(130 174 224 / 0.2);
+    backdrop-filter: blur(12px);
+    box-shadow:
+      inset 0 1px 0 rgb(255 255 255 / 0.25),
+      0 8px 24px rgb(5 32 78 / 0.35);
+    transform: translateY(-2px);
+  }
+  &:active {
+    transform: none;
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.25);
+  }
 }
 
 /* ─────────────────────────────────────────────────────────────

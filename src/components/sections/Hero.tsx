@@ -28,7 +28,7 @@ export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 						href={booking.link.href}
 						target={booking.link.target}
 						rel={booking.link.rel}
-						className="inline-flex w-full items-center justify-center gap-2 bg-white px-8 py-3.5 text-sm font-bold text-primary-700 shadow-btn-white transition duration-200 hover:-translate-y-0.5 hover:bg-primary-50 hover:shadow-btn-white-hover active:translate-y-0 active:shadow-md sm:w-auto"
+						className="inline-flex w-full items-center justify-center gap-2 btn-glass px-8 py-3.5 text-sm font-bold sm:w-auto"
 					>
 						<booking.Icon size={18} /> {hero.ctaPrimaryLabel}
 					</a>
