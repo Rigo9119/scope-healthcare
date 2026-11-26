@@ -116,11 +116,7 @@ export function PillarItemPage({
 					className={`bg-bg-section px-4 pt-16 sm:px-6 lg:pt-24 ${lists?.length ? "" : "pb-16 lg:pb-24"}`}
 				>
 					<div
-						className={`mx-auto flex flex-col gap-5 p-6 shadow-card sm:flex-row sm:gap-6 sm:p-8 lg:p-10 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
-						style={{
-							background:
-								"linear-gradient(120deg, #1059b5 0%, #0b78b0 55%, #009999 100%)",
-						}}
+						className={`mx-auto flex flex-col gap-5 bg-hero p-6 shadow-card sm:flex-row sm:gap-6 sm:p-8 lg:p-10 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
 					>
 						<span className="flex h-12 w-12 shrink-0 items-center justify-center bg-white text-primary-600 shadow-sm">
 							<HeartPulse size={24} aria-hidden />
