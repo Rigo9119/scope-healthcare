@@ -116,16 +116,34 @@ export function PillarItemPage({
 					className={`bg-bg-section px-4 pt-16 sm:px-6 lg:pt-24 ${lists?.length ? "" : "pb-16 lg:pb-24"}`}
 				>
 					<div
-						className={`mx-auto flex flex-col gap-5 bg-hero p-6 shadow-card sm:flex-row sm:gap-6 sm:p-8 lg:p-10 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
+						className={`reveal relative isolate mx-auto flex flex-col gap-5 overflow-hidden bg-hero p-6 shadow-card sm:flex-row sm:gap-7 sm:p-8 lg:p-12 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
 					>
-						<span className="flex h-12 w-12 shrink-0 items-center justify-center bg-white text-primary-600 shadow-sm">
-							<HeartPulse size={24} aria-hidden />
+						{/* Decorative beating heart watermark. */}
+						<HeartPulse
+							aria-hidden
+							strokeWidth={1}
+							className="pointer-events-none absolute -right-10 -bottom-16 -z-10 h-64 w-64 text-white/10 motion-safe:animate-heartbeat sm:h-80 sm:w-80"
+						/>
+						<span className="relative flex h-14 w-14 shrink-0 items-center justify-center bg-white text-primary-600 shadow-md">
+							<span
+								aria-hidden
+								className="absolute inset-0 -z-10 bg-white motion-safe:animate-ring"
+							/>
+							<HeartPulse
+								size={28}
+								aria-hidden
+								className="motion-safe:animate-heartbeat"
+							/>
 						</span>
 						<div>
-							<h2 className="font-heading text-xl font-bold text-white sm:text-2xl">
+							<h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">
 								{audience.title}
 							</h2>
-							<p className="mt-3 max-w-4xl leading-relaxed text-white/90">
+							<span
+								aria-hidden
+								className="mt-3 block h-1 w-16 bg-linear-to-r from-white to-white/0"
+							/>
+							<p className="mt-4 max-w-4xl leading-relaxed text-white/90 sm:text-lg">
 								{audience.body}
 							</p>
 						</div>
@@ -145,10 +163,10 @@ export function PillarItemPage({
 							return (
 								<div
 									key={list.title}
-									className="border border-t-4 border-border-default border-t-primary-500 bg-white p-6 shadow-sm transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-card sm:p-8"
+									className="reveal group border border-t-4 border-border-default border-t-primary-500 bg-white p-6 shadow-sm transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-card sm:p-8"
 								>
 									<div className="flex items-center gap-4">
-										<span className="flex h-11 w-11 shrink-0 items-center justify-center bg-primary-50 text-primary-600">
+										<span className="flex h-11 w-11 shrink-0 items-center justify-center bg-primary-50 text-primary-600 transition-colors duration-300 group-hover:bg-primary-500 group-hover:text-white">
 											<ListIcon size={22} aria-hidden />
 										</span>
 										<h2 className="font-heading text-xl font-bold text-text-primary">
