@@ -46,9 +46,9 @@ const SEARCHABLE_SECTIONS: SectionKey[] = [
 	"cookies",
 ];
 
-/** SEO titles carry a " | Scope Health" suffix; drop it for the search label. */
+/** SEO titles carry a " | Scope Healthcare" suffix; drop it for the search label. */
 function stripBrand(title: string): string {
-	return title.replace(/\s*\|\s*Scope Health\s*$/i, "");
+	return title.replace(/\s*\|\s*Scope Health(care)?\s*$/i, "");
 }
 
 export function buildSearchIndex(locale: Locale): SearchEntry[] {
@@ -59,8 +59,8 @@ export function buildSearchIndex(locale: Locale): SearchEntry[] {
 			title: g.home,
 			description:
 				locale === "es"
-					? "Página principal de Scope Health"
-					: "Scope Health home page",
+					? "Página principal de Scope Healthcare"
+					: "Scope Healthcare home page",
 			group: g.home,
 		},
 	];

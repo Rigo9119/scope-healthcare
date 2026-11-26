@@ -33,7 +33,7 @@
   --color-bg-card: #ffffff;
 
   /* COLORS — Semantic text */
-  --color-text-primary: #05204e; /* primary-900 navy; also the footer background */
+  --color-text-primary: #05204e; /* primary-900 navy */
   --color-text-secondary: #4b5563;
   --color-text-muted: #5f6673; /* 5.8:1 on white, 4.9:1 on primary-50 (WCAG AA) */
   --color-text-inverse: #ffffff;
@@ -215,6 +215,15 @@
     linear-gradient(to bottom, rgb(0 0 0 / 0.2), transparent, rgb(0 0 0 / 0.4)),
     linear-gradient(rgb(5 32 78 / 0.6), rgb(5 32 78 / 0.6)),
     linear-gradient(150deg, #b3e8e8 0%, #4dcaca 55%, #009999 100%);
+}
+
+/* The hero blue mirrored for the footer: the teal light comes from the
+   bottom-left and the dark fade sits at the top, under the page content. */
+@utility bg-footer {
+  background:
+    linear-gradient(to top, rgb(0 0 0 / 0.15), transparent, rgb(0 0 0 / 0.45)),
+    linear-gradient(rgb(5 32 78 / 0.6), rgb(5 32 78 / 0.6)),
+    linear-gradient(330deg, #b3e8e8 0%, #4dcaca 55%, #009999 100%);
 }
 
 /* Outlined booking button for bg-hero surfaces; frosted bluish glass on hover. */

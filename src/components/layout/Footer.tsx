@@ -41,7 +41,7 @@ export function Footer() {
 	];
 
 	return (
-		<footer className="bg-text-primary px-4 pb-8 pt-12 text-neutral-400 sm:px-6 sm:pb-10 sm:pt-16">
+		<footer className="bg-footer px-4 pb-8 pt-12 text-white/80 sm:px-6 sm:pb-10 sm:pt-16">
 			<div className="mx-auto max-w-7xl">
 				<div className="grid gap-8 sm:grid-cols-2 sm:gap-10 lg:grid-cols-4 lg:gap-12">
 					<div>
@@ -61,7 +61,7 @@ export function Footer() {
 									<Link
 										to="/$lang/$section/"
 										params={{ lang: locale, section: pillar.slug }}
-										className="link-animated text-inherit transition-colors duration-200 hover:text-primary-300"
+										className="link-animated text-inherit transition-colors duration-200 hover:text-white"
 									>
 										{pillar.navLabel}
 									</Link>
@@ -80,7 +80,7 @@ export function Footer() {
 									<Link
 										to="/$lang/$section/"
 										params={{ lang: locale, section: sectionSlug(key, locale) }}
-										className="link-animated text-inherit transition-colors duration-200 hover:text-primary-300"
+										className="link-animated text-inherit transition-colors duration-200 hover:text-white"
 									>
 										{label()}
 									</Link>
@@ -98,7 +98,7 @@ export function Footer() {
 								<li className="flex items-start gap-3">
 									<MapPin
 										size={16}
-										className="mt-0.5 shrink-0 text-primary-400"
+										className="mt-0.5 shrink-0 text-primary-200"
 									/>{" "}
 									{footerAddress}
 								</li>
@@ -107,7 +107,7 @@ export function Footer() {
 								<li className="flex items-start gap-3">
 									<Phone
 										size={16}
-										className="mt-0.5 shrink-0 text-primary-400"
+										className="mt-0.5 shrink-0 text-primary-200"
 									/>{" "}
 									{footerPhone}
 								</li>
@@ -116,7 +116,7 @@ export function Footer() {
 								<li className="flex items-start gap-3">
 									<Mail
 										size={16}
-										className="mt-0.5 shrink-0 text-primary-400"
+										className="mt-0.5 shrink-0 text-primary-200"
 									/>{" "}
 									{footerEmail}
 								</li>

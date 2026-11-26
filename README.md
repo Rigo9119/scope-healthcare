@@ -1,6 +1,6 @@
-# Scope Health
+# Scope Healthcare
 
-Marketing site for Scope Health, a medical tourism clinic.
+Marketing site for Scope Healthcare, a medical tourism clinic.
 React SPA (TanStack Router) with content managed in Sanity CMS, prerendered to static HTML and deployed on Netlify.
 
 ## Stack

@@ -30,7 +30,7 @@ export const Route = createFileRoute("/$lang/$section/$item/")({
 		if (!pillar || !item) return {};
 		// Items listed under two pillars share one canonical URL.
 		const home = canonicalPillar(item.slug) ?? pillar;
-		const title = `${item.title[locale]} | ${home.title[locale]} | Scope Health`;
+		const title = `${item.title[locale]} | ${home.title[locale]} | Scope Healthcare`;
 		return seoHead({
 			locale,
 			path: `/${home.slug}/${item.path[locale]}`,

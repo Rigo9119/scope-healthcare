@@ -7,7 +7,7 @@ import { SITE_SETTINGS_FALLBACK } from "./siteSettingsFallback";
 // switch to the custom domain once the client migrates it. Also hardcoded in
 // `public/robots.txt` and `public/sitemap.xml`.
 export const SITE_URL = "https://scope-healthcare.netlify.app";
-export const SITE_NAME = "Scope Health";
+export const SITE_NAME = "Scope Healthcare";
 export const DEFAULT_OG_IMAGE = "/logo512.png";
 
 interface SeoInput {
@@ -117,12 +117,12 @@ export const HOME_SEO: Record<Locale, { title: string; description: string }> =
 	{
 		es: {
 			title:
-				"Scope Health | Turismo médico en Bogotá, atención de clase mundial",
+				"Scope Healthcare | Turismo médico en Bogotá, atención de clase mundial",
 			description:
 				"Cirugías y tratamientos médicos de alta calidad en Bogotá, Colombia, para pacientes internacionales. Especialistas certificados, precios transparentes y acompañamiento integral.",
 		},
 		en: {
-			title: "Scope Health | Medical Tourism in Bogotá, World-Class Care",
+			title: "Scope Healthcare | Medical Tourism in Bogotá, World-Class Care",
 			description:
 				"High-quality surgery and medical treatments in Bogotá, Colombia for international patients. Board-certified specialists, transparent pricing, and full-journey support.",
 		},

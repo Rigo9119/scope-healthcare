@@ -81,98 +81,98 @@ export const SECTION_SEO: Record<
 > = {
 	services: {
 		es: {
-			title: "Nuestros servicios y especialidades | Scope Health",
+			title: "Nuestros servicios y especialidades | Scope Healthcare",
 			description:
-				"Servicios médicos y especialidades de Scope Health en Bogotá: tratamientos certificados para pacientes internacionales.",
+				"Servicios médicos y especialidades de Scope Healthcare en Bogotá: tratamientos certificados para pacientes internacionales.",
 		},
 		en: {
-			title: "Our Services & Specialties | Scope Health",
+			title: "Our Services & Specialties | Scope Healthcare",
 			description:
-				"Scope Health's medical services and specialties in Bogotá: certified treatments for international patients.",
+				"Scope Healthcare's medical services and specialties in Bogotá: certified treatments for international patients.",
 		},
 	},
 	team: {
 		es: {
-			title: "Nuestro equipo | Scope Health",
+			title: "Nuestro equipo | Scope Healthcare",
 			description:
-				"Conoce a los especialistas certificados detrás de Scope Health en Bogotá.",
+				"Conoce a los especialistas certificados detrás de Scope Healthcare en Bogotá.",
 		},
 		en: {
-			title: "Our Team | Scope Health",
+			title: "Our Team | Scope Healthcare",
 			description:
-				"Meet the board-certified specialists behind Scope Health in Bogotá.",
+				"Meet the board-certified specialists behind Scope Healthcare in Bogotá.",
 		},
 	},
 	blog: {
 		es: {
-			title: "Blog | Scope Health",
+			title: "Blog | Scope Healthcare",
 			description:
-				"Artículos y guías sobre turismo médico, tratamientos y salud en Scope Health.",
+				"Artículos y guías sobre turismo médico, tratamientos y salud en Scope Healthcare.",
 		},
 		en: {
-			title: "Blog | Scope Health",
+			title: "Blog | Scope Healthcare",
 			description:
-				"Articles and guides on medical tourism, treatments and health from Scope Health.",
+				"Articles and guides on medical tourism, treatments and health from Scope Healthcare.",
 		},
 	},
 	about: {
 		es: {
-			title: "Sobre nosotros | Scope Health",
+			title: "Sobre nosotros | Scope Healthcare",
 			description:
 				"Quiénes somos: turismo médico de clase mundial en Bogotá para pacientes internacionales.",
 		},
 		en: {
-			title: "About Us | Scope Health",
+			title: "About Us | Scope Healthcare",
 			description:
 				"Who we are: world-class medical tourism in Bogotá for international patients.",
 		},
 	},
 	contact: {
 		es: {
-			title: "Contacto | Scope Health",
+			title: "Contacto | Scope Healthcare",
 			description:
 				"Contáctanos para agendar tu consulta. Estamos en Bogotá y atendemos a pacientes internacionales.",
 		},
 		en: {
-			title: "Contact | Scope Health",
+			title: "Contact | Scope Healthcare",
 			description:
 				"Get in touch to book your consultation. Based in Bogotá, serving international patients.",
 		},
 	},
 	privacy: {
 		es: {
-			title: "Política de privacidad | Scope Health",
+			title: "Política de privacidad | Scope Healthcare",
 			description:
-				"Cómo Scope Health recopila, usa y protege tus datos personales.",
+				"Cómo Scope Healthcare recopila, usa y protege tus datos personales.",
 		},
 		en: {
-			title: "Privacy Policy | Scope Health",
+			title: "Privacy Policy | Scope Healthcare",
 			description:
-				"How Scope Health collects, uses and protects your personal data.",
+				"How Scope Healthcare collects, uses and protects your personal data.",
 		},
 	},
 	terms: {
 		es: {
-			title: "Términos y condiciones | Scope Health",
+			title: "Términos y condiciones | Scope Healthcare",
 			description:
-				"Términos y condiciones de uso del sitio y los servicios de Scope Health.",
+				"Términos y condiciones de uso del sitio y los servicios de Scope Healthcare.",
 		},
 		en: {
-			title: "Terms & Conditions | Scope Health",
+			title: "Terms & Conditions | Scope Healthcare",
 			description:
-				"Terms and conditions for using Scope Health's website and services.",
+				"Terms and conditions for using Scope Healthcare's website and services.",
 		},
 	},
 	cookies: {
 		es: {
-			title: "Política de cookies | Scope Health",
+			title: "Política de cookies | Scope Healthcare",
 			description:
-				"Qué cookies utiliza Scope Health y cómo puedes gestionarlas.",
+				"Qué cookies utiliza Scope Healthcare y cómo puedes gestionarlas.",
 		},
 		en: {
-			title: "Cookie Policy | Scope Health",
+			title: "Cookie Policy | Scope Healthcare",
 			description:
-				"Which cookies Scope Health uses and how you can manage them.",
+				"Which cookies Scope Healthcare uses and how you can manage them.",
 		},
 	},
 };

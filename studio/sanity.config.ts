@@ -12,7 +12,7 @@ const LOCALES = [
 
 export default defineConfig({
   name: 'default',
-  title: 'Scope Health',
+  title: 'Scope Healthcare',
 
   projectId: '3fyb50d2',
   dataset: 'production',

@@ -19,7 +19,7 @@ const LEGAL: Record<
 			eyebrow: "Legal",
 			title: "Política de privacidad",
 			intro:
-				"En Scope Health nos tomamos en serio la protección de tus datos personales.",
+				"En Scope Healthcare nos tomamos en serio la protección de tus datos personales.",
 			body: [
 				"Esta página describirá qué datos personales recopilamos, con qué finalidad los tratamos, la base legal para ello y durante cuánto tiempo los conservamos.",
 				"También detallará tus derechos (acceso, rectificación, supresión y oposición) y cómo ejercerlos, así como las medidas de seguridad que aplicamos.",
@@ -30,7 +30,7 @@ const LEGAL: Record<
 			eyebrow: "Legal",
 			title: "Privacy Policy",
 			intro:
-				"At Scope Health we take the protection of your personal data seriously.",
+				"At Scope Healthcare we take the protection of your personal data seriously.",
 			body: [
 				"This page will describe what personal data we collect, the purposes for which we process it, the legal basis for doing so, and how long we retain it.",
 				"It will also detail your rights (access, rectification, erasure and objection) and how to exercise them, along with the security measures we apply.",
@@ -43,7 +43,7 @@ const LEGAL: Record<
 			eyebrow: "Legal",
 			title: "Términos y condiciones",
 			intro:
-				"Estas condiciones regulan el uso del sitio web y los servicios de Scope Health.",
+				"Estas condiciones regulan el uso del sitio web y los servicios de Scope Healthcare.",
 			body: [
 				"Aquí se especificarán las condiciones de uso del sitio, la reserva de citas, las responsabilidades de las partes y las limitaciones aplicables.",
 				"El contenido médico de este sitio es informativo y no sustituye una consulta médica presencial con un profesional certificado.",
@@ -54,7 +54,7 @@ const LEGAL: Record<
 			eyebrow: "Legal",
 			title: "Terms & Conditions",
 			intro:
-				"These terms govern the use of Scope Health's website and services.",
+				"These terms govern the use of Scope Healthcare's website and services.",
 			body: [
 				"This page will set out the conditions for using the site, booking appointments, the responsibilities of each party, and any applicable limitations.",
 				"The medical content on this site is informational and does not replace an in-person consultation with a board-certified professional.",

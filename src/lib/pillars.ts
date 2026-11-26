@@ -238,36 +238,39 @@ export const PILLAR_SEO: Record<
 > = {
 	clinic: {
 		es: {
-			title: "Scope Clinic | Atención médica especializada | Scope Health",
+			title: "Scope Clinic | Atención médica especializada | Scope Healthcare",
 			description:
 				"Especialidades médicas de Scope Clinic: gastroenterología, urología, medicina física y del deporte, reumatología, medicina estética y capilar, psicología y nutrición.",
 		},
 		en: {
-			title: "Scope Clinic | Specialized Medical Care | Scope Health",
+			title: "Scope Clinic | Specialized Medical Care | Scope Healthcare",
 			description:
 				"Scope Clinic medical specialties: gastroenterology, urology, physical & sports medicine, rheumatology, aesthetic & hair medicine, psychology and nutrition.",
 		},
 	},
 	ageless: {
 		es: {
-			title: "Scope Ageless | Medicina estética y longevidad | Scope Health",
+			title:
+				"Scope Ageless | Medicina estética y longevidad | Scope Healthcare",
 			description:
 				"Programas de Scope Ageless: peso saludable, bienestar y longevidad, medicina estética y capilar, enfoque deportivo y prevención ejecutiva.",
 		},
 		en: {
-			title: "Scope Ageless | Aesthetic & Longevity Medicine | Scope Health",
+			title:
+				"Scope Ageless | Aesthetic & Longevity Medicine | Scope Healthcare",
 			description:
 				"Scope Ageless programs: healthy weight, wellness & longevity, aesthetic & hair medicine, sports focus and executive prevention.",
 		},
 	},
 	live: {
 		es: {
-			title: "Live by Scope | Bienestar integrado a tu vida | Scope Health",
+			title: "Live by Scope | Bienestar integrado a tu vida | Scope Healthcare",
 			description:
 				"Live by Scope: Living Medical, telemedicina y financiamiento para integrar la medicina de Scope a tu estilo de vida.",
 		},
 		en: {
-			title: "Live by Scope | Wellbeing built into your life | Scope Health",
+			title:
+				"Live by Scope | Wellbeing built into your life | Scope Healthcare",
 			description:
 				"Live by Scope: Living Medical, telemedicine and financing to weave Scope's medicine into your lifestyle.",
 		},

@@ -67,7 +67,7 @@ export const Route = createFileRoute("/$lang/$section/")({
 		const key = sectionFromSlug(params.section, locale);
 		const seo = key
 			? SECTION_SEO[key][locale]
-			: { title: "Scope Health", description: "" };
+			: { title: "Scope Healthcare", description: "" };
 		return seoHead({
 			locale,
 			path: `/${params.section}`,
