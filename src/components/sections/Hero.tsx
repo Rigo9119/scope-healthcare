@@ -4,6 +4,7 @@ import { BookingButton } from "#/components/ui/BookingButton.js";
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
 import { useLang } from "#/i18n.js";
 import type { HomePageData } from "#/lib/queries.js";
+import { m } from "#/paraglide/messages.js";
 
 export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 	const { locale } = useLang();
@@ -44,7 +45,7 @@ export function Hero({ hero }: { hero: HomePageData["hero"] }) {
 					<span className="absolute inset-x-0 top-0 h-1/2 bg-linear-to-b from-transparent to-white motion-safe:animate-scroll-cue motion-reduce:translate-y-1/2" />
 				</div>
 				<span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white/40">
-					Scroll
+					{m.hero_scroll()}
 				</span>
 			</div>
 		</section>
