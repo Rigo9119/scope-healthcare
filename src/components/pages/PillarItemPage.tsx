@@ -122,18 +122,14 @@ export function PillarItemPage({
 						<HeartPulse
 							aria-hidden
 							strokeWidth={1}
-							className="pointer-events-none absolute -right-10 -bottom-16 -z-10 h-64 w-64 text-white/10 motion-safe:animate-heartbeat sm:h-80 sm:w-80"
+							className="pointer-events-none absolute -right-10 -bottom-16 -z-10 h-64 w-64 text-white/10 sm:h-80 sm:w-80"
 						/>
 						<span className="relative flex h-14 w-14 shrink-0 items-center justify-center bg-white text-primary-600 shadow-md">
 							<span
 								aria-hidden
 								className="absolute inset-0 -z-10 bg-white motion-safe:animate-ring"
 							/>
-							<HeartPulse
-								size={28}
-								aria-hidden
-								className="motion-safe:animate-heartbeat"
-							/>
+							<HeartPulse size={28} aria-hidden />
 						</span>
 						<div>
 							<h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">

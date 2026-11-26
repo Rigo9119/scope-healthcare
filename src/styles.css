@@ -171,24 +171,6 @@
     }
   }
 
-  /* Double-beat pulse for heart icons. */
-  --animate-heartbeat: heartbeat 1.8s ease-in-out infinite;
-
-  @keyframes heartbeat {
-    0%, 40%, 100% {
-      transform: scale(1);
-    }
-    15% {
-      transform: scale(1.12);
-    }
-    25% {
-      transform: scale(1);
-    }
-    32% {
-      transform: scale(1.07);
-    }
-  }
-
   /* Slow expanding ring behind an icon badge. */
   --animate-ring: ring 2.4s cubic-bezier(0, 0, 0.2, 1) infinite;
 
