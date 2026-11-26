@@ -1,5 +1,11 @@
 import { Link } from "@tanstack/react-router";
-import { ArrowLeft, Check } from "lucide-react";
+import {
+	ArrowLeft,
+	Check,
+	ClipboardList,
+	HeartPulse,
+	ListChecks,
+} from "lucide-react";
 import { IconComponent } from "#/components/Icon.js";
 import { BookingCta } from "#/components/ui/BookingCta.js";
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
@@ -110,14 +116,23 @@ export function PillarItemPage({
 					className={`bg-bg-section px-4 pt-16 sm:px-6 lg:pt-24 ${lists?.length ? "" : "pb-16 lg:pb-24"}`}
 				>
 					<div
-						className={`mx-auto border-l-4 border-primary-500 bg-primary-50 p-6 sm:p-8 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
+						className={`mx-auto flex flex-col gap-5 p-6 shadow-card sm:flex-row sm:gap-6 sm:p-8 lg:p-10 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
+						style={{
+							background:
+								"linear-gradient(120deg, #1059b5 0%, #0b78b0 55%, #009999 100%)",
+						}}
 					>
-						<h2 className="font-heading text-xl font-bold text-text-primary">
-							{audience.title}
-						</h2>
-						<p className="mt-3 max-w-4xl leading-relaxed text-text-secondary">
-							{audience.body}
-						</p>
+						<span className="flex h-12 w-12 shrink-0 items-center justify-center bg-white text-primary-600 shadow-sm">
+							<HeartPulse size={24} aria-hidden />
+						</span>
+						<div>
+							<h2 className="font-heading text-xl font-bold text-white sm:text-2xl">
+								{audience.title}
+							</h2>
+							<p className="mt-3 max-w-4xl leading-relaxed text-white/90">
+								{audience.body}
+							</p>
+						</div>
 					</div>
 				</section>
 			)}
@@ -129,17 +144,25 @@ export function PillarItemPage({
 					<div
 						className={`mx-auto grid gap-6 ${lists.length > 1 ? "max-w-6xl md:grid-cols-2" : "max-w-3xl"}`}
 					>
-						{lists.map((list) => (
-							<div
-								key={list.title}
-								className="border border-border-default bg-white p-6 shadow-sm sm:p-8"
-							>
-								<h2 className="font-heading text-xl font-bold text-text-primary">
-									{list.title}
-								</h2>
-								<CheckList items={list.items} className="mt-5" />
-							</div>
-						))}
+						{lists.map((list, i) => {
+							const ListIcon = i % 2 ? ListChecks : ClipboardList;
+							return (
+								<div
+									key={list.title}
+									className="border border-t-4 border-border-default border-t-primary-500 bg-white p-6 shadow-sm transition-[translate,box-shadow] duration-300 hover:-translate-y-1 hover:shadow-card sm:p-8"
+								>
+									<div className="flex items-center gap-4">
+										<span className="flex h-11 w-11 shrink-0 items-center justify-center bg-primary-50 text-primary-600">
+											<ListIcon size={22} aria-hidden />
+										</span>
+										<h2 className="font-heading text-xl font-bold text-text-primary">
+											{list.title}
+										</h2>
+									</div>
+									<CheckList items={list.items} className="mt-6" />
+								</div>
+							);
+						})}
 					</div>
 				</section>
 			) : null}
@@ -213,12 +236,14 @@ function CheckList({
 		<ul className={`space-y-3 ${className}`}>
 			{items.map((text) => (
 				<li key={text} className="flex gap-3 text-text-secondary">
-					<Check
-						size={18}
-						strokeWidth={2.5}
-						className="mt-0.5 shrink-0 text-primary-500"
-						aria-hidden
-					/>
+					{/* em-sized so the badge centres on the first line at text-base and text-sm. */}
+					<span className="mt-[0.2em] flex h-[1.25em] w-[1.25em] shrink-0 items-center justify-center bg-primary-500 text-white">
+						<Check
+							className="h-[0.8em] w-[0.8em]"
+							strokeWidth={3}
+							aria-hidden
+						/>
+					</span>
 					<span className="leading-relaxed">{text}</span>
 				</li>
 			))}
