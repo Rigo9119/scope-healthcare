@@ -1,11 +1,5 @@
 import { Link } from "@tanstack/react-router";
-import {
-	ArrowLeft,
-	Check,
-	ClipboardList,
-	HeartPulse,
-	ListChecks,
-} from "lucide-react";
+import { ArrowLeft, Check, ClipboardList, ListChecks } from "lucide-react";
 import { IconComponent } from "#/components/Icon.js";
 import { BookingCta } from "#/components/ui/BookingCta.js";
 import { Eyebrow } from "#/components/ui/Eyebrow.js";
@@ -116,21 +110,17 @@ export function PillarItemPage({
 					className={`bg-bg-section px-4 pt-16 sm:px-6 lg:pt-24 ${lists?.length ? "" : "pb-16 lg:pb-24"}`}
 				>
 					<div
-						className={`reveal relative isolate mx-auto flex flex-col gap-5 overflow-hidden bg-hero p-6 shadow-card sm:flex-row sm:gap-7 sm:p-8 lg:p-12 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
+						className={`reveal relative isolate mx-auto overflow-hidden bg-hero p-6 shadow-card sm:p-8 lg:p-12 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
 					>
-						{/* Decorative beating heart watermark. */}
-						<HeartPulse
+						{/* Two slow-drifting colour glows over the hero blue. */}
+						<span
 							aria-hidden
-							strokeWidth={1}
-							className="pointer-events-none absolute -right-10 -bottom-16 -z-10 h-64 w-64 text-white/10 sm:h-80 sm:w-80"
+							className="pointer-events-none absolute -top-32 -right-24 -z-10 h-96 w-96 rounded-full bg-[#4dcaca]/45 blur-3xl motion-safe:animate-drift"
 						/>
-						<span className="relative flex h-14 w-14 shrink-0 items-center justify-center bg-white text-primary-600 shadow-md">
-							<span
-								aria-hidden
-								className="absolute inset-0 -z-10 bg-white motion-safe:animate-ring"
-							/>
-							<HeartPulse size={28} aria-hidden />
-						</span>
+						<span
+							aria-hidden
+							className="pointer-events-none absolute -bottom-40 -left-24 -z-10 h-[28rem] w-[28rem] rounded-full bg-primary-400/50 blur-3xl motion-safe:animate-drift motion-safe:[animation-delay:-7s]"
+						/>
 						<div>
 							<h2 className="font-heading text-2xl font-bold text-white sm:text-3xl">
 								{audience.title}
