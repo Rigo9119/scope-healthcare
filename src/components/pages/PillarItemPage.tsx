@@ -35,7 +35,7 @@ export function PillarItemPage({
 				subtitle={content.summary}
 			/>
 
-			{/* Intro split: visual left, intro + audience right. */}
+			{/* Intro split: visual left, icon + intro right. */}
 			<section className="px-4 py-12 sm:px-6 lg:py-20">
 				<div className="mx-auto max-w-6xl">
 					<Link
@@ -51,7 +51,8 @@ export function PillarItemPage({
 
 					<div className="mt-8 grid items-start gap-8 lg:grid-cols-2 lg:gap-12">
 						<ImagePlaceholder className="aspect-[4/3] w-full lg:sticky lg:top-28" />
-						<div>
+						{/* Centred so a one-line intro doesn't leave a gap under it. */}
+						<div className="lg:self-center">
 							<span className="inline-flex h-12 w-12 items-center justify-center bg-primary-50">
 								<IconComponent
 									name={item.icon}
@@ -67,16 +68,6 @@ export function PillarItemPage({
 									{p}
 								</p>
 							))}
-							{audience && (
-								<div className="mt-8 border-l-4 border-primary-500 bg-primary-50 p-6">
-									<h2 className="font-heading text-lg font-bold text-text-primary">
-										{audience.title}
-									</h2>
-									<p className="mt-2 leading-relaxed text-text-secondary">
-										{audience.body}
-									</p>
-								</div>
-							)}
 						</div>
 					</div>
 				</div>
@@ -113,8 +104,28 @@ export function PillarItemPage({
 				</section>
 			) : null}
 
+			{/* Audience opens the grey band; the lists join it (pt-0) so they read as one block. */}
+			{audience && (
+				<section
+					className={`bg-bg-section px-4 pt-16 sm:px-6 lg:pt-24 ${lists?.length ? "" : "pb-16 lg:pb-24"}`}
+				>
+					<div
+						className={`mx-auto border-l-4 border-primary-500 bg-primary-50 p-6 sm:p-8 ${lists?.length === 1 ? "max-w-3xl" : "max-w-6xl"}`}
+					>
+						<h2 className="font-heading text-xl font-bold text-text-primary">
+							{audience.title}
+						</h2>
+						<p className="mt-3 max-w-4xl leading-relaxed text-text-secondary">
+							{audience.body}
+						</p>
+					</div>
+				</section>
+			)}
+
 			{lists?.length ? (
-				<section className="bg-bg-section px-4 py-16 sm:px-6 lg:py-24">
+				<section
+					className={`bg-bg-section px-4 pb-16 sm:px-6 lg:pb-24 ${audience ? "pt-6" : "pt-16 lg:pt-24"}`}
+				>
 					<div
 						className={`mx-auto grid gap-6 ${lists.length > 1 ? "max-w-6xl md:grid-cols-2" : "max-w-3xl"}`}
 					>
